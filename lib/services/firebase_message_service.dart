@@ -21,19 +21,25 @@ class FirebaseMessageService {
   FirebaseMessageService(this.context);
 
   Future<void> initNotifications() async {
+    // request for permission to get notifications from app
     await firebaseMessaging.requestPermission();
+
+    // get FCM token for this device
     final fcmToken = await firebaseMessaging.getToken();
     debugPrint('FCM token: $fcmToken');
 
     // cache phone fcm token
     LocalStorageService.setLocalStorageData('phoneToken', fcmToken);
 
+    // subscribe to a topic to get messages from that topic
     firebaseMessaging.subscribeToTopic('all');
+
     initPushNotifications();
     initLocalNotifications();
   }
 
   Future initPushNotifications() async {
+    // user for IOS, config foreground message options
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
       alert: true,
@@ -41,20 +47,24 @@ class FirebaseMessageService {
       sound: true,
     );
 
+    // event handler when application is opened from terminated state
     FirebaseMessaging.instance.getInitialMessage().then((message) {
-      print('Title: ${message?.notification?.title}');
-      print('Body: ${message?.notification?.body}');
-      print('Data: ${message?.data}');
+      debugPrint('Title: ${message?.notification?.title}');
+      debugPrint('Body: ${message?.notification?.body}');
+      debugPrint('Data: ${message?.data}');
     });
 
+    // event handler when user press on the message
     FirebaseMessaging.onMessageOpenedApp.listen((message) {
-      print('Title: ${message.notification?.title}');
-      print('Body: ${message.notification?.body}');
-      print('Data: ${message.data}');
+      debugPrint('Title: ${message.notification?.title}');
+      debugPrint('Body: ${message.notification?.body}');
+      debugPrint('Data: ${message.data}');
     });
 
+    // application gets a message when it is in the background or terminated
     FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
 
+    // event handler when application gets a message on foreground
     FirebaseMessaging.onMessage.listen((message) {
       final notification = message.notification;
 
@@ -82,6 +92,7 @@ class FirebaseMessageService {
     const ios = DarwinInitializationSettings();
     const setting = InitializationSettings(android: android, iOS: ios);
 
+    // init local notification settings for both platforms
     await localNotification.initialize(
       setting,
       // handle on press message event
