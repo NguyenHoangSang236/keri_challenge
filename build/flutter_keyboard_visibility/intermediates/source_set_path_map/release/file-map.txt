@@ -1,0 +1,12 @@
+com.jrai.flutter_keyboard_visibility-jetified-window-java-1.0.0-beta04-0 /home/mr/.gradle/caches/transforms-3/994c5d7770d335c1c00691483b31cae4/transformed/jetified-window-java-1.0.0-beta04/res
+com.jrai.flutter_keyboard_visibility-jetified-annotation-experimental-1.1.0-1 /home/mr/.gradle/caches/transforms-3/ce18629baf30b2d1cb03c9f8e8cdf9d0/transformed/jetified-annotation-experimental-1.1.0/res
+com.jrai.flutter_keyboard_visibility-jetified-window-1.0.0-beta04-2 /home/mr/.gradle/caches/transforms-3/d5ba6af9fd3ce1d33b0b22ec973e9d64/transformed/jetified-window-1.0.0-beta04/res
+com.jrai.flutter_keyboard_visibility-core-1.6.0-3 /home/mr/.gradle/caches/transforms-3/fd21bb4960202f53117f689576200407/transformed/core-1.6.0/res
+com.jrai.flutter_keyboard_visibility-main-4 /home/mr/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility-5.4.1/android/src/main/res
+com.jrai.flutter_keyboard_visibility-release-5 /home/mr/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility-5.4.1/android/src/release/res
+com.jrai.flutter_keyboard_visibility-pngs-6 /home/mr/University/MobileProgramming/keri_challenge/build/flutter_keyboard_visibility/generated/res/pngs/release
+com.jrai.flutter_keyboard_visibility-resValues-7 /home/mr/University/MobileProgramming/keri_challenge/build/flutter_keyboard_visibility/generated/res/resValues/release
+com.jrai.flutter_keyboard_visibility-rs-8 /home/mr/University/MobileProgramming/keri_challenge/build/flutter_keyboard_visibility/generated/res/rs/release
+com.jrai.flutter_keyboard_visibility-mergeReleaseResources-9 /home/mr/University/MobileProgramming/keri_challenge/build/flutter_keyboard_visibility/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.jrai.flutter_keyboard_visibility-mergeReleaseResources-10 /home/mr/University/MobileProgramming/keri_challenge/build/flutter_keyboard_visibility/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.jrai.flutter_keyboard_visibility-merged_res-11 /home/mr/University/MobileProgramming/keri_challenge/build/flutter_keyboard_visibility/intermediates/merged_res/release

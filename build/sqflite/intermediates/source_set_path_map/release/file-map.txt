@@ -1,0 +1,12 @@
+com.tekartik.sqflite-jetified-window-java-1.0.0-beta04-0 /home/mr/.gradle/caches/transforms-3/994c5d7770d335c1c00691483b31cae4/transformed/jetified-window-java-1.0.0-beta04/res
+com.tekartik.sqflite-jetified-annotation-experimental-1.1.0-1 /home/mr/.gradle/caches/transforms-3/ce18629baf30b2d1cb03c9f8e8cdf9d0/transformed/jetified-annotation-experimental-1.1.0/res
+com.tekartik.sqflite-jetified-window-1.0.0-beta04-2 /home/mr/.gradle/caches/transforms-3/d5ba6af9fd3ce1d33b0b22ec973e9d64/transformed/jetified-window-1.0.0-beta04/res
+com.tekartik.sqflite-core-1.6.0-3 /home/mr/.gradle/caches/transforms-3/fd21bb4960202f53117f689576200407/transformed/core-1.6.0/res
+com.tekartik.sqflite-main-4 /home/mr/.pub-cache/hosted/pub.dev/sqflite-2.3.0/android/src/main/res
+com.tekartik.sqflite-release-5 /home/mr/.pub-cache/hosted/pub.dev/sqflite-2.3.0/android/src/release/res
+com.tekartik.sqflite-pngs-6 /home/mr/University/MobileProgramming/keri_challenge/build/sqflite/generated/res/pngs/release
+com.tekartik.sqflite-resValues-7 /home/mr/University/MobileProgramming/keri_challenge/build/sqflite/generated/res/resValues/release
+com.tekartik.sqflite-rs-8 /home/mr/University/MobileProgramming/keri_challenge/build/sqflite/generated/res/rs/release
+com.tekartik.sqflite-mergeReleaseResources-9 /home/mr/University/MobileProgramming/keri_challenge/build/sqflite/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.tekartik.sqflite-mergeReleaseResources-10 /home/mr/University/MobileProgramming/keri_challenge/build/sqflite/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.tekartik.sqflite-merged_res-11 /home/mr/University/MobileProgramming/keri_challenge/build/sqflite/intermediates/merged_res/release

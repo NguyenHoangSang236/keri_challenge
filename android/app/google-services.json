@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "552339039192",
+    "firebase_url": "https://keri-challenge-default-rtdb.firebaseio.com",
+    "project_id": "keri-challenge",
+    "storage_bucket": "keri-challenge.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:552339039192:android:b89661691081bee3a548ad",
+        "android_client_info": {
+          "package_name": "com.example.keri_challenge"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCF1aIEHENKuUYehmP3D0qazN2KzRPp7xk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

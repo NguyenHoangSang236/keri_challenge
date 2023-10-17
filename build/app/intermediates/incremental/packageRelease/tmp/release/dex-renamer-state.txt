@@ -1,0 +1,4 @@
+#Sun Oct 15 23:07:01 ICT 2023
+base.0=/home/mr/University/MobileProgramming/keri_challenge/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

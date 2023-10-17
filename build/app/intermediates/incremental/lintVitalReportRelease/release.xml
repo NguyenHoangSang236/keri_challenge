@@ -1,0 +1,55 @@
+<variant
+    name="release"
+    package="com.example.keri_challenge"
+    minSdkVersion="20"
+    targetSdkVersion="33"
+    shrinking="true"
+    mergedManifest="/home/mr/University/MobileProgramming/keri_challenge/build/app/intermediates/merged_manifest/release/AndroidManifest.xml"
+    manifestMergeReport="/home/mr/University/MobileProgramming/keri_challenge/build/app/outputs/logs/manifest-merger-release-report.txt"
+    proguardFiles="/home/mr/University/MobileProgramming/keri_challenge/build/app/intermediates/default_proguard_files/global/proguard-android.txt-7.4.2:/home/mr/snap/flutter/common/flutter/packages/flutter_tools/gradle/flutter_proguard_rules.pro:proguard-rules.pro"
+    partialResultsDir="/home/mr/University/MobileProgramming/keri_challenge/build/app/intermediates/lint_vital_partial_results/release/out">
+  <buildFeatures
+      namespacing="REQUIRED"/>
+  <sourceProviders>
+    <sourceProvider
+        manifest="src/main/AndroidManifest.xml"
+        javaDirectories="src/main/java:src/main/kotlin"
+        resDirectories="src/main/res"
+        assetsDirectories="src/main/assets"/>
+    <sourceProvider
+        manifest="src/release/AndroidManifest.xml"
+        javaDirectories="src/release/java:src/release/kotlin"
+        resDirectories="src/release/res"
+        assetsDirectories="src/release/assets"/>
+  </sourceProviders>
+  <testSourceProviders>
+  </testSourceProviders>
+  <testFixturesSourceProviders>
+  </testFixturesSourceProviders>
+  <manifestPlaceholders>
+    <placeholder
+        name="MAPS_API_KEY"
+        value="AIzaSyAORtYhclWmVTCjaK9-rDJmNx0A4U7O7qY" />
+    <placeholder
+        name="applicationName"
+        value="android.app.Application" />
+    <placeholder
+        name="flutterbuildMode"
+        value="release" />
+    <placeholder
+        name="fluttersdk"
+        value="/home/mr/snap/flutter/common/flutter" />
+    <placeholder
+        name="flutterversionCode"
+        value="1" />
+    <placeholder
+        name="flutterversionName"
+        value="1.0.0" />
+  </manifestPlaceholders>
+  <mainArtifact
+      classOutputs="/home/mr/University/MobileProgramming/keri_challenge/build/app/intermediates/javac/release/classes:/home/mr/University/MobileProgramming/keri_challenge/build/app/tmp/kotlin-classes/release:/home/mr/University/MobileProgramming/keri_challenge/build/app/kotlinToolingMetadata:/home/mr/University/MobileProgramming/keri_challenge/build/app/intermediates/compile_and_runtime_not_namespaced_r_class_jar/release/R.jar"
+      applicationId="com.example.keri_challenge"
+      generatedSourceFolders="/home/mr/University/MobileProgramming/keri_challenge/build/app/generated/ap_generated_sources/release/out:/home/mr/University/MobileProgramming/keri_challenge/build/app/generated/aidl_source_output_dir/release/out:/home/mr/University/MobileProgramming/keri_challenge/build/app/generated/source/buildConfig/release:/home/mr/University/MobileProgramming/keri_challenge/build/app/generated/renderscript_source_output_dir/release/out"
+      generatedResourceFolders="/home/mr/University/MobileProgramming/keri_challenge/build/app/generated/res/rs/release:/home/mr/University/MobileProgramming/keri_challenge/build/app/generated/res/resValues/release">
+  </mainArtifact>
+</variant>
