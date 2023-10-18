@@ -69,8 +69,8 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
         if (response.contains('No data available')) {
           User newUser = User(
             event.userName,
-            event.phoneNumber,
             event.password,
+            event.phoneNumber,
             await LocalStorageService.getLocalStorageData('phoneToken')
                 as String,
           );
