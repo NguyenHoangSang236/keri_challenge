@@ -4,7 +4,7 @@
     name=":app"
     type="APP"
     maven="android:app:"
-    gradle="7.4.2"
+    gradle="7.3.0"
     buildFolder="/home/mr/University/MobileProgramming/keri_challenge/build/app"
     bootClassPath="/home/mr/Android/Sdk/platforms/android-33/android.jar:/home/mr/Android/Sdk/build-tools/30.0.3/core-lambda-stubs.jar"
     javaSourceLevel="1.8"

@@ -4,17 +4,7 @@
             "outputFile": "io.flutter.plugins.firebase.auth.firebase_auth-mergeReleaseResources-12:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
-                    "source": "/home/mr/.gradle/caches/transforms-3/9b246f3efdbad08804b46b96727829b7/transformed/browser-1.4.0/res/values-en-rAU/values-en-rAU.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,153,250,359",
-                        "endColumns": "97,96,108,98",
-                        "endOffsets": "148,245,354,453"
-                    }
-                },
-                {
-                    "source": "/home/mr/.gradle/caches/transforms-3/fd21bb4960202f53117f689576200407/transformed/core-1.6.0/res/values-en-rAU/values-en-rAU.xml",
+                    "source": "/home/mr/.gradle/caches/transforms-3/2d4239ca75dcdd5c121682a6a037d8b7/transformed/core-1.6.0/res/values-en-rAU/values-en-rAU.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -28,6 +18,16 @@
                         "startOffsets": "458",
                         "endColumns": "100",
                         "endOffsets": "554"
+                    }
+                },
+                {
+                    "source": "/home/mr/.gradle/caches/transforms-3/ef68ef404aa07329343dfe8c6f106eef/transformed/browser-1.4.0/res/values-en-rAU/values-en-rAU.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,153,250,359",
+                        "endColumns": "97,96,108,98",
+                        "endOffsets": "148,245,354,453"
                     }
                 }
             ]
@@ -36,17 +36,7 @@
             "outputFile": "io.flutter.plugins.firebase.auth.firebase_auth-merged_res-14:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
-                    "source": "/home/mr/.gradle/caches/transforms-3/9b246f3efdbad08804b46b96727829b7/transformed/browser-1.4.0/res/values-en-rAU/values-en-rAU.xml",
-                    "from": {
-                        "startLines": "2,3,4,5",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,153,250,359",
-                        "endColumns": "97,96,108,98",
-                        "endOffsets": "148,245,354,453"
-                    }
-                },
-                {
-                    "source": "/home/mr/.gradle/caches/transforms-3/fd21bb4960202f53117f689576200407/transformed/core-1.6.0/res/values-en-rAU/values-en-rAU.xml",
+                    "source": "/home/mr/.gradle/caches/transforms-3/2d4239ca75dcdd5c121682a6a037d8b7/transformed/core-1.6.0/res/values-en-rAU/values-en-rAU.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -60,6 +50,16 @@
                         "startOffsets": "458",
                         "endColumns": "100",
                         "endOffsets": "554"
+                    }
+                },
+                {
+                    "source": "/home/mr/.gradle/caches/transforms-3/ef68ef404aa07329343dfe8c6f106eef/transformed/browser-1.4.0/res/values-en-rAU/values-en-rAU.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,153,250,359",
+                        "endColumns": "97,96,108,98",
+                        "endOffsets": "148,245,354,453"
                     }
                 }
             ]

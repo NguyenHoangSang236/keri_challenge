@@ -4,26 +4,26 @@ import 'package:flutter/cupertino.dart';
 import '../main.dart';
 
 class FirebaseDatabaseService {
-  static Future<void> set(dynamic object, String objectName) async {
+  static Future<void> set(dynamic object, String path) async {
     try {
-      DatabaseReference ref = firebaseDatabase.ref("/users/$objectName");
+      DatabaseReference ref = firebaseDatabase.ref(path);
 
       await ref.set(object.toJson());
 
-      debugPrint('Added /$objectName');
+      debugPrint('Added /$path');
     } catch (e, stacktrace) {
       debugPrint(e.toString());
       debugPrint(stacktrace.toString());
     }
   }
 
-  static Future<String> get(String name) async {
+  static Future<String> get(String path) async {
     try {
       String result = '';
 
       DatabaseReference databaseRef = firebaseDatabase.ref();
 
-      DataSnapshot snapshot = await databaseRef.child('/users/$name').get();
+      DataSnapshot snapshot = await databaseRef.child(path).get();
 
       if (snapshot.exists) {
         result = snapshot.value.toString();
@@ -51,5 +51,19 @@ class FirebaseDatabaseService {
       debugPrint(e.toString());
       debugPrint(stacktrace.toString());
     }
+  }
+
+  static Future<void> searchAccount(String username) async {
+    DatabaseReference databaseRef = firebaseDatabase.ref();
+
+    databaseRef
+        .child('/users')
+        .orderByChild('name')
+        .startAt(username)
+        .endAt('$username\uf8ff')
+        .once()
+        .then((dbEvent) {
+      print(dbEvent.snapshot.value.toString());
+    });
   }
 }

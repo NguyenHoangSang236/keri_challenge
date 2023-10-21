@@ -7,14 +7,13 @@ class ValueRender {
 
   String? verificationId;
 
-  static String randomVerifiedToken() {
-    const chars =
-        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+  static String randomPhoneNumber() {
+    const chars = '1234567890';
     Random rnd = Random();
 
     return String.fromCharCodes(
       Iterable.generate(
-        5,
+        8,
         (_) => chars.codeUnitAt(
           rnd.nextInt(chars.length),
         ),

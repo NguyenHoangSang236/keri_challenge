@@ -1,10 +1,10 @@
-com.baseflow.geolocator.geolocator_android-jetified-play-services-base-18.1.0-0 /home/mr/.gradle/caches/transforms-3/171aa4ebaee8aee9f75674a912252089/transformed/jetified-play-services-base-18.1.0/res
-com.baseflow.geolocator.geolocator_android-core-1.9.0-1 /home/mr/.gradle/caches/transforms-3/3529b2fd3aa506f49cca8015afd8d1dc/transformed/core-1.9.0/res
-com.baseflow.geolocator.geolocator_android-jetified-play-services-basement-18.1.0-2 /home/mr/.gradle/caches/transforms-3/6b297bda78d2b77902d89dff8ee9d359/transformed/jetified-play-services-basement-18.1.0/res
-com.baseflow.geolocator.geolocator_android-lifecycle-runtime-2.3.1-3 /home/mr/.gradle/caches/transforms-3/85a7dd3afa14d8240d7f34beede896fa/transformed/lifecycle-runtime-2.3.1/res
-com.baseflow.geolocator.geolocator_android-jetified-window-java-1.0.0-beta04-4 /home/mr/.gradle/caches/transforms-3/994c5d7770d335c1c00691483b31cae4/transformed/jetified-window-java-1.0.0-beta04/res
-com.baseflow.geolocator.geolocator_android-jetified-annotation-experimental-1.3.0-5 /home/mr/.gradle/caches/transforms-3/b10f751863ea2c8602a15db59c6907c1/transformed/jetified-annotation-experimental-1.3.0/res
-com.baseflow.geolocator.geolocator_android-jetified-window-1.0.0-beta04-6 /home/mr/.gradle/caches/transforms-3/d5ba6af9fd3ce1d33b0b22ec973e9d64/transformed/jetified-window-1.0.0-beta04/res
+com.baseflow.geolocator.geolocator_android-lifecycle-runtime-2.3.1-0 /home/mr/.gradle/caches/transforms-3/0af87918e97507d8384a137a4d2376bd/transformed/lifecycle-runtime-2.3.1/res
+com.baseflow.geolocator.geolocator_android-jetified-window-java-1.0.0-beta04-1 /home/mr/.gradle/caches/transforms-3/1e7ba6fbd85f3eea4df52d6d1dbf36a1/transformed/jetified-window-java-1.0.0-beta04/res
+com.baseflow.geolocator.geolocator_android-core-1.9.0-2 /home/mr/.gradle/caches/transforms-3/3711f82dd128aea0e8c9e809ff31d0b3/transformed/core-1.9.0/res
+com.baseflow.geolocator.geolocator_android-jetified-window-1.0.0-beta04-3 /home/mr/.gradle/caches/transforms-3/3ad08d9b78aace06bae7755411156cc1/transformed/jetified-window-1.0.0-beta04/res
+com.baseflow.geolocator.geolocator_android-jetified-annotation-experimental-1.3.0-4 /home/mr/.gradle/caches/transforms-3/bf3388adfeaf26dbd3fcde2f9122ffa0/transformed/jetified-annotation-experimental-1.3.0/res
+com.baseflow.geolocator.geolocator_android-jetified-play-services-base-18.1.0-5 /home/mr/.gradle/caches/transforms-3/c464a4401e5c76febbfbf0aa24992942/transformed/jetified-play-services-base-18.1.0/res
+com.baseflow.geolocator.geolocator_android-jetified-play-services-basement-18.1.0-6 /home/mr/.gradle/caches/transforms-3/d3f527bc3d3a968e59ffdb9c4abab8d7/transformed/jetified-play-services-basement-18.1.0/res
 com.baseflow.geolocator.geolocator_android-main-7 /home/mr/.pub-cache/hosted/pub.dev/geolocator_android-4.3.1/android/src/main/res
 com.baseflow.geolocator.geolocator_android-release-8 /home/mr/.pub-cache/hosted/pub.dev/geolocator_android-4.3.1/android/src/release/res
 com.baseflow.geolocator.geolocator_android-pngs-9 /home/mr/University/MobileProgramming/keri_challenge/build/geolocator_android/generated/res/pngs/release

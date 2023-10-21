@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ElevatedButton(
               onPressed: () async {
-                await FirebaseDatabaseService.get('nhu123');
+                await FirebaseDatabaseService.get('users/sang');
               },
               child: Text('show user'),
             ),

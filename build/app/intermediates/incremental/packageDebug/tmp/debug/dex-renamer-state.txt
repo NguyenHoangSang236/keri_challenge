@@ -1,4 +1,4 @@
-#Tue Oct 17 21:12:32 ICT 2023
+#Sun Oct 22 00:23:48 ICT 2023
 base.1=/home/mr/University/MobileProgramming/keri_challenge/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex
 path.1=classes2.dex
 base.0=/home/mr/University/MobileProgramming/keri_challenge/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex

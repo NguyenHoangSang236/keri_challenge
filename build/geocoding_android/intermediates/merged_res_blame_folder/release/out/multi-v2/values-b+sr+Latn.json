@@ -4,7 +4,7 @@
             "outputFile": "com.baseflow.geocoding.geocoding_android-merged_res-10:/values-b+sr+Latn/values-b+sr+Latn.xml",
             "map": [
                 {
-                    "source": "/home/mr/.gradle/caches/transforms-3/fd21bb4960202f53117f689576200407/transformed/core-1.6.0/res/values-b+sr+Latn/values-b+sr+Latn.xml",
+                    "source": "/home/mr/.gradle/caches/transforms-3/2d4239ca75dcdd5c121682a6a037d8b7/transformed/core-1.6.0/res/values-b+sr+Latn/values-b+sr+Latn.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -19,7 +19,7 @@
             "outputFile": "com.baseflow.geocoding.geocoding_android-mergeReleaseResources-8:/values-b+sr+Latn/values-b+sr+Latn.xml",
             "map": [
                 {
-                    "source": "/home/mr/.gradle/caches/transforms-3/fd21bb4960202f53117f689576200407/transformed/core-1.6.0/res/values-b+sr+Latn/values-b+sr+Latn.xml",
+                    "source": "/home/mr/.gradle/caches/transforms-3/2d4239ca75dcdd5c121682a6a037d8b7/transformed/core-1.6.0/res/values-b+sr+Latn/values-b+sr+Latn.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

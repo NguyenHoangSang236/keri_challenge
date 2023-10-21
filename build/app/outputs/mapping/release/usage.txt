@@ -3340,8 +3340,7 @@ androidx.interpolator.view.animation.FastOutLinearInInterpolator
 androidx.interpolator.view.animation.FastOutSlowInInterpolator
 androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 androidx.interpolator.view.animation.LookupTableInterpolator
-androidx.legacy.content.WakefulBroadcastReceiver:
-    private static final java.lang.String EXTRA_WAKE_LOCK_ID
+androidx.legacy.content.WakefulBroadcastReceiver
 androidx.legacy.coreutils.R$attr
 androidx.legacy.coreutils.R$color
 androidx.legacy.coreutils.R$dimen
@@ -4004,28 +4003,6 @@ androidx.viewpager.widget.ViewPager$SavedState
 androidx.viewpager.widget.ViewPager$SimpleOnPageChangeListener
 androidx.viewpager.widget.ViewPager$ViewPositionComparator
 androidx.viewpager.widget.ViewPager
-com.alexmiller.map_launcher.BuildConfig
-com.alexmiller.map_launcher.MapLauncherPlugin$Companion:
-    public final void registerWith(io.flutter.plugin.common.PluginRegistry$Registrar)
-com.alexmiller.map_launcher.MapLauncherPlugin:
-    public static final synthetic io.flutter.plugin.common.MethodChannel access$getChannel$p(com.alexmiller.map_launcher.MapLauncherPlugin)
-    public static final synthetic void access$setChannel$p(com.alexmiller.map_launcher.MapLauncherPlugin,io.flutter.plugin.common.MethodChannel)
-    public static final synthetic void access$setContext$p(com.alexmiller.map_launcher.MapLauncherPlugin,android.content.Context)
-    private final void launchGoogleMaps(java.lang.String)
-    public static final void registerWith(io.flutter.plugin.common.PluginRegistry$Registrar)
-com.alexmiller.map_launcher.MapModel:
-    public final java.lang.String getMapName()
-com.alexmiller.map_launcher.R$attr
-com.alexmiller.map_launcher.R$color
-com.alexmiller.map_launcher.R$dimen
-com.alexmiller.map_launcher.R$drawable
-com.alexmiller.map_launcher.R$id
-com.alexmiller.map_launcher.R$integer
-com.alexmiller.map_launcher.R$layout
-com.alexmiller.map_launcher.R$string
-com.alexmiller.map_launcher.R$style
-com.alexmiller.map_launcher.R$styleable
-com.alexmiller.map_launcher.R
 com.baseflow.geocoding.BuildConfig
 com.baseflow.geocoding.GeocodingPlugin:
     private static final java.lang.String TAG
@@ -4380,12 +4357,6 @@ com.google.android.gms.actions.ItemListIntents
 com.google.android.gms.actions.NoteIntents
 com.google.android.gms.actions.ReserveIntents
 com.google.android.gms.actions.SearchIntents
-com.google.android.gms.ads.identifier.AdvertisingIdClient:
-    public void <init>(android.content.Context)
-    public com.google.android.gms.ads.identifier.AdvertisingIdClient$Info getInfo()
-    public static boolean getIsAdIdFakeForDebugLogging(android.content.Context)
-    public void start()
-com.google.android.gms.ads_identifier.R
 com.google.android.gms.auth.api.phone.R
 com.google.android.gms.auth.api.phone.SmsCodeAutofillClient$PermissionState
 com.google.android.gms.auth.api.phone.SmsCodeAutofillClient
@@ -4488,8 +4459,7 @@ com.google.android.gms.cloudmessaging.R
 com.google.android.gms.common.AccountPicker$AccountChooserOptions$Builder
 com.google.android.gms.common.AccountPicker$AccountChooserOptions
 com.google.android.gms.common.AccountPicker
-com.google.android.gms.common.BlockingServiceConnection:
-    public android.os.IBinder getService()
+com.google.android.gms.common.BlockingServiceConnection
 com.google.android.gms.common.ConnectionResult:
     public static final int API_DISABLED
     public static final int API_DISABLED_FOR_CONNECTION
@@ -4540,6 +4510,7 @@ com.google.android.gms.common.GoogleApiAvailabilityLight:
     static final java.lang.String TRACKING_SOURCE_DIALOG
     static final java.lang.String TRACKING_SOURCE_NOTIFICATION
     public void cancelAvailabilityErrorNotifications(android.content.Context)
+    public int getApkVersion(android.content.Context)
     public int getClientVersion(android.content.Context)
     public android.content.Intent getErrorResolutionIntent(int)
     public boolean isPlayServicesPossiblyUpdating(android.content.Context,int)
@@ -4574,15 +4545,23 @@ com.google.android.gms.common.GooglePlayServicesUtilLight:
     public static void cancelAvailabilityErrorNotifications(android.content.Context)
     public static void enableUsingApkIndependentContext()
     public static void ensurePlayServicesAvailable(android.content.Context,int)
+    public static int getApkVersion(android.content.Context)
     public static int getClientVersion(android.content.Context)
     public static android.app.PendingIntent getErrorPendingIntent(int,android.content.Context,int)
     public static android.content.Intent getGooglePlayServicesAvailabilityRecoveryIntent(int)
+    public static boolean honorsDebugCertificates(android.content.Context)
     public static int isGooglePlayServicesAvailable(android.content.Context)
     public static boolean isGooglePlayServicesUid(android.content.Context,int)
     public static boolean isPlayStorePossiblyUpdating(android.content.Context,int)
     public static boolean isSidewinderDevice(android.content.Context)
+    public static boolean uidHasPackageName(android.content.Context,int,java.lang.String)
 com.google.android.gms.common.GoogleSignatureVerifier:
+    private static volatile java.util.Set zzb
+    private volatile java.lang.String zzd
+    public boolean isGooglePublicSignedPackage(android.content.pm.PackageInfo)
     public boolean isPackageGoogleSigned(java.lang.String)
+    public boolean isUidGoogleSigned(int)
+    private final com.google.android.gms.common.zzx zzc(java.lang.String,boolean,boolean)
 com.google.android.gms.common.GoogleSourceStampsChecker
 com.google.android.gms.common.GoogleSourceStampsResult
 com.google.android.gms.common.PackageSignatureVerifier
@@ -4958,6 +4937,7 @@ com.google.android.gms.common.internal.Preconditions:
     private void <init>()
     public static void checkHandlerThread(android.os.Handler,java.lang.String)
     public static void checkMainThread()
+    public static int checkNotZero(int)
     public static int checkNotZero(int,java.lang.Object)
     public static long checkNotZero(long)
     public static long checkNotZero(long,java.lang.Object)
@@ -5009,6 +4989,7 @@ com.google.android.gms.common.internal.safeparcel.SafeParcelReader:
     public static android.util.SparseArray createStringSparseArray(android.os.Parcel,int)
     public static android.util.SparseArray createTypedSparseArray(android.os.Parcel,int,android.os.Parcelable$Creator)
     public static char readChar(android.os.Parcel,int)
+    public static java.lang.Double readDoubleObject(android.os.Parcel,int)
     public static android.app.PendingIntent readPendingIntent(android.os.Parcel,int)
 com.google.android.gms.common.internal.safeparcel.SafeParcelWriter:
     private void <init>()
@@ -5024,6 +5005,7 @@ com.google.android.gms.common.internal.safeparcel.SafeParcelWriter:
     public static void writeCharArray(android.os.Parcel,int,char[],boolean)
     public static void writeDoubleArray(android.os.Parcel,int,double[],boolean)
     public static void writeDoubleList(android.os.Parcel,int,java.util.List,boolean)
+    public static void writeDoubleObject(android.os.Parcel,int,java.lang.Double,boolean)
     public static void writeDoubleSparseArray(android.os.Parcel,int,android.util.SparseArray,boolean)
     public static void writeFloatArray(android.os.Parcel,int,float[],boolean)
     public static void writeFloatList(android.os.Parcel,int,java.util.List,boolean)
@@ -5100,10 +5082,9 @@ com.google.android.gms.common.internal.zax
 com.google.android.gms.common.internal.zay
 com.google.android.gms.common.internal.zaz
 com.google.android.gms.common.internal.zzaa
-com.google.android.gms.common.internal.zzad:
-    public final boolean zzg()
-com.google.android.gms.common.internal.zzaf:
-    public abstract boolean zzg()
+com.google.android.gms.common.internal.zzad
+com.google.android.gms.common.internal.zzae
+com.google.android.gms.common.internal.zzaf
 com.google.android.gms.common.internal.zzag:
     public static java.lang.String zzb(android.content.Context)
 com.google.android.gms.common.internal.zzaj
@@ -5115,6 +5096,9 @@ com.google.android.gms.common.internal.zzn:
     public void <init>(java.lang.String,int,boolean)
 com.google.android.gms.common.internal.zzr:
     final void zzi(android.os.Looper)
+com.google.android.gms.common.internal.zzx
+com.google.android.gms.common.internal.zzy:
+    public static com.google.android.gms.common.internal.zzz zzg(android.os.IBinder)
 com.google.android.gms.common.logging.Logger:
     public java.lang.String getTag()
     public varargs void v(java.lang.String,java.lang.Throwable,java.lang.Object[])
@@ -5236,22 +5220,14 @@ com.google.android.gms.common.util.ClientLibraryUtils
 com.google.android.gms.common.util.Clock$-CC
 com.google.android.gms.common.util.Clock:
     public abstract long currentThreadTimeMillis()
-com.google.android.gms.common.util.CollectionUtils:
-    private void <init>()
-    public static boolean isEmpty(java.util.Collection)
-    public static java.util.Map mapOf(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)
-    public static java.util.Map mapOf(java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object,java.lang.Object)
-    public static java.util.Map mapOfKeyValueArrays(java.lang.Object[],java.lang.Object[])
-    public static java.util.Set mutableSetOfWithSize(int)
-    public static java.util.Set setOf(java.lang.Object,java.lang.Object,java.lang.Object)
-    public static varargs java.util.Set setOf(java.lang.Object[])
-    private static java.util.Map zza(int,boolean)
-    private static java.util.Set zzb(int,boolean)
+    public abstract long nanoTime()
+com.google.android.gms.common.util.CollectionUtils
 com.google.android.gms.common.util.CrashUtils:
     public void <init>()
 com.google.android.gms.common.util.DataUtils
 com.google.android.gms.common.util.DefaultClock:
     public final long currentThreadTimeMillis()
+    public final long nanoTime()
 com.google.android.gms.common.util.DeviceProperties:
     private static java.lang.Boolean zza
     private static java.lang.Boolean zzb
@@ -5270,10 +5246,12 @@ com.google.android.gms.common.util.DeviceProperties:
     public static boolean isTablet(android.content.Context)
     public static boolean isTablet(android.content.res.Resources)
     public static boolean isTv(android.content.Context)
+    public static boolean isUserBuild()
     public static boolean zzc(android.content.res.Resources)
 com.google.android.gms.common.util.GmsVersion
 com.google.android.gms.common.util.Hex:
     public void <init>()
+    public static java.lang.String bytesToStringLowercase(byte[])
     public static byte[] stringToBytes(java.lang.String)
 com.google.android.gms.common.util.HexDumpUtils
 com.google.android.gms.common.util.HttpUtils
@@ -5296,6 +5274,7 @@ com.google.android.gms.common.util.PlatformVersion:
     public static boolean isAtLeastHoneycombMR1()
     public static boolean isAtLeastIceCreamSandwichMR1()
     public static boolean isAtLeastJellyBeanMR1()
+    public static boolean isAtLeastKitKat()
     public static boolean isAtLeastLollipopMR1()
     public static boolean isAtLeastM()
     public static boolean isAtLeastSv2()
@@ -5309,8 +5288,7 @@ com.google.android.gms.common.util.ScopeUtil
 com.google.android.gms.common.util.SharedPreferencesUtils
 com.google.android.gms.common.util.Strings:
     private void <init>()
-com.google.android.gms.common.util.UidVerifier:
-    private void <init>()
+com.google.android.gms.common.util.UidVerifier
 com.google.android.gms.common.util.VisibleForTesting
 com.google.android.gms.common.util.WorkSourceUtil:
     private void <init>()
@@ -5322,7 +5300,10 @@ com.google.android.gms.common.util.zzc
 com.google.android.gms.common.wrappers.InstantApps:
     public void <init>()
 com.google.android.gms.common.wrappers.PackageManagerWrapper:
+    public int checkCallingOrSelfPermission(java.lang.String)
     public androidx.core.util.Pair getApplicationLabelAndIcon(java.lang.String)
+    public boolean isCallerInstantApp()
+    public final boolean zza(int,java.lang.String)
 com.google.android.gms.common.zaa
 com.google.android.gms.common.zab
 com.google.android.gms.common.zza
@@ -5331,9 +5312,30 @@ com.google.android.gms.common.zzab
 com.google.android.gms.common.zzac
 com.google.android.gms.common.zzad
 com.google.android.gms.common.zzae
+com.google.android.gms.common.zzd
+com.google.android.gms.common.zze
 com.google.android.gms.common.zzn:
+    private static volatile com.google.android.gms.common.internal.zzaf zze
+    static com.google.android.gms.common.zzx zza(java.lang.String,com.google.android.gms.common.zzj,boolean,boolean)
+    static com.google.android.gms.common.zzx zzb(java.lang.String,boolean,boolean,boolean)
     static com.google.android.gms.common.zzx zzc(java.lang.String,boolean,boolean,boolean)
+    static synthetic java.lang.String zzd(boolean,java.lang.String,com.google.android.gms.common.zzj)
     static boolean zzf()
+    static boolean zzg()
+    private static com.google.android.gms.common.zzx zzh(java.lang.String,com.google.android.gms.common.zzj,boolean,boolean)
+    private static com.google.android.gms.common.zzx zzi(java.lang.String,boolean,boolean,boolean,boolean)
+    private static void zzj()
+com.google.android.gms.common.zzo
+com.google.android.gms.common.zzp
+com.google.android.gms.common.zzq
+com.google.android.gms.common.zzr
+com.google.android.gms.common.zzs
+com.google.android.gms.common.zzt
+com.google.android.gms.common.zzu
+com.google.android.gms.common.zzv
+com.google.android.gms.common.zzw
+com.google.android.gms.common.zzx
+com.google.android.gms.common.zzy
 com.google.android.gms.common.zzz
 com.google.android.gms.dynamic.DeferredLifecycleHelper:
     protected void handleGooglePlayUnavailable(android.widget.FrameLayout)
@@ -5362,6 +5364,8 @@ com.google.android.gms.dynamite.DynamiteModule:
     public static final int NONE
     public static final int NO_SELECTION
     public static final int REMOTE
+    public static int getRemoteVersion(android.content.Context,java.lang.String)
+    public android.os.IBinder instantiate(java.lang.String)
 com.google.android.gms.location.ActivityRecognition:
     private void <init>()
     public static com.google.android.gms.location.ActivityRecognitionClient getClient(android.app.Activity)
@@ -6000,109 +6004,6 @@ com.google.android.gms.maps.zzr
 com.google.android.gms.maps.zzs
 com.google.android.gms.maps.zzt
 com.google.android.gms.maps.zzw
-com.google.android.gms.measurement.AppMeasurement$ConditionalUserProperty:
-    public void <init>(com.google.android.gms.measurement.AppMeasurement$ConditionalUserProperty)
-com.google.android.gms.measurement.AppMeasurement$EventInterceptor
-com.google.android.gms.measurement.AppMeasurement$OnEventListener
-com.google.android.gms.measurement.AppMeasurement:
-    public static final java.lang.String CRASH_ORIGIN
-    public static final java.lang.String FCM_ORIGIN
-    public static final java.lang.String FIAM_ORIGIN
-    public java.lang.Boolean getBoolean()
-    public java.lang.Double getDouble()
-    public java.lang.Integer getInteger()
-    public java.lang.Long getLong()
-    public java.lang.String getString()
-    public java.util.Map getUserProperties(boolean)
-    public void logEventInternalNoInterceptor(java.lang.String,java.lang.String,android.os.Bundle,long)
-    public void registerOnMeasurementEventListener(com.google.android.gms.measurement.AppMeasurement$OnEventListener)
-    public void setEventInterceptor(com.google.android.gms.measurement.AppMeasurement$EventInterceptor)
-    public void unregisterOnMeasurementEventListener(com.google.android.gms.measurement.AppMeasurement$OnEventListener)
-com.google.android.gms.measurement.AppMeasurementContentProvider
-com.google.android.gms.measurement.AppMeasurementReceiver:
-    public android.content.BroadcastReceiver$PendingResult doGoAsync()
-com.google.android.gms.measurement.api.AppMeasurementSdk$ConditionalUserProperty
-com.google.android.gms.measurement.api.AppMeasurementSdk$EventInterceptor
-com.google.android.gms.measurement.api.AppMeasurementSdk$OnEventListener
-com.google.android.gms.measurement.api.AppMeasurementSdk:
-    public void beginAdUnitExposure(java.lang.String)
-    public void clearConditionalUserProperty(java.lang.String,java.lang.String,android.os.Bundle)
-    public void endAdUnitExposure(java.lang.String)
-    public long generateEventId()
-    public java.lang.String getAppIdOrigin()
-    public java.lang.String getAppInstanceId()
-    public java.util.List getConditionalUserProperties(java.lang.String,java.lang.String)
-    public java.lang.String getCurrentScreenClass()
-    public java.lang.String getCurrentScreenName()
-    public java.lang.String getGmpAppId()
-    public static com.google.android.gms.measurement.api.AppMeasurementSdk getInstance(android.content.Context)
-    public static com.google.android.gms.measurement.api.AppMeasurementSdk getInstance(android.content.Context,java.lang.String,java.lang.String,java.lang.String,android.os.Bundle)
-    public int getMaxUserProperties(java.lang.String)
-    public java.util.Map getUserProperties(java.lang.String,java.lang.String,boolean)
-    public void logEventNoInterceptor(java.lang.String,java.lang.String,android.os.Bundle,long)
-    public void performAction(android.os.Bundle)
-    public android.os.Bundle performActionWithResponse(android.os.Bundle)
-    public void registerOnMeasurementEventListener(com.google.android.gms.measurement.api.AppMeasurementSdk$OnEventListener)
-    public void setConditionalUserProperty(android.os.Bundle)
-    public void setConsent(android.os.Bundle)
-    public void setCurrentScreen(android.app.Activity,java.lang.String,java.lang.String)
-    public void setEventInterceptor(com.google.android.gms.measurement.api.AppMeasurementSdk$EventInterceptor)
-    public void setMeasurementEnabled(java.lang.Boolean)
-    public void setMeasurementEnabled(boolean)
-    public void unregisterOnMeasurementEventListener(com.google.android.gms.measurement.api.AppMeasurementSdk$OnEventListener)
-com.google.android.gms.measurement.api.R
-com.google.android.gms.measurement.internal.zzeh:
-    public final java.util.List zze(com.google.android.gms.measurement.internal.zzq,boolean)
-    public final void zzl(com.google.android.gms.measurement.internal.zzau,java.lang.String,java.lang.String)
-    public final void zzo(com.google.android.gms.measurement.internal.zzac)
-com.google.android.gms.measurement.internal.zzhr
-com.google.android.gms.measurement.internal.zzik:
-    public final java.util.List zzt(boolean)
-com.google.android.gms.measurement.internal.zzil:
-    public abstract java.lang.Object zzg(int)
-    public abstract void zzt(java.lang.String,java.lang.String,android.os.Bundle,long)
-    public abstract void zzu(com.google.android.gms.measurement.internal.zzhg)
-    public abstract void zzw(com.google.android.gms.measurement.internal.zzhf)
-    public abstract void zzx(com.google.android.gms.measurement.internal.zzhg)
-com.google.android.gms.measurement.internal.zziq:
-    public static java.lang.Object zza(java.lang.Object)
-com.google.android.gms.measurement.internal.zzjb
-com.google.android.gms.measurement.internal.zzjz:
-    protected final void zzx(java.util.concurrent.atomic.AtomicReference,boolean)
-com.google.android.gms.measurement.sdk.R
-com.google.android.gms.measurement.sdk.api.R
-com.google.android.gms.measurement.zza:
-    public final java.lang.Boolean zzc()
-    public final java.lang.Double zzd()
-    public final java.lang.Integer zze()
-    public final java.lang.Long zzf()
-    public final java.lang.Object zzg(int)
-    public final java.lang.String zzl()
-    public final java.util.Map zzn(boolean)
-    public final void zzt(java.lang.String,java.lang.String,android.os.Bundle,long)
-    public final void zzu(com.google.android.gms.measurement.internal.zzhg)
-    public final void zzw(com.google.android.gms.measurement.internal.zzhf)
-    public final void zzx(com.google.android.gms.measurement.internal.zzhg)
-com.google.android.gms.measurement.zzb:
-    public final java.lang.Boolean zzc()
-    public final java.lang.Double zzd()
-    public final java.lang.Integer zze()
-    public final java.lang.Long zzf()
-    public final java.lang.Object zzg(int)
-    public final java.lang.String zzl()
-    public final java.util.Map zzn(boolean)
-    public final void zzt(java.lang.String,java.lang.String,android.os.Bundle,long)
-    public final void zzu(com.google.android.gms.measurement.internal.zzhg)
-    public final void zzw(com.google.android.gms.measurement.internal.zzhf)
-    public final void zzx(com.google.android.gms.measurement.internal.zzhg)
-com.google.android.gms.measurement.zzd:
-    abstract java.lang.Boolean zzc()
-    abstract java.lang.Double zzd()
-    abstract java.lang.Integer zze()
-    abstract java.lang.Long zzf()
-    abstract java.lang.String zzl()
-    abstract java.util.Map zzn(boolean)
-com.google.android.gms.measurement_base.R
 com.google.android.gms.security.ProviderInstaller$ProviderInstallListener
 com.google.android.gms.security.ProviderInstaller
 com.google.android.gms.security.zza
@@ -6202,9 +6103,6 @@ com.google.firebase.R$string
 com.google.firebase.R$style
 com.google.firebase.R$styleable
 com.google.firebase.R
-com.google.firebase.analytics.FirebaseAnalytics$Event
-com.google.firebase.analytics.FirebaseAnalytics$Param
-com.google.firebase.analytics.FirebaseAnalytics$UserProperty
 com.google.firebase.analytics.connector.AnalyticsConnector$AnalyticsConnectorHandle
 com.google.firebase.analytics.connector.AnalyticsConnector$AnalyticsConnectorListener
 com.google.firebase.analytics.connector.AnalyticsConnector$ConditionalUserProperty
@@ -6215,33 +6113,7 @@ com.google.firebase.analytics.connector.AnalyticsConnector:
     public abstract java.util.Map getUserProperties(boolean)
     public abstract com.google.firebase.analytics.connector.AnalyticsConnector$AnalyticsConnectorHandle registerAnalyticsConnectorListener(java.lang.String,com.google.firebase.analytics.connector.AnalyticsConnector$AnalyticsConnectorListener)
     public abstract void setConditionalUserProperty(com.google.firebase.analytics.connector.AnalyticsConnector$ConditionalUserProperty)
-com.google.firebase.analytics.connector.AnalyticsConnectorImpl$1
-com.google.firebase.analytics.connector.AnalyticsConnectorImpl:
-    public void clearConditionalUserProperty(java.lang.String,java.lang.String,android.os.Bundle)
-    public java.util.List getConditionalUserProperties(java.lang.String,java.lang.String)
-    public static com.google.firebase.analytics.connector.AnalyticsConnector getInstance()
-    public static com.google.firebase.analytics.connector.AnalyticsConnector getInstance(com.google.firebase.FirebaseApp)
-    public int getMaxUserProperties(java.lang.String)
-    public java.util.Map getUserProperties(boolean)
-    public com.google.firebase.analytics.connector.AnalyticsConnector$AnalyticsConnectorHandle registerAnalyticsConnectorListener(java.lang.String,com.google.firebase.analytics.connector.AnalyticsConnector$AnalyticsConnectorListener)
-    public void setConditionalUserProperty(com.google.firebase.analytics.connector.AnalyticsConnector$ConditionalUserProperty)
-    static synthetic bridge boolean zzb(com.google.firebase.analytics.connector.AnalyticsConnectorImpl,java.lang.String)
-    private final boolean zzc(java.lang.String)
 com.google.firebase.analytics.connector.R
-com.google.firebase.analytics.connector.internal.zza
-com.google.firebase.analytics.connector.internal.zzc:
-    public static final synthetic int zza
-    public static boolean zzc(java.lang.String)
-com.google.firebase.analytics.connector.internal.zzd
-com.google.firebase.analytics.connector.internal.zze
-com.google.firebase.analytics.connector.internal.zzf
-com.google.firebase.analytics.connector.internal.zzg
-com.google.firebase.analytics.zzd:
-    public final java.lang.Object zzg(int)
-    public final void zzt(java.lang.String,java.lang.String,android.os.Bundle,long)
-    public final void zzu(com.google.android.gms.measurement.internal.zzhg)
-    public final void zzw(com.google.android.gms.measurement.internal.zzhf)
-    public final void zzx(com.google.android.gms.measurement.internal.zzhg)
 com.google.firebase.annotations.DeferredApi
 com.google.firebase.annotations.PreviewApi
 com.google.firebase.annotations.PublicApi
@@ -6397,6 +6269,7 @@ com.google.firebase.auth.zze:
 com.google.firebase.auth.zzy
 com.google.firebase.components.BuildConfig
 com.google.firebase.components.Component$Builder:
+    public com.google.firebase.components.Component$Builder eagerInDefaultApp()
     public com.google.firebase.components.Component$Builder publishes(java.lang.Class)
 com.google.firebase.components.Component:
     public static com.google.firebase.components.Component intoSet(java.lang.Object,com.google.firebase.components.Qualified)
@@ -7125,7 +6998,10 @@ com.google.firebase.encoders.proto.ProtobufValueEncoderContext:
     public com.google.firebase.encoders.ValueEncoderContext add(int)
     public com.google.firebase.encoders.ValueEncoderContext add(long)
     public com.google.firebase.encoders.ValueEncoderContext add(byte[])
-com.google.firebase.firebase_analytics.R
+com.google.firebase.events.Event:
+    public java.lang.Object getPayload()
+com.google.firebase.events.Subscriber:
+    public abstract void subscribe(java.lang.Class,java.util.concurrent.Executor,com.google.firebase.events.EventHandler)
 com.google.firebase.heartbeatinfo.AutoValue_SdkHeartBeatResult
 com.google.firebase.heartbeatinfo.HeartBeatConsumerComponent:
     private void <init>()
@@ -7198,6 +7074,7 @@ com.google.firebase.installations.FirebaseInstallations:
     static synthetic java.util.Set access$000(com.google.firebase.installations.FirebaseInstallations)
     public com.google.android.gms.tasks.Task delete()
     private java.lang.Void deleteFirebaseInstallationId()
+    public static com.google.firebase.installations.FirebaseInstallations getInstance()
     java.lang.String getName()
     public synchronized com.google.firebase.installations.internal.FidListenerHandle registerFidListener(com.google.firebase.installations.internal.FidListener)
 com.google.firebase.installations.FirebaseInstallationsApi:
@@ -7307,8 +7184,6 @@ com.google.firebase.internal.DataCollectionConfigStorage:
     public static final java.lang.String DATA_COLLECTION_DEFAULT_ENABLED
     private static final java.lang.String FIREBASE_APP_PREFS
 com.google.firebase.internal.InternalTokenProvider
-com.google.firebase.measurement.R
-com.google.firebase.measurement_impl.R
 com.google.firebase.messaging.AutoProtoEncoderDoNotUseEncoder:
     public static final int CODEGEN_VERSION
 com.google.firebase.messaging.BuildConfig
@@ -8559,20 +8434,6 @@ io.flutter.plugin.platform.VirtualDisplayController:
     public void dispose()
     void onFlutterViewAttached(android.view.View)
     void onFlutterViewDetached()
-io.flutter.plugins.firebase.analytics.BuildConfig
-io.flutter.plugins.firebase.analytics.Constants
-io.flutter.plugins.firebase.analytics.R$attr
-io.flutter.plugins.firebase.analytics.R$color
-io.flutter.plugins.firebase.analytics.R$dimen
-io.flutter.plugins.firebase.analytics.R$drawable
-io.flutter.plugins.firebase.analytics.R$id
-io.flutter.plugins.firebase.analytics.R$integer
-io.flutter.plugins.firebase.analytics.R$layout
-io.flutter.plugins.firebase.analytics.R$raw
-io.flutter.plugins.firebase.analytics.R$string
-io.flutter.plugins.firebase.analytics.R$style
-io.flutter.plugins.firebase.analytics.R$styleable
-io.flutter.plugins.firebase.analytics.R
 io.flutter.plugins.firebase.auth.BuildConfig
 io.flutter.plugins.firebase.auth.Constants
 io.flutter.plugins.firebase.auth.FlutterFirebaseAuthPlugin:
@@ -15238,6 +15099,28 @@ kotlinx.coroutines.test.TestCoroutineContext$special$$inlined$CoroutineException
 kotlinx.coroutines.test.TestCoroutineContext
 kotlinx.coroutines.test.TestCoroutineContextKt
 kotlinx.coroutines.test.TimedRunnableObsolete
+net.zonble.flutter_platform_alert.BuildConfig
+net.zonble.flutter_platform_alert.R$attr
+net.zonble.flutter_platform_alert.R$color
+net.zonble.flutter_platform_alert.R$dimen
+net.zonble.flutter_platform_alert.R$drawable
+net.zonble.flutter_platform_alert.R$id
+net.zonble.flutter_platform_alert.R$integer
+net.zonble.flutter_platform_alert.R$layout
+net.zonble.flutter_platform_alert.R$string:
+    public static final int status_bar_notification_info_overflow
+    private void <init>()
+net.zonble.flutter_platform_alert.R$style:
+    public static final int TextAppearance_Compat_Notification
+    public static final int TextAppearance_Compat_Notification_Info
+    public static final int TextAppearance_Compat_Notification_Line2
+    public static final int TextAppearance_Compat_Notification_Time
+    public static final int TextAppearance_Compat_Notification_Title
+    public static final int Widget_Compat_NotificationActionContainer
+    public static final int Widget_Compat_NotificationActionText
+    private void <init>()
+net.zonble.flutter_platform_alert.R$styleable
+net.zonble.flutter_platform_alert.R
 org.intellij.lang.annotations.Flow
 org.intellij.lang.annotations.Identifier
 org.intellij.lang.annotations.JdkConstants$AdjustableOrientation
@@ -15293,29 +15176,10 @@ android.support.v4.media.MediaBrowserCompat$SearchResultReceiver:
 android.support.v4.media.session.MediaControllerCompat$Callback$MessageHandler
 android.support.v4.media.session.MediaControllerCompat$Callback:
     android.support.v4.media.session.MediaControllerCompat$Callback$MessageHandler mHandler
-androidx.core.app.ActivityCompat$PermissionCompatDelegate:
-    public abstract boolean onActivityResult(android.app.Activity,int,int,android.content.Intent)
-    public abstract boolean requestPermissions(android.app.Activity,java.lang.String[],int)
-androidx.core.app.ActivityCompat:
-    private static androidx.core.app.ActivityCompat$PermissionCompatDelegate sDelegate
 androidx.core.app.BundleCompat$BeforeApi18Impl
 androidx.core.app.NotificationCompat$Action:
     public androidx.core.app.RemoteInput[] getDataOnlyRemoteInputs()
-androidx.core.app.NotificationCompat$BubbleMetadata$Api29Impl$$InternalSyntheticApiModelOutline$2$6e7271ba046966584d7e4dc31c9c028d255d7d9de474a432358b7144fb93556a$0
-androidx.core.app.NotificationCompat$BubbleMetadata$Api29Impl$$InternalSyntheticApiModelOutline$2$6e7271ba046966584d7e4dc31c9c028d255d7d9de474a432358b7144fb93556a$1
-androidx.core.app.NotificationCompat$BubbleMetadata$Api29Impl$$InternalSyntheticApiModelOutline$2$6e7271ba046966584d7e4dc31c9c028d255d7d9de474a432358b7144fb93556a$2
-androidx.core.app.NotificationCompat$BubbleMetadata$Api29Impl$$InternalSyntheticApiModelOutline$2$6e7271ba046966584d7e4dc31c9c028d255d7d9de474a432358b7144fb93556a$3
-androidx.core.app.NotificationCompat$BubbleMetadata$Api29Impl$$InternalSyntheticApiModelOutline$2$6e7271ba046966584d7e4dc31c9c028d255d7d9de474a432358b7144fb93556a$4
-androidx.core.app.NotificationCompat$BubbleMetadata$Api29Impl$$InternalSyntheticApiModelOutline$2$6e7271ba046966584d7e4dc31c9c028d255d7d9de474a432358b7144fb93556a$5
-androidx.core.app.NotificationCompat$BubbleMetadata$Api29Impl$$InternalSyntheticApiModelOutline$2$6e7271ba046966584d7e4dc31c9c028d255d7d9de474a432358b7144fb93556a$6
-androidx.core.app.NotificationCompat$BubbleMetadata$Api29Impl$$InternalSyntheticApiModelOutline$2$6e7271ba046966584d7e4dc31c9c028d255d7d9de474a432358b7144fb93556a$7
 androidx.core.app.NotificationCompat$BubbleMetadata$Api29Impl
-androidx.core.app.NotificationCompat$BubbleMetadata$Api30Impl$$InternalSyntheticApiModelOutline$2$8970c2cc2d805df4eec8a892aa14314be612b4b30e7572399a41bf2529d9108e$0
-androidx.core.app.NotificationCompat$BubbleMetadata$Api30Impl$$InternalSyntheticApiModelOutline$2$8970c2cc2d805df4eec8a892aa14314be612b4b30e7572399a41bf2529d9108e$1
-androidx.core.app.NotificationCompat$BubbleMetadata$Api30Impl$$InternalSyntheticApiModelOutline$2$8970c2cc2d805df4eec8a892aa14314be612b4b30e7572399a41bf2529d9108e$2
-androidx.core.app.NotificationCompat$BubbleMetadata$Api30Impl$$InternalSyntheticApiModelOutline$2$8970c2cc2d805df4eec8a892aa14314be612b4b30e7572399a41bf2529d9108e$3
-androidx.core.app.NotificationCompat$BubbleMetadata$Api30Impl$$InternalSyntheticApiModelOutline$2$8970c2cc2d805df4eec8a892aa14314be612b4b30e7572399a41bf2529d9108e$4
-androidx.core.app.NotificationCompat$BubbleMetadata$Api30Impl$$InternalSyntheticApiModelOutline$2$8970c2cc2d805df4eec8a892aa14314be612b4b30e7572399a41bf2529d9108e$5
 androidx.core.app.NotificationCompat$BubbleMetadata$Api30Impl
 androidx.core.app.NotificationCompat$BubbleMetadata:
     public boolean getAutoExpandBubble()
@@ -15329,7 +15193,7 @@ androidx.core.app.NotificationCompat$BubbleMetadata:
 androidx.core.app.NotificationCompat$Builder:
     androidx.core.app.NotificationCompat$BubbleMetadata mBubbleMetadata
     androidx.core.content.LocusIdCompat mLocusId
-androidx.core.app.NotificationCompatBuilder$$InternalSyntheticApiModelOutline$1$73cb8751ab51b21ad35dca8bb429f18dd92b113dd98fb852fe30e6efdb45c21f$21
+androidx.core.app.NotificationCompatBuilder$$InternalSyntheticApiModelOutline$1$73cb8751ab51b21ad35dca8bb429f18dd92b113dd98fb852fe30e6efdb45c21f$20
 androidx.core.app.NotificationCompatJellybean:
     private static java.lang.reflect.Field sExtrasField
     private static boolean sExtrasFieldAccessFailed
@@ -15349,22 +15213,12 @@ androidx.core.location.LocationListenerCompat$-CC:
     public static void $default$onProviderDisabled(androidx.core.location.LocationListenerCompat,java.lang.String)
     public static void $default$onProviderEnabled(androidx.core.location.LocationListenerCompat,java.lang.String)
     public static void $default$onStatusChanged(androidx.core.location.LocationListenerCompat,java.lang.String,int,android.os.Bundle)
-androidx.core.text.ICUCompat$Api21Impl$$InternalSyntheticApiModelOutline$3$55a58bfb6a1089206bd9d70257cd3f8c5b4204aa95e23db97e333e89f129ebc4$0
+androidx.core.text.ICUCompat$Api21Impl$$InternalSyntheticApiModelOutline$2$55a58bfb6a1089206bd9d70257cd3f8c5b4204aa95e23db97e333e89f129ebc4$0
 androidx.core.text.ICUCompat$Api21Impl
-androidx.core.text.ICUCompat$Api24Impl$$InternalSyntheticApiModelOutline$3$0e3958cde1c8d1e6e06ca237859aa63bc9148f6158f73c6dd249a2fabe73f8aa$0
-androidx.core.text.ICUCompat$Api24Impl$$InternalSyntheticApiModelOutline$3$6f31b810d14370c942025a7cfb561f2794c14e017f95ccd290822209cc652b27$0
-androidx.core.text.ICUCompat$Api24Impl$$InternalSyntheticApiModelOutline$3$b1db41874ed3ef624336e94dac6883118cdc10836cd79e07718704e522669a1d$0
 androidx.core.text.ICUCompat$Api24Impl
 androidx.core.text.ICUCompat
 androidx.core.text.TextUtilsCompat:
     private static int getLayoutDirectionFromFirstChar(java.util.Locale)
-androidx.core.view.OnApplyWindowInsetsListener:
-    public abstract androidx.core.view.WindowInsetsCompat onApplyWindowInsets(android.view.View,androidx.core.view.WindowInsetsCompat)
-androidx.core.view.ViewCompat$Api20Impl
-androidx.core.view.ViewCompat$Api21Impl$1:
-    final synthetic androidx.core.view.OnApplyWindowInsetsListener val$listener
-androidx.core.view.ViewCompat:
-    public static void requestApplyInsets(android.view.View)
 androidx.fragment.app.Fragment$AnimationInfo:
     androidx.core.app.SharedElementCallback mEnterTransitionCallback
     androidx.core.app.SharedElementCallback mExitTransitionCallback
@@ -15390,8 +15244,6 @@ androidx.lifecycle.LiveData:
     public java.lang.Object getValue()
     public boolean hasActiveObservers()
     public void observe(androidx.lifecycle.LifecycleOwner,androidx.lifecycle.Observer)
-androidx.lifecycle.ReportFragment:
-    private androidx.lifecycle.ReportFragment$ActivityInitializationListener mProcessListener
 androidx.loader.app.LoaderManagerImpl$LoaderInfo:
     private final androidx.loader.content.Loader mLoader
     private androidx.loader.app.LoaderManagerImpl$LoaderObserver mObserver
@@ -15408,17 +15260,14 @@ androidx.loader.content.Loader:
     public final void startLoading()
     public void stopLoading()
     public void unregisterListener(androidx.loader.content.Loader$OnLoadCompleteListener)
-com.baseflow.geolocator.GeolocatorPlugin:
-    private io.flutter.plugin.common.PluginRegistry$Registrar pluginRegistrar
 com.baseflow.geolocator.location.LocationClient:
     public abstract boolean checkLocationService(android.content.Context)
 com.google.android.datatransport.runtime.dagger.internal.DoubleCheck:
     static final synthetic boolean $assertionsDisabled
 com.google.android.datatransport.runtime.dagger.internal.MemoizedSentinel
-com.google.android.gms.common.GoogleSignatureVerifier:
-    private static volatile java.util.Set zzb
-com.google.android.gms.common.api.internal.NonGmsServiceBrokerClient:
-    private static final java.lang.String zaa
+com.google.android.gms.common.GooglePlayServicesUtilLight:
+    static boolean zza
+    private static boolean zzb
 com.google.android.gms.common.api.internal.zadb:
     final synthetic com.google.android.gms.common.api.internal.zadc zaa
 com.google.android.gms.common.api.internal.zadc
@@ -15428,13 +15277,6 @@ com.google.android.gms.common.util.AndroidUtilsLight:
     private static volatile int zza
 com.google.android.gms.maps.internal.zzcb:
     public void <init>()
-com.google.android.gms.maps.model.MapStyleOptions:
-    private static final java.lang.String zza
-com.google.android.gms.maps.model.PatternItem:
-    private static final java.lang.String zza
-com.google.android.gms.measurement.internal.zzfb:
-    static final java.lang.String zza
-com.google.android.gms.measurement.internal.zzfw
 com.google.android.gms.signin.internal.SignInClientImpl:
     public static final synthetic int zaa
 com.google.firebase.auth.FirebaseAuth:
@@ -15450,10 +15292,6 @@ com.google.firebase.heartbeatinfo.HeartBeatInfoStorage:
     private static com.google.firebase.heartbeatinfo.HeartBeatInfoStorage instance
 com.google.gson.internal.LinkedTreeMap:
     static final synthetic boolean $assertionsDisabled
-io.flutter.FlutterInjector$Builder:
-    private io.flutter.embedding.engine.deferredcomponents.DeferredComponentManager deferredComponentManager
-io.flutter.FlutterInjector:
-    private io.flutter.embedding.engine.deferredcomponents.DeferredComponentManager deferredComponentManager
 io.flutter.Log:
     public static int ASSERT
     public static int DEBUG
@@ -15469,28 +15307,12 @@ io.flutter.embedding.engine.FlutterEngineConnectionRegistry:
     private io.flutter.embedding.engine.FlutterEngineConnectionRegistry$FlutterEngineBroadcastReceiverPluginBinding broadcastReceiverPluginBinding
     private io.flutter.embedding.engine.FlutterEngineConnectionRegistry$FlutterEngineContentProviderPluginBinding contentProviderPluginBinding
     private io.flutter.embedding.engine.FlutterEngineConnectionRegistry$FlutterEngineServicePluginBinding servicePluginBinding
-io.flutter.embedding.engine.dart.DartExecutor$IsolateServiceIdListener:
-    public abstract void onIsolateServiceIdAvailable(java.lang.String)
-io.flutter.embedding.engine.dart.DartExecutor:
-    private io.flutter.embedding.engine.dart.DartExecutor$IsolateServiceIdListener isolateServiceIdListener
-    static synthetic java.lang.String access$000(io.flutter.embedding.engine.dart.DartExecutor)
-io.flutter.embedding.engine.deferredcomponents.DeferredComponentManager:
-    public abstract void destroy()
-    public abstract java.lang.String getDeferredComponentInstallState(int,java.lang.String)
-    public abstract void installDeferredComponent(int,java.lang.String)
-    public abstract void setDeferredComponentChannel(io.flutter.embedding.engine.systemchannels.DeferredComponentChannel)
-    public abstract boolean uninstallDeferredComponent(int,java.lang.String)
 io.flutter.embedding.engine.loader.ResourceExtractor:
     void waitForCompletion()
-io.flutter.embedding.engine.systemchannels.DeferredComponentChannel:
-    private io.flutter.embedding.engine.deferredcomponents.DeferredComponentManager deferredComponentManager
-    static synthetic java.util.Map access$100(io.flutter.embedding.engine.systemchannels.DeferredComponentChannel)
-    public void setDeferredComponentManager(io.flutter.embedding.engine.deferredcomponents.DeferredComponentManager)
 io.flutter.embedding.engine.systemchannels.PlatformChannel$PlatformMessageHandler$-CC
 io.flutter.plugin.common.BinaryMessenger$-CC:
     public static io.flutter.plugin.common.BinaryMessenger$TaskQueue $default$makeBackgroundTaskQueue(io.flutter.plugin.common.BinaryMessenger,io.flutter.plugin.common.BinaryMessenger$TaskQueueOptions)
     public static void $default$setMessageHandler(io.flutter.plugin.common.BinaryMessenger,java.lang.String,io.flutter.plugin.common.BinaryMessenger$BinaryMessageHandler,io.flutter.plugin.common.BinaryMessenger$TaskQueue)
-io.flutter.plugin.common.PluginRegistry$Registrar
 io.flutter.plugin.platform.PlatformPlugin$PlatformPluginDelegate$-CC
 io.flutter.plugin.platform.VirtualDisplayController:
     private static java.lang.String TAG

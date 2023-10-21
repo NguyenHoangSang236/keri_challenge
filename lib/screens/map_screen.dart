@@ -13,6 +13,7 @@ import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/core/extension/latLng_extenstion.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/extension/position_extension.dart';
+import 'package:keri_challenge/core/router/app_router_path.dart';
 import 'package:keri_challenge/screens/searching_screen.dart';
 import 'package:keri_challenge/services/firebase_message_service.dart';
 
@@ -363,27 +364,30 @@ class _MapState extends State<MapScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          getUserCurrentLocation().then((value) async {
-            final latLng = LatLng(value.latitude, value.longitude);
-            // marker added for current users location
-            _markers.add(
-              Marker(
-                markerId: const MarkerId("My location"),
-                position: latLng,
-                infoWindow: const InfoWindow(
-                  title: 'My Current Location',
-                ),
-              ),
-            );
+        backgroundColor: Colors.green,
+        onPressed: () {
+          context.router.pushNamed(AppRouterPath.accountList);
 
-            addMarkerAndAnimateCameraToPosition(
-              latLng: latLng,
-              isFromLocation: false,
-            );
-          });
+          // getUserCurrentLocation().then((value) async {
+          //   final latLng = LatLng(value.latitude, value.longitude);
+          //   // marker added for current users location
+          //   _markers.add(
+          //     Marker(
+          //       markerId: const MarkerId("My location"),
+          //       position: latLng,
+          //       infoWindow: const InfoWindow(
+          //         title: 'My Current Location',
+          //       ),
+          //     ),
+          //   );
+          //
+          //   addMarkerAndAnimateCameraToPosition(
+          //     latLng: latLng,
+          //     isFromLocation: false,
+          //   );
+          // });
         },
-        child: const Icon(Icons.account_balance_sharp),
+        child: const Icon(Icons.list_alt),
       ),
     );
   }

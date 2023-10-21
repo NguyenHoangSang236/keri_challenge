@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.keri_challenge.app-mergeReleaseResources-19:/values-v24/values-v24.xml",
+            "outputFile": "com.example.keri_challenge.app-mergeReleaseResources-18:/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "/home/mr/.gradle/caches/transforms-3/4ea1501dfa2cd467eed4e3dc987bf372/transformed/media-1.1.0/res/values-v24/values-v24.xml",
+                    "source": "/home/mr/.gradle/caches/transforms-3/3a5788a58a1c8128c4e96a65e24a0794/transformed/media-1.1.0/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

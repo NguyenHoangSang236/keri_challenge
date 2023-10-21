@@ -20,9 +20,8 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
       emit(AuthorLoadingState());
 
       try {
-        final String response = await FirebaseDatabaseService.get(
-          event.userName,
-        );
+        final String response =
+            await FirebaseDatabaseService.get('users/${event.userName}');
 
         if (!response.contains('No data available')) {
           String jsonString = response.substring(response.indexOf('{'));
@@ -39,7 +38,7 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
 
               await FirebaseDatabaseService.set(
                 currentUser,
-                currentUser!.name,
+                "/users/${currentUser!.name}",
               );
 
               emit(AuthorLoggedInState(currentUser!));
@@ -62,9 +61,8 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
       emit(AuthorLoadingState());
 
       try {
-        final String response = await FirebaseDatabaseService.get(
-          event.userName,
-        );
+        final String response =
+            await FirebaseDatabaseService.get('users/${event.userName}');
 
         if (response.contains('No data available')) {
           User newUser = User(
@@ -77,7 +75,7 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
 
           await FirebaseDatabaseService.set(
             newUser,
-            newUser.name,
+            "users/${newUser.name}",
           );
 
           emit(const AuthorRegisteredState('Register successfully'));

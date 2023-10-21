@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:keri_challenge/bloc/account/account_bloc.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/repository/google_map_repository.dart';
@@ -74,6 +75,7 @@ Future<void> main() async {
               create: (context) => GoogleMapBloc(
                   RepositoryProvider.of<GoogleMapRepository>(context))),
           BlocProvider<AuthorBloc>(create: (context) => AuthorBloc()),
+          BlocProvider<AccountBloc>(create: (context) => AccountBloc()),
         ],
         child: const MyApp(),
       ),

@@ -55,7 +55,27 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  void _onPressedLoginButton() {
+  void _onPressedLoginButton() async {
+    /// for getting total number of users
+    // final snapshot = await FirebaseDatabaseService.get('/users');
+    //
+    // Map jsonMap = jsonDecode(snapshot.toString().formatToJson);
+    //
+    // print(jsonMap.keys.length);
+
+    /// for setting new users
+    // FirebaseDatabaseService.remove('users');
+    // Set<String> phoneList = {};
+    //
+    // for (int i = 0; i < 5000; i++) {
+    //   String phone = '09${ValueRender.randomPhoneNumber()}';
+    //
+    //   FirebaseDatabaseService.set(
+    //     User('user${i + 1}', phone, '123', ''),
+    //     'users/user${i + 1}',
+    //   );
+    // }
+
     if (_formKey.currentState!.validate()) {
       context.read<AuthorBloc>().add(
             OnLoginEvent(

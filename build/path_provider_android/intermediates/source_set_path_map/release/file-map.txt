@@ -1,7 +1,7 @@
-io.flutter.plugins.pathprovider.path_provider_android-jetified-window-java-1.0.0-beta04-0 /home/mr/.gradle/caches/transforms-3/994c5d7770d335c1c00691483b31cae4/transformed/jetified-window-java-1.0.0-beta04/res
-io.flutter.plugins.pathprovider.path_provider_android-jetified-annotation-experimental-1.1.0-1 /home/mr/.gradle/caches/transforms-3/ce18629baf30b2d1cb03c9f8e8cdf9d0/transformed/jetified-annotation-experimental-1.1.0/res
-io.flutter.plugins.pathprovider.path_provider_android-jetified-window-1.0.0-beta04-2 /home/mr/.gradle/caches/transforms-3/d5ba6af9fd3ce1d33b0b22ec973e9d64/transformed/jetified-window-1.0.0-beta04/res
-io.flutter.plugins.pathprovider.path_provider_android-core-1.6.0-3 /home/mr/.gradle/caches/transforms-3/fd21bb4960202f53117f689576200407/transformed/core-1.6.0/res
+io.flutter.plugins.pathprovider.path_provider_android-jetified-window-java-1.0.0-beta04-0 /home/mr/.gradle/caches/transforms-3/1e7ba6fbd85f3eea4df52d6d1dbf36a1/transformed/jetified-window-java-1.0.0-beta04/res
+io.flutter.plugins.pathprovider.path_provider_android-core-1.6.0-1 /home/mr/.gradle/caches/transforms-3/2d4239ca75dcdd5c121682a6a037d8b7/transformed/core-1.6.0/res
+io.flutter.plugins.pathprovider.path_provider_android-jetified-window-1.0.0-beta04-2 /home/mr/.gradle/caches/transforms-3/3ad08d9b78aace06bae7755411156cc1/transformed/jetified-window-1.0.0-beta04/res
+io.flutter.plugins.pathprovider.path_provider_android-jetified-annotation-experimental-1.1.0-3 /home/mr/.gradle/caches/transforms-3/4ca549dac0359dc0d04e577cbea7981d/transformed/jetified-annotation-experimental-1.1.0/res
 io.flutter.plugins.pathprovider.path_provider_android-main-4 /home/mr/.pub-cache/hosted/pub.dev/path_provider_android-2.2.0/android/src/main/res
 io.flutter.plugins.pathprovider.path_provider_android-release-5 /home/mr/.pub-cache/hosted/pub.dev/path_provider_android-2.2.0/android/src/release/res
 io.flutter.plugins.pathprovider.path_provider_android-pngs-6 /home/mr/University/MobileProgramming/keri_challenge/build/path_provider_android/generated/res/pngs/release

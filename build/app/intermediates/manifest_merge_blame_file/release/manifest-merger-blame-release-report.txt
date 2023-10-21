@@ -11,548 +11,447 @@
 9-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-11-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:3:5-80
-11-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:3:22-78
+11-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:2:5-80
+11-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:2:22-78
 12    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-12-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:4:5-78
-12-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:4:22-76
+12-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:3:5-78
+12-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:3:22-76
 13    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-13-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:5:5-84
-13-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:5:22-82
-14    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-14-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:3:5-80
-14-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:3:22-78
-15    <uses-permission android:name="android.permission.SET_TIME_ZONE" />
-15-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:7:5-8:47
-15-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:7:22-69
-16    <uses-permission android:name="android.permission.INTERNET" />
-16-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:9:5-66
-16-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:9:22-64
-17    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-17-->[:firebase_analytics] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_analytics/intermediates/merged_manifest/release/AndroidManifest.xml:7:5-79
-17-->[:firebase_analytics] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_analytics/intermediates/merged_manifest/release/AndroidManifest.xml:7:22-76
-18    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- Permissions options for the `notification` group -->
-18-->[:firebase_analytics] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_analytics/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-68
-18-->[:firebase_analytics] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_analytics/intermediates/merged_manifest/release/AndroidManifest.xml:9:22-65
-19    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-19-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:11:5-77
-19-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:11:22-74
-20    <uses-permission android:name="android.permission.VIBRATE" />
-20-->[:flutter_local_notifications] /home/mr/University/MobileProgramming/keri_challenge/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:7:5-66
-20-->[:flutter_local_notifications] /home/mr/University/MobileProgramming/keri_challenge/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:7:22-63
-21
-22    <queries>
-22-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:7:5-23:15
-23        <package android:name="com.google.android.apps.maps" />
-23-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:8:9-64
-23-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:8:18-61
-24        <package android:name="com.google.android.apps.mapslite" />
-24-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:9:9-68
-24-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:9:18-65
-25        <package android:name="com.autonavi.minimap" />
-25-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-56
-25-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:10:18-53
-26        <package android:name="com.baidu.BaiduMap" />
-26-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:11:9-54
-26-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:11:18-51
-27        <package android:name="com.waze" />
-27-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:12:9-44
-27-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:12:18-41
-28        <package android:name="ru.yandex.yandexnavi" />
-28-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:13:9-56
-28-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:13:18-53
-29        <package android:name="ru.yandex.yandexmaps" />
-29-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:14:9-56
-29-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:14:18-53
-30        <package android:name="com.citymapper.app.release" />
-30-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:15:9-62
-30-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:15:18-59
-31        <package android:name="com.mapswithme.maps.pro" />
-31-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:16:9-59
-31-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:16:18-56
-32        <package android:name="net.osmand" />
-32-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:17:9-46
-32-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:17:18-43
-33        <package android:name="net.osmand.plus" />
-33-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:18:9-51
-33-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:18:18-48
-34        <package android:name="ru.dublgis.dgismobile" />
-34-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:19:9-57
-34-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:19:18-54
-35        <package android:name="com.tencent.map" />
-35-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:20:9-51
-35-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:20:18-48
-36        <package android:name="com.here.app.maps" />
-36-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:21:9-53
-36-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:21:18-50
-37        <package android:name="com.huawei.maps.app" />
-37-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:22:9-55
-37-->[:map_launcher] /home/mr/University/MobileProgramming/keri_challenge/build/map_launcher/intermediates/merged_manifest/release/AndroidManifest.xml:22:18-52
-38    </queries>
-39
-40    <uses-feature
-40-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/1c016e7262d90ddbfc275359d6f8eca0/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:26:5-28:35
-41        android:glEsVersion="0x00020000"
-41-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/1c016e7262d90ddbfc275359d6f8eca0/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:27:9-41
-42        android:required="true" /> <!-- Required by older versions of Google Play services to create IID tokens -->
-42-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/1c016e7262d90ddbfc275359d6f8eca0/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:28:9-32
-43    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-43-->[com.google.firebase:firebase-iid:21.1.0] /home/mr/.gradle/caches/transforms-3/36d0f3e572d9885cbd2b800c46731a45/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:5-82
-43-->[com.google.firebase:firebase-iid:21.1.0] /home/mr/.gradle/caches/transforms-3/36d0f3e572d9885cbd2b800c46731a45/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:26:22-79
-44    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-44-->[com.google.android.gms:play-services-measurement-api:21.3.0] /home/mr/.gradle/caches/transforms-3/1c7015e78eef637d2f5b3a44c93f758b/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:25:5-79
-44-->[com.google.android.gms:play-services-measurement-api:21.3.0] /home/mr/.gradle/caches/transforms-3/1c7015e78eef637d2f5b3a44c93f758b/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:25:22-76
-45    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
-45-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:26:5-110
-45-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:26:22-107
+13-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:4:5-84
+13-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:4:22-82
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-67
+14-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:9:22-64
+15    <uses-permission android:name="android.permission.WAKE_LOCK" />
+15-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:10:5-68
+15-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:10:22-65
+16    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- Permissions options for the `notification` group -->
+16-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:11:5-79
+16-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:11:22-76
+17    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+17-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:13:5-77
+17-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:13:22-74
+18    <uses-permission android:name="android.permission.VIBRATE" />
+18-->[:flutter_local_notifications] /home/mr/University/MobileProgramming/keri_challenge/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:9:5-66
+18-->[:flutter_local_notifications] /home/mr/University/MobileProgramming/keri_challenge/build/flutter_local_notifications/intermediates/merged_manifest/release/AndroidManifest.xml:9:22-63
+19
+20    <uses-feature
+20-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/518691cb8585cfc370b1082b84be7455/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:26:5-28:35
+21        android:glEsVersion="0x00020000"
+21-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/518691cb8585cfc370b1082b84be7455/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:27:9-41
+22        android:required="true" />
+22-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/518691cb8585cfc370b1082b84be7455/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:28:9-32
+23
+24    <queries>
+24-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/518691cb8585cfc370b1082b84be7455/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:30:5-34:15
+25
+26        <!-- Needs to be explicitly declared on Android R+ -->
+27        <package android:name="com.google.android.apps.maps" />
+27-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/518691cb8585cfc370b1082b84be7455/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:33:9-64
+27-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/518691cb8585cfc370b1082b84be7455/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:33:18-61
+28    </queries> <!-- Required by older versions of Google Play services to create IID tokens -->
+29    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+29-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:26:5-82
+29-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:26:22-79
+30
+31    <permission
+31-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3711f82dd128aea0e8c9e809ff31d0b3/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
+32        android:name="com.example.keri_challenge.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+32-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3711f82dd128aea0e8c9e809ff31d0b3/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
+33        android:protectionLevel="signature" />
+33-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3711f82dd128aea0e8c9e809ff31d0b3/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
+34
+35    <uses-permission android:name="com.example.keri_challenge.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+35-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3711f82dd128aea0e8c9e809ff31d0b3/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
+35-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3711f82dd128aea0e8c9e809ff31d0b3/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
+36
+37    <application
+38        android:name="android.app.Application"
+38-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:8:9-42
+39        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+39-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3711f82dd128aea0e8c9e809ff31d0b3/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
+40        android:icon="@mipmap/ic_launcher"
+40-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:10:9-43
+41        android:label="keri_challenge"
+41-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:7:9-39
+42        android:networkSecurityConfig="@xml/network_security_config" >
+42-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:9:9-69
+43        <meta-data
+44            android:name="com.google.android.geo.API_KEY"
+44-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:12:13-58
+45            android:value="AIzaSyAORtYhclWmVTCjaK9-rDJmNx0A4U7O7qY" />
+45-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:13:13-44
 46
-47    <permission
-47-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3529b2fd3aa506f49cca8015afd8d1dc/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
-48        android:name="com.example.keri_challenge.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-48-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3529b2fd3aa506f49cca8015afd8d1dc/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
-49        android:protectionLevel="signature" />
-49-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3529b2fd3aa506f49cca8015afd8d1dc/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
-50
-51    <uses-permission android:name="com.example.keri_challenge.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-51-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3529b2fd3aa506f49cca8015afd8d1dc/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
-51-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3529b2fd3aa506f49cca8015afd8d1dc/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
-52
-53    <application
-54        android:name="android.app.Application"
-54-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:13:9-42
-55        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-55-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3529b2fd3aa506f49cca8015afd8d1dc/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
-56        android:icon="@mipmap/ic_launcher"
-56-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:15:9-43
-57        android:label="keri_challenge"
-57-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:12:9-39
-58        android:networkSecurityConfig="@xml/network_security_config" >
-58-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:14:9-69
-59        <meta-data
-60            android:name="com.google.android.geo.API_KEY"
-60-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:17:13-58
-61            android:value="AIzaSyAORtYhclWmVTCjaK9-rDJmNx0A4U7O7qY" />
-61-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:18:13-44
-62
-63        <activity
-63-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:20:9-43:20
-64            android:name="com.example.keri_challenge.MainActivity"
-64-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:21:13-41
-65            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-65-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:25:13-163
-66            android:exported="true"
-66-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:22:13-36
-67            android:hardwareAccelerated="true"
-67-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:26:13-47
-68            android:launchMode="singleTop"
-68-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:23:13-43
-69            android:theme="@style/LaunchTheme"
-69-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:24:13-47
-70            android:windowSoftInputMode="adjustResize" >
-70-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:27:13-55
+47        <activity
+47-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:15:9-41:20
+48            android:name="com.example.keri_challenge.MainActivity"
+48-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:16:13-41
+49            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+49-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:20:13-163
+50            android:exported="true"
+50-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:17:13-36
+51            android:hardwareAccelerated="true"
+51-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:21:13-47
+52            android:launchMode="singleTop"
+52-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:18:13-43
+53            android:theme="@style/LaunchTheme"
+53-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:19:13-47
+54            android:windowSoftInputMode="adjustResize" >
+54-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:22:13-55
+55
+56            <!--
+57                 Specifies an Android theme to apply to this Activity as soon as
+58                 the Android process has started. This theme is visible to the user
+59                 while the Flutter UI initializes. After that, this theme continues
+60                 to determine the Window background behind the Flutter UI.
+61            -->
+62            <meta-data
+62-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:27:13-30:17
+63                android:name="io.flutter.embedding.android.NormalTheme"
+63-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:28:15-70
+64                android:resource="@style/NormalTheme" />
+64-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:29:15-52
+65            <meta-data
+65-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:32:13-35:19
+66                android:name="com.google.firebase.messaging.default_notification_channel_id"
+66-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:33:17-93
+67                android:value="high_importance_channel" />
+67-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:34:17-56
+68
+69            <intent-filter>
+69-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:37:13-40:29
+70                <action android:name="android.intent.action.MAIN" />
+70-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:38:17-68
+70-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:38:25-66
 71
-72            <!--
-73                 Specifies an Android theme to apply to this Activity as soon as
-74                 the Android process has started. This theme is visible to the user
-75                 while the Flutter UI initializes. After that, this theme continues
-76                 to determine the Window background behind the Flutter UI.
-77            -->
-78            <meta-data
-78-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:32:13-35:17
-79                android:name="io.flutter.embedding.android.NormalTheme"
-79-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:33:15-70
-80                android:resource="@style/NormalTheme" />
-80-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:34:15-52
-81
-82            <intent-filter>
-82-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:37:13-42:29
-83                <action android:name="android.intent.action.MAIN" />
-83-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:38:17-68
-83-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:38:25-66
-84
-85                <category android:name="android.intent.category.LAUNCHER" />
-85-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:39:17-76
-85-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:39:27-74
-86
-87                <action android:name="FLUTTER_NOTIFICATION_CLICK" />
-87-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:40:17-69
-87-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:40:25-66
-88
-89                <category android:name="android.intent.category.DEFAULT" />
-89-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:41:17-76
-89-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:41:27-73
-90            </intent-filter>
-91        </activity>
-92        <!--
-93             Don't delete the meta-data below.
-94             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-95        -->
-96        <meta-data
-96-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:46:9-48:33
-97            android:name="flutterEmbedding"
-97-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:47:13-44
-98            android:value="2" />
-98-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:48:13-30
-99        <meta-data
-99-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:49:9-51:55
-100            android:name="com.google.firebase.messaging.default_notification_channel_id"
-100-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:50:13-89
-101            android:value="high_importance_channel" />
-101-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:51:13-52
-102
-103        <service
-103-->[:firebase_database] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_database/intermediates/merged_manifest/release/AndroidManifest.xml:8:9-12:19
-104            android:name="com.google.firebase.components.ComponentDiscoveryService"
-104-->[:firebase_database] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_database/intermediates/merged_manifest/release/AndroidManifest.xml:8:18-89
-105            android:directBootAware="true"
-105-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/b1324ca8feced069246e7a05254c593e/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:34:13-43
-106            android:exported="false" >
-106-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:68:13-37
-107            <meta-data
-107-->[:firebase_database] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_database/intermediates/merged_manifest/release/AndroidManifest.xml:9:13-11:85
-108                android:name="com.google.firebase.components:io.flutter.plugins.firebase.database.FlutterFirebaseAppRegistrar"
-108-->[:firebase_database] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_database/intermediates/merged_manifest/release/AndroidManifest.xml:10:17-127
-109                android:value="com.google.firebase.components.ComponentRegistrar" />
-109-->[:firebase_database] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_database/intermediates/merged_manifest/release/AndroidManifest.xml:11:17-82
-110            <meta-data
-110-->[:firebase_analytics] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_analytics/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-15:85
-111                android:name="com.google.firebase.components:io.flutter.plugins.firebase.analytics.FlutterFirebaseAppRegistrar"
-111-->[:firebase_analytics] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_analytics/intermediates/merged_manifest/release/AndroidManifest.xml:14:17-128
-112                android:value="com.google.firebase.components.ComponentRegistrar" />
-112-->[:firebase_analytics] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_analytics/intermediates/merged_manifest/release/AndroidManifest.xml:15:17-82
-113            <meta-data
-113-->[:firebase_auth] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_auth/intermediates/merged_manifest/release/AndroidManifest.xml:9:13-11:85
-114                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
-114-->[:firebase_auth] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_auth/intermediates/merged_manifest/release/AndroidManifest.xml:10:17-124
-115                android:value="com.google.firebase.components.ComponentRegistrar" />
-115-->[:firebase_auth] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_auth/intermediates/merged_manifest/release/AndroidManifest.xml:11:17-82
-116            <meta-data
-116-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:36:13-38:85
-117                android:name="com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar"
-117-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:37:17-128
-118                android:value="com.google.firebase.components.ComponentRegistrar" />
-118-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:38:17-82
-119            <meta-data
-119-->[:firebase_core] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_core/intermediates/merged_manifest/release/AndroidManifest.xml:9:13-11:85
-120                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-120-->[:firebase_core] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_core/intermediates/merged_manifest/release/AndroidManifest.xml:10:17-124
-121                android:value="com.google.firebase.components.ComponentRegistrar" />
-121-->[:firebase_core] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_core/intermediates/merged_manifest/release/AndroidManifest.xml:11:17-82
-122            <meta-data
-122-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:69:13-71:85
-123                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
-123-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:70:17-109
-124                android:value="com.google.firebase.components.ComponentRegistrar" />
-124-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:71:17-82
-125            <meta-data
-125-->[com.google.firebase:firebase-iid:21.1.0] /home/mr/.gradle/caches/transforms-3/36d0f3e572d9885cbd2b800c46731a45/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:32:13-34:85
-126                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
-126-->[com.google.firebase:firebase-iid:21.1.0] /home/mr/.gradle/caches/transforms-3/36d0f3e572d9885cbd2b800c46731a45/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:33:17-96
-127                android:value="com.google.firebase.components.ComponentRegistrar" />
-127-->[com.google.firebase:firebase-iid:21.1.0] /home/mr/.gradle/caches/transforms-3/36d0f3e572d9885cbd2b800c46731a45/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:34:17-82
-128            <meta-data
-128-->[com.google.firebase:firebase-database:20.2.2] /home/mr/.gradle/caches/transforms-3/ed4eeddfbe7aaa3f1072fb0505474749/transformed/jetified-firebase-database-20.2.2/AndroidManifest.xml:31:13-33:85
-129                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
-129-->[com.google.firebase:firebase-database:20.2.2] /home/mr/.gradle/caches/transforms-3/ed4eeddfbe7aaa3f1072fb0505474749/transformed/jetified-firebase-database-20.2.2/AndroidManifest.xml:32:17-109
-130                android:value="com.google.firebase.components.ComponentRegistrar" />
-130-->[com.google.firebase:firebase-database:20.2.2] /home/mr/.gradle/caches/transforms-3/ed4eeddfbe7aaa3f1072fb0505474749/transformed/jetified-firebase-database-20.2.2/AndroidManifest.xml:33:17-82
-131            <meta-data
-131-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/815c425ecf0ef1e71cfc6a4cffce44a3/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:53:13-55:85
-132                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
-132-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/815c425ecf0ef1e71cfc6a4cffce44a3/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:54:17-119
-133                android:value="com.google.firebase.components.ComponentRegistrar" />
-133-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/815c425ecf0ef1e71cfc6a4cffce44a3/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:55:17-82
-134            <meta-data
-134-->[com.google.android.gms:play-services-measurement-api:21.3.0] /home/mr/.gradle/caches/transforms-3/1c7015e78eef637d2f5b3a44c93f758b/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:31:13-33:85
-135                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
-135-->[com.google.android.gms:play-services-measurement-api:21.3.0] /home/mr/.gradle/caches/transforms-3/1c7015e78eef637d2f5b3a44c93f758b/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:32:17-139
-136                android:value="com.google.firebase.components.ComponentRegistrar" />
-136-->[com.google.android.gms:play-services-measurement-api:21.3.0] /home/mr/.gradle/caches/transforms-3/1c7015e78eef637d2f5b3a44c93f758b/transformed/jetified-play-services-measurement-api-21.3.0/AndroidManifest.xml:33:17-82
-137            <meta-data
-137-->[com.google.firebase:firebase-installations:17.1.4] /home/mr/.gradle/caches/transforms-3/cb75af87a900a7915bf621b4deb28a85/transformed/jetified-firebase-installations-17.1.4/AndroidManifest.xml:15:13-17:85
-138                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
-138-->[com.google.firebase:firebase-installations:17.1.4] /home/mr/.gradle/caches/transforms-3/cb75af87a900a7915bf621b4deb28a85/transformed/jetified-firebase-installations-17.1.4/AndroidManifest.xml:16:17-127
-139                android:value="com.google.firebase.components.ComponentRegistrar" />
-139-->[com.google.firebase:firebase-installations:17.1.4] /home/mr/.gradle/caches/transforms-3/cb75af87a900a7915bf621b4deb28a85/transformed/jetified-firebase-installations-17.1.4/AndroidManifest.xml:17:17-82
-140            <meta-data
-140-->[com.google.firebase:firebase-datatransport:18.1.7] /home/mr/.gradle/caches/transforms-3/8c17921990ef8b729c31b5798f18d8b7/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:27:13-29:85
-141                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
-141-->[com.google.firebase:firebase-datatransport:18.1.7] /home/mr/.gradle/caches/transforms-3/8c17921990ef8b729c31b5798f18d8b7/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:28:17-115
-142                android:value="com.google.firebase.components.ComponentRegistrar" />
-142-->[com.google.firebase:firebase-datatransport:18.1.7] /home/mr/.gradle/caches/transforms-3/8c17921990ef8b729c31b5798f18d8b7/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:29:17-82
-143        </service>
-144        <service
-144-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:14:9-17:72
-145            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService"
-145-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-107
-146            android:exported="false"
-146-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:16:13-37
-147            android:permission="android.permission.BIND_JOB_SERVICE" />
-147-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:17:13-69
-148        <service
-148-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:18:9-24:19
-149            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService"
-149-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:19:13-97
-150            android:exported="false" >
-150-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:20:13-37
-151            <intent-filter>
-151-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:21:13-23:29
-152                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-152-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:22:17-78
-152-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:22:25-75
-153            </intent-filter>
-154        </service>
-155
-156        <receiver
-156-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:26:9-33:20
-157            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver"
-157-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:27:13-98
-158            android:exported="true"
-158-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:28:13-36
-159            android:permission="com.google.android.c2dm.permission.SEND" >
-159-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-73
-160            <intent-filter>
-160-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:30:13-32:29
-161                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-161-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:31:17-81
-161-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:31:25-78
-162            </intent-filter>
-163        </receiver>
-164
-165        <provider
-165-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:41:9-45:38
-166            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
-166-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:42:13-102
-167            android:authorities="com.example.keri_challenge.flutterfirebasemessaginginitprovider"
-167-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:43:13-88
-168            android:exported="false"
-168-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:44:13-37
-169            android:initOrder="99" />
-169-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:45:13-35
-170
-171        <service
-171-->[:geolocator_android] /home/mr/University/MobileProgramming/keri_challenge/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:8:9-12:56
-172            android:name="com.baseflow.geolocator.GeolocatorLocationService"
-172-->[:geolocator_android] /home/mr/University/MobileProgramming/keri_challenge/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:9:13-77
-173            android:enabled="true"
-173-->[:geolocator_android] /home/mr/University/MobileProgramming/keri_challenge/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:13-35
-174            android:exported="false"
-174-->[:geolocator_android] /home/mr/University/MobileProgramming/keri_challenge/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-37
-175            android:foregroundServiceType="location" />
-175-->[:geolocator_android] /home/mr/University/MobileProgramming/keri_challenge/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-53
-176
-177        <activity
-177-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:29:9-46:20
-178            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
-178-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:30:13-80
-179            android:excludeFromRecents="true"
-179-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:31:13-46
-180            android:exported="true"
-180-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:32:13-36
-181            android:launchMode="singleTask"
-181-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:33:13-44
-182            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-182-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:34:13-72
-183            <intent-filter>
-183-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:35:13-45:29
-184                <action android:name="android.intent.action.VIEW" />
-184-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:36:17-69
-184-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:36:25-66
-185
-186                <category android:name="android.intent.category.DEFAULT" />
-186-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:41:17-76
-186-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:41:27-73
-187                <category android:name="android.intent.category.BROWSABLE" />
-187-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:17-78
-187-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:27-75
-188
-189                <data
-189-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:41:17-44:51
-190                    android:host="firebase.auth"
-190-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:42:21-49
-191                    android:path="/"
-191-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:43:21-37
-192                    android:scheme="genericidp" />
-192-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:44:21-48
-193            </intent-filter>
-194        </activity>
-195        <activity
-195-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:47:9-64:20
-196            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
-196-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:48:13-79
-197            android:excludeFromRecents="true"
-197-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:49:13-46
-198            android:exported="true"
-198-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:50:13-36
-199            android:launchMode="singleTask"
-199-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:51:13-44
-200            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
-200-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:52:13-72
-201            <intent-filter>
-201-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:53:13-63:29
-202                <action android:name="android.intent.action.VIEW" />
-202-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:36:17-69
-202-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:36:25-66
-203
-204                <category android:name="android.intent.category.DEFAULT" />
-204-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:41:17-76
-204-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:41:27-73
-205                <category android:name="android.intent.category.BROWSABLE" />
-205-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:17-78
-205-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:27-75
-206
-207                <data
-207-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:41:17-44:51
-208                    android:host="firebase.auth"
-208-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:42:21-49
-209                    android:path="/"
-209-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:43:21-37
-210                    android:scheme="recaptcha" />
-210-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/a485cf4d3e640edf8283791c540dfebd/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:44:21-48
-211            </intent-filter>
-212        </activity>
-213
-214        <uses-library
-214-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/d5ba6af9fd3ce1d33b0b22ec973e9d64/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
-215            android:name="androidx.window.extensions"
-215-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/d5ba6af9fd3ce1d33b0b22ec973e9d64/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
-216            android:required="false" />
-216-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/d5ba6af9fd3ce1d33b0b22ec973e9d64/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
-217        <uses-library
-217-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/d5ba6af9fd3ce1d33b0b22ec973e9d64/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
-218            android:name="androidx.window.sidecar"
-218-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/d5ba6af9fd3ce1d33b0b22ec973e9d64/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
-219            android:required="false" /> <!-- Needs to be explicitly declared on P+ -->
-219-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/d5ba6af9fd3ce1d33b0b22ec973e9d64/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
-220        <uses-library
-220-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/1c016e7262d90ddbfc275359d6f8eca0/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:39:9-41:40
-221            android:name="org.apache.http.legacy"
-221-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/1c016e7262d90ddbfc275359d6f8eca0/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:40:13-50
-222            android:required="false" />
-222-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/1c016e7262d90ddbfc275359d6f8eca0/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:41:13-37
-223
-224        <receiver
-224-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/815c425ecf0ef1e71cfc6a4cffce44a3/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:29:9-36:20
-225            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
-225-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/815c425ecf0ef1e71cfc6a4cffce44a3/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:30:13-78
-226            android:exported="true"
-226-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/815c425ecf0ef1e71cfc6a4cffce44a3/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:31:13-36
-227            android:permission="com.google.android.c2dm.permission.SEND" >
-227-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/815c425ecf0ef1e71cfc6a4cffce44a3/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:32:13-73
-228            <intent-filter>
-228-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:30:13-32:29
-229                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-229-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:31:17-81
-229-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:31:25-78
-230            </intent-filter>
-231        </receiver>
-232        <!--
-233             FirebaseMessagingService performs security checks at runtime,
-234             but set to not exported to explicitly avoid allowing another app to call it.
-235        -->
-236        <service
-236-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/815c425ecf0ef1e71cfc6a4cffce44a3/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:42:9-49:19
-237            android:name="com.google.firebase.messaging.FirebaseMessagingService"
-237-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/815c425ecf0ef1e71cfc6a4cffce44a3/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:43:13-82
-238            android:directBootAware="true"
-238-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/815c425ecf0ef1e71cfc6a4cffce44a3/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:44:13-43
-239            android:exported="false" >
-239-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/815c425ecf0ef1e71cfc6a4cffce44a3/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:45:13-37
-240            <intent-filter android:priority="-500" >
-240-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:21:13-23:29
-241                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-241-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:22:17-78
-241-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:22:25-75
-242            </intent-filter>
-243        </service>
-244
-245        <provider
-245-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/b1324ca8feced069246e7a05254c593e/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:25:9-30:39
-246            android:name="com.google.firebase.provider.FirebaseInitProvider"
-246-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/b1324ca8feced069246e7a05254c593e/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:26:13-77
-247            android:authorities="com.example.keri_challenge.firebaseinitprovider"
-247-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/b1324ca8feced069246e7a05254c593e/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:27:13-72
-248            android:directBootAware="true"
-248-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/b1324ca8feced069246e7a05254c593e/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:28:13-43
-249            android:exported="false"
-249-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/b1324ca8feced069246e7a05254c593e/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:29:13-37
-250            android:initOrder="100" />
-250-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/b1324ca8feced069246e7a05254c593e/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:30:13-36
-251
-252        <activity
-252-->[com.google.android.gms:play-services-base:18.1.0] /home/mr/.gradle/caches/transforms-3/171aa4ebaee8aee9f75674a912252089/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
-253            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-253-->[com.google.android.gms:play-services-base:18.1.0] /home/mr/.gradle/caches/transforms-3/171aa4ebaee8aee9f75674a912252089/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:19-85
-254            android:exported="false"
-254-->[com.google.android.gms:play-services-base:18.1.0] /home/mr/.gradle/caches/transforms-3/171aa4ebaee8aee9f75674a912252089/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:22:19-43
-255            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-255-->[com.google.android.gms:play-services-base:18.1.0] /home/mr/.gradle/caches/transforms-3/171aa4ebaee8aee9f75674a912252089/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:21:19-78
-256
-257        <receiver
-257-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:29:9-33:20
-258            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
-258-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:30:13-85
-259            android:enabled="true"
-259-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:31:13-35
-260            android:exported="false" >
-260-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:32:13-37
-261        </receiver>
-262
-263        <service
-263-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:35:9-38:40
-264            android:name="com.google.android.gms.measurement.AppMeasurementService"
-264-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:36:13-84
-265            android:enabled="true"
-265-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:37:13-35
-266            android:exported="false" />
-266-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:38:13-37
-267        <service
-267-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:39:9-43:72
-268            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
-268-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:40:13-87
-269            android:enabled="true"
-269-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:41:13-35
-270            android:exported="false"
-270-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:42:13-37
-271            android:permission="android.permission.BIND_JOB_SERVICE" />
-271-->[com.google.android.gms:play-services-measurement:21.3.0] /home/mr/.gradle/caches/transforms-3/427c9086218129c26eb87e17cd523fcc/transformed/jetified-play-services-measurement-21.3.0/AndroidManifest.xml:43:13-69
-272
-273        <meta-data
-273-->[com.google.android.gms:play-services-basement:18.1.0] /home/mr/.gradle/caches/transforms-3/6b297bda78d2b77902d89dff8ee9d359/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
-274            android:name="com.google.android.gms.version"
-274-->[com.google.android.gms:play-services-basement:18.1.0] /home/mr/.gradle/caches/transforms-3/6b297bda78d2b77902d89dff8ee9d359/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
-275            android:value="@integer/google_play_services_version" />
-275-->[com.google.android.gms:play-services-basement:18.1.0] /home/mr/.gradle/caches/transforms-3/6b297bda78d2b77902d89dff8ee9d359/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
-276
-277        <service
-277-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/34ed560d2c7bbc84d72f88c1d494650e/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:28:9-34:19
-278            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
-278-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/34ed560d2c7bbc84d72f88c1d494650e/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:29:13-103
-279            android:exported="false" >
-279-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/34ed560d2c7bbc84d72f88c1d494650e/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:30:13-37
-280            <meta-data
-280-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/34ed560d2c7bbc84d72f88c1d494650e/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:31:13-33:39
-281                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
-281-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/34ed560d2c7bbc84d72f88c1d494650e/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:32:17-94
-282                android:value="cct" />
-282-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/34ed560d2c7bbc84d72f88c1d494650e/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:33:17-36
-283        </service>
-284        <service
-284-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/bebe616a39fd83555fd365a6b0a26646/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:26:9-30:19
-285            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
-285-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/bebe616a39fd83555fd365a6b0a26646/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:27:13-117
-286            android:exported="false"
-286-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/bebe616a39fd83555fd365a6b0a26646/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:28:13-37
-287            android:permission="android.permission.BIND_JOB_SERVICE" >
-287-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/bebe616a39fd83555fd365a6b0a26646/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:29:13-69
-288        </service>
-289
-290        <receiver
-290-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/bebe616a39fd83555fd365a6b0a26646/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:32:9-34:40
-291            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
-291-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/bebe616a39fd83555fd365a6b0a26646/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:33:13-132
-292            android:exported="false" />
-292-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/bebe616a39fd83555fd365a6b0a26646/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:34:13-37
-293    </application>
-294
-295</manifest>
+72                <category android:name="android.intent.category.LAUNCHER" />
+72-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:39:17-76
+72-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:39:27-74
+73            </intent-filter>
+74        </activity>
+75        <!--
+76             Don't delete the meta-data below.
+77             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+78        -->
+79        <meta-data
+79-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:44:9-46:33
+80            android:name="flutterEmbedding"
+80-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:45:13-44
+81            android:value="2" />
+81-->/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/AndroidManifest.xml:46:13-30
+82
+83        <service
+83-->[:firebase_database] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_database/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-14:19
+84            android:name="com.google.firebase.components.ComponentDiscoveryService"
+84-->[:firebase_database] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_database/intermediates/merged_manifest/release/AndroidManifest.xml:10:18-89
+85            android:directBootAware="true"
+85-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/e3256d8323c9dd67dbc05ca71305bc65/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:34:13-43
+86            android:exported="false" >
+86-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:68:13-37
+87            <meta-data
+87-->[:firebase_database] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_database/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-13:85
+88                android:name="com.google.firebase.components:io.flutter.plugins.firebase.database.FlutterFirebaseAppRegistrar"
+88-->[:firebase_database] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_database/intermediates/merged_manifest/release/AndroidManifest.xml:12:17-127
+89                android:value="com.google.firebase.components.ComponentRegistrar" />
+89-->[:firebase_database] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_database/intermediates/merged_manifest/release/AndroidManifest.xml:13:17-82
+90            <meta-data
+90-->[:firebase_auth] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_auth/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-13:85
+91                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
+91-->[:firebase_auth] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_auth/intermediates/merged_manifest/release/AndroidManifest.xml:12:17-124
+92                android:value="com.google.firebase.components.ComponentRegistrar" />
+92-->[:firebase_auth] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_auth/intermediates/merged_manifest/release/AndroidManifest.xml:13:17-82
+93            <meta-data
+93-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:38:13-40:85
+94                android:name="com.google.firebase.components:io.flutter.plugins.firebase.messaging.FlutterFirebaseAppRegistrar"
+94-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:39:17-128
+95                android:value="com.google.firebase.components.ComponentRegistrar" />
+95-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:40:17-82
+96            <meta-data
+96-->[:firebase_core] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_core/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-13:85
+97                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
+97-->[:firebase_core] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_core/intermediates/merged_manifest/release/AndroidManifest.xml:12:17-124
+98                android:value="com.google.firebase.components.ComponentRegistrar" />
+98-->[:firebase_core] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_core/intermediates/merged_manifest/release/AndroidManifest.xml:13:17-82
+99            <meta-data
+99-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:69:13-71:85
+100                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+100-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:70:17-109
+101                android:value="com.google.firebase.components.ComponentRegistrar" />
+101-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:71:17-82
+102            <meta-data
+102-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:53:13-55:85
+103                android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar"
+103-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:54:17-119
+104                android:value="com.google.firebase.components.ComponentRegistrar" />
+104-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:55:17-82
+105            <meta-data
+105-->[com.google.firebase:firebase-iid:21.1.0] /home/mr/.gradle/caches/transforms-3/1cffc7788fd38629ce609cd0a60d348d/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:32:13-34:85
+106                android:name="com.google.firebase.components:com.google.firebase.iid.Registrar"
+106-->[com.google.firebase:firebase-iid:21.1.0] /home/mr/.gradle/caches/transforms-3/1cffc7788fd38629ce609cd0a60d348d/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:33:17-96
+107                android:value="com.google.firebase.components.ComponentRegistrar" />
+107-->[com.google.firebase:firebase-iid:21.1.0] /home/mr/.gradle/caches/transforms-3/1cffc7788fd38629ce609cd0a60d348d/transformed/jetified-firebase-iid-21.1.0/AndroidManifest.xml:34:17-82
+108            <meta-data
+108-->[com.google.firebase:firebase-database:20.2.2] /home/mr/.gradle/caches/transforms-3/4b85b8fb782e9cc6d4f9c1eb8256cce4/transformed/jetified-firebase-database-20.2.2/AndroidManifest.xml:31:13-33:85
+109                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+109-->[com.google.firebase:firebase-database:20.2.2] /home/mr/.gradle/caches/transforms-3/4b85b8fb782e9cc6d4f9c1eb8256cce4/transformed/jetified-firebase-database-20.2.2/AndroidManifest.xml:32:17-109
+110                android:value="com.google.firebase.components.ComponentRegistrar" />
+110-->[com.google.firebase:firebase-database:20.2.2] /home/mr/.gradle/caches/transforms-3/4b85b8fb782e9cc6d4f9c1eb8256cce4/transformed/jetified-firebase-database-20.2.2/AndroidManifest.xml:33:17-82
+111            <meta-data
+111-->[com.google.firebase:firebase-datatransport:18.1.7] /home/mr/.gradle/caches/transforms-3/4e42c06c9af9552d30e78a86ebcf501c/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:27:13-29:85
+112                android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar"
+112-->[com.google.firebase:firebase-datatransport:18.1.7] /home/mr/.gradle/caches/transforms-3/4e42c06c9af9552d30e78a86ebcf501c/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:28:17-115
+113                android:value="com.google.firebase.components.ComponentRegistrar" />
+113-->[com.google.firebase:firebase-datatransport:18.1.7] /home/mr/.gradle/caches/transforms-3/4e42c06c9af9552d30e78a86ebcf501c/transformed/jetified-firebase-datatransport-18.1.7/AndroidManifest.xml:29:17-82
+114            <meta-data
+114-->[com.google.firebase:firebase-installations:17.1.4] /home/mr/.gradle/caches/transforms-3/f76015f2ecc3b82cc62ae6f3991563d1/transformed/jetified-firebase-installations-17.1.4/AndroidManifest.xml:15:13-17:85
+115                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+115-->[com.google.firebase:firebase-installations:17.1.4] /home/mr/.gradle/caches/transforms-3/f76015f2ecc3b82cc62ae6f3991563d1/transformed/jetified-firebase-installations-17.1.4/AndroidManifest.xml:16:17-127
+116                android:value="com.google.firebase.components.ComponentRegistrar" />
+116-->[com.google.firebase:firebase-installations:17.1.4] /home/mr/.gradle/caches/transforms-3/f76015f2ecc3b82cc62ae6f3991563d1/transformed/jetified-firebase-installations-17.1.4/AndroidManifest.xml:17:17-82
+117        </service>
+118        <service
+118-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:16:9-19:72
+119            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService"
+119-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:17:13-107
+120            android:exported="false"
+120-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:18:13-37
+121            android:permission="android.permission.BIND_JOB_SERVICE" />
+121-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:19:13-69
+122        <service
+122-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:20:9-26:19
+123            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingService"
+123-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:21:13-97
+124            android:exported="false" >
+124-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:22:13-37
+125            <intent-filter>
+125-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:23:13-25:29
+126                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+126-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:24:17-78
+126-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:24:25-75
+127            </intent-filter>
+128        </service>
+129
+130        <receiver
+130-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:28:9-35:20
+131            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingReceiver"
+131-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-98
+132            android:exported="true"
+132-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:30:13-36
+133            android:permission="com.google.android.c2dm.permission.SEND" >
+133-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:31:13-73
+134            <intent-filter>
+134-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:32:13-34:29
+135                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+135-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:33:17-81
+135-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:33:25-78
+136            </intent-filter>
+137        </receiver>
+138
+139        <provider
+139-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:43:9-47:38
+140            android:name="io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingInitProvider"
+140-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:44:13-102
+141            android:authorities="com.example.keri_challenge.flutterfirebasemessaginginitprovider"
+141-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:45:13-88
+142            android:exported="false"
+142-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:46:13-37
+143            android:initOrder="99" />
+143-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:47:13-35
+144
+145        <service
+145-->[:geolocator_android] /home/mr/University/MobileProgramming/keri_challenge/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-14:56
+146            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+146-->[:geolocator_android] /home/mr/University/MobileProgramming/keri_challenge/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-77
+147            android:enabled="true"
+147-->[:geolocator_android] /home/mr/University/MobileProgramming/keri_challenge/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-35
+148            android:exported="false"
+148-->[:geolocator_android] /home/mr/University/MobileProgramming/keri_challenge/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
+149            android:foregroundServiceType="location" />
+149-->[:geolocator_android] /home/mr/University/MobileProgramming/keri_challenge/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-53
+150
+151        <activity
+151-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:29:9-46:20
+152            android:name="com.google.firebase.auth.internal.GenericIdpActivity"
+152-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:30:13-80
+153            android:excludeFromRecents="true"
+153-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:31:13-46
+154            android:exported="true"
+154-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:32:13-36
+155            android:launchMode="singleTask"
+155-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:33:13-44
+156            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+156-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:34:13-72
+157            <intent-filter>
+157-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:35:13-45:29
+158                <action android:name="android.intent.action.VIEW" />
+158-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:36:17-69
+158-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:36:25-66
+159
+160                <category android:name="android.intent.category.DEFAULT" />
+160-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:17-76
+160-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:27-73
+161                <category android:name="android.intent.category.BROWSABLE" />
+161-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:17-78
+161-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:27-75
+162
+163                <data
+163-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:41:17-44:51
+164                    android:host="firebase.auth"
+164-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:42:21-49
+165                    android:path="/"
+165-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:43:21-37
+166                    android:scheme="genericidp" />
+166-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:44:21-48
+167            </intent-filter>
+168        </activity>
+169        <activity
+169-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:47:9-64:20
+170            android:name="com.google.firebase.auth.internal.RecaptchaActivity"
+170-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:48:13-79
+171            android:excludeFromRecents="true"
+171-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:49:13-46
+172            android:exported="true"
+172-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:50:13-36
+173            android:launchMode="singleTask"
+173-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:51:13-44
+174            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+174-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:52:13-72
+175            <intent-filter>
+175-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:53:13-63:29
+176                <action android:name="android.intent.action.VIEW" />
+176-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:36:17-69
+176-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:36:25-66
+177
+178                <category android:name="android.intent.category.DEFAULT" />
+178-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:17-76
+178-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:38:27-73
+179                <category android:name="android.intent.category.BROWSABLE" />
+179-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:17-78
+179-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:39:27-75
+180
+181                <data
+181-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:41:17-44:51
+182                    android:host="firebase.auth"
+182-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:42:21-49
+183                    android:path="/"
+183-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:43:21-37
+184                    android:scheme="recaptcha" />
+184-->[com.google.firebase:firebase-auth:22.1.2] /home/mr/.gradle/caches/transforms-3/f3d700e1a1fd017e7ed3c2f114d19024/transformed/jetified-firebase-auth-22.1.2/AndroidManifest.xml:44:21-48
+185            </intent-filter>
+186        </activity>
+187
+188        <uses-library
+188-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/3ad08d9b78aace06bae7755411156cc1/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+189            android:name="androidx.window.extensions"
+189-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/3ad08d9b78aace06bae7755411156cc1/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+190            android:required="false" />
+190-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/3ad08d9b78aace06bae7755411156cc1/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+191        <uses-library
+191-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/3ad08d9b78aace06bae7755411156cc1/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+192            android:name="androidx.window.sidecar"
+192-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/3ad08d9b78aace06bae7755411156cc1/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+193            android:required="false" /> <!-- Needs to be explicitly declared on P+ -->
+193-->[androidx.window:window:1.0.0-beta04] /home/mr/.gradle/caches/transforms-3/3ad08d9b78aace06bae7755411156cc1/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+194        <uses-library
+194-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/518691cb8585cfc370b1082b84be7455/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:39:9-41:40
+195            android:name="org.apache.http.legacy"
+195-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/518691cb8585cfc370b1082b84be7455/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:40:13-50
+196            android:required="false" />
+196-->[com.google.android.gms:play-services-maps:18.1.0] /home/mr/.gradle/caches/transforms-3/518691cb8585cfc370b1082b84be7455/transformed/jetified-play-services-maps-18.1.0/AndroidManifest.xml:41:13-37
+197
+198        <receiver
+198-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:29:9-36:20
+199            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+199-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:30:13-78
+200            android:exported="true"
+200-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:31:13-36
+201            android:permission="com.google.android.c2dm.permission.SEND" >
+201-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:32:13-73
+202            <intent-filter>
+202-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:32:13-34:29
+203                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+203-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:33:17-81
+203-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:33:25-78
+204            </intent-filter>
+205        </receiver>
+206        <!--
+207             FirebaseMessagingService performs security checks at runtime,
+208             but set to not exported to explicitly avoid allowing another app to call it.
+209        -->
+210        <service
+210-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:42:9-49:19
+211            android:name="com.google.firebase.messaging.FirebaseMessagingService"
+211-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:43:13-82
+212            android:directBootAware="true"
+212-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:44:13-43
+213            android:exported="false" >
+213-->[com.google.firebase:firebase-messaging:23.2.1] /home/mr/.gradle/caches/transforms-3/0d9332afafb45015ad60b2e4d16ceae9/transformed/jetified-firebase-messaging-23.2.1/AndroidManifest.xml:45:13-37
+214            <intent-filter android:priority="-500" >
+214-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:23:13-25:29
+215                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+215-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:24:17-78
+215-->[:firebase_messaging] /home/mr/University/MobileProgramming/keri_challenge/build/firebase_messaging/intermediates/merged_manifest/release/AndroidManifest.xml:24:25-75
+216            </intent-filter>
+217        </service>
+218
+219        <provider
+219-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/e3256d8323c9dd67dbc05ca71305bc65/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:25:9-30:39
+220            android:name="com.google.firebase.provider.FirebaseInitProvider"
+220-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/e3256d8323c9dd67dbc05ca71305bc65/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:26:13-77
+221            android:authorities="com.example.keri_challenge.firebaseinitprovider"
+221-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/e3256d8323c9dd67dbc05ca71305bc65/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:27:13-72
+222            android:directBootAware="true"
+222-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/e3256d8323c9dd67dbc05ca71305bc65/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:28:13-43
+223            android:exported="false"
+223-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/e3256d8323c9dd67dbc05ca71305bc65/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:29:13-37
+224            android:initOrder="100" />
+224-->[com.google.firebase:firebase-common:20.3.3] /home/mr/.gradle/caches/transforms-3/e3256d8323c9dd67dbc05ca71305bc65/transformed/jetified-firebase-common-20.3.3/AndroidManifest.xml:30:13-36
+225
+226        <activity
+226-->[com.google.android.gms:play-services-base:18.1.0] /home/mr/.gradle/caches/transforms-3/c464a4401e5c76febbfbf0aa24992942/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
+227            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+227-->[com.google.android.gms:play-services-base:18.1.0] /home/mr/.gradle/caches/transforms-3/c464a4401e5c76febbfbf0aa24992942/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:19-85
+228            android:exported="false"
+228-->[com.google.android.gms:play-services-base:18.1.0] /home/mr/.gradle/caches/transforms-3/c464a4401e5c76febbfbf0aa24992942/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:22:19-43
+229            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+229-->[com.google.android.gms:play-services-base:18.1.0] /home/mr/.gradle/caches/transforms-3/c464a4401e5c76febbfbf0aa24992942/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:21:19-78
+230
+231        <meta-data
+231-->[com.google.android.gms:play-services-basement:18.1.0] /home/mr/.gradle/caches/transforms-3/d3f527bc3d3a968e59ffdb9c4abab8d7/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+232            android:name="com.google.android.gms.version"
+232-->[com.google.android.gms:play-services-basement:18.1.0] /home/mr/.gradle/caches/transforms-3/d3f527bc3d3a968e59ffdb9c4abab8d7/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+233            android:value="@integer/google_play_services_version" />
+233-->[com.google.android.gms:play-services-basement:18.1.0] /home/mr/.gradle/caches/transforms-3/d3f527bc3d3a968e59ffdb9c4abab8d7/transformed/jetified-play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+234
+235        <service
+235-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/d889c0b2698970d6fe65d6e4b7af818d/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:28:9-34:19
+236            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+236-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/d889c0b2698970d6fe65d6e4b7af818d/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:29:13-103
+237            android:exported="false" >
+237-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/d889c0b2698970d6fe65d6e4b7af818d/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:30:13-37
+238            <meta-data
+238-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/d889c0b2698970d6fe65d6e4b7af818d/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:31:13-33:39
+239                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+239-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/d889c0b2698970d6fe65d6e4b7af818d/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:32:17-94
+240                android:value="cct" />
+240-->[com.google.android.datatransport:transport-backend-cct:3.1.8] /home/mr/.gradle/caches/transforms-3/d889c0b2698970d6fe65d6e4b7af818d/transformed/jetified-transport-backend-cct-3.1.8/AndroidManifest.xml:33:17-36
+241        </service>
+242        <service
+242-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/6c51cae4511808e8f48d9984ed2b4612/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:26:9-30:19
+243            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+243-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/6c51cae4511808e8f48d9984ed2b4612/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:27:13-117
+244            android:exported="false"
+244-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/6c51cae4511808e8f48d9984ed2b4612/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:28:13-37
+245            android:permission="android.permission.BIND_JOB_SERVICE" >
+245-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/6c51cae4511808e8f48d9984ed2b4612/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:29:13-69
+246        </service>
+247
+248        <receiver
+248-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/6c51cae4511808e8f48d9984ed2b4612/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:32:9-34:40
+249            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+249-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/6c51cae4511808e8f48d9984ed2b4612/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:33:13-132
+250            android:exported="false" />
+250-->[com.google.android.datatransport:transport-runtime:3.1.8] /home/mr/.gradle/caches/transforms-3/6c51cae4511808e8f48d9984ed2b4612/transformed/jetified-transport-runtime-3.1.8/AndroidManifest.xml:34:13-37
+251    </application>
+252
+253</manifest>

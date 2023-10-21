@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.keri_challenge.app-mergeReleaseResources-19:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.example.keri_challenge.app-mergeReleaseResources-18:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
                     "source": "/home/mr/University/MobileProgramming/keri_challenge/android/app/src/main/res/values-night/styles.xml",

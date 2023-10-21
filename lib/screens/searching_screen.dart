@@ -71,17 +71,19 @@ class _SearchingScreenState extends State<SearchingScreen> {
             );
           }
           if (state is GoogleMapLoadedState) {
-            return Container(
-              padding: const EdgeInsets.all(10),
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: state.predictionList.length,
-                itemBuilder: (context, index) {
-                  return SearchResultOption(
-                    prediction: state.predictionList[index],
-                    isFromLocation: widget.isFromLocation,
-                  );
-                },
+            return SingleChildScrollView(
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.predictionList.length,
+                  itemBuilder: (context, index) {
+                    return SearchResultOption(
+                      prediction: state.predictionList[index],
+                      isFromLocation: widget.isFromLocation,
+                    );
+                  },
+                ),
               ),
             );
           }
