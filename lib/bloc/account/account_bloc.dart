@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:keri_challenge/core/extension/string%20_extension.dart';
 
-import '../../entities/user.dart';
+import '../../data/entities/user.dart';
 import '../../services/firebase_database_service.dart';
 
 part 'account_event.dart';
@@ -48,7 +48,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
           page = 1;
 
           filterUserList = allUserList
-              .where((user) => user.name.contains(event.userName))
+              .where((user) => user.fullName.contains(event.userName))
               .toList();
 
           add(OnLoadPaginationUserListEvent(page));
@@ -114,7 +114,7 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
   List<User> _removeDuplicates(List<User> list) {
     Set<String> set = {};
     List<User> uniqueList =
-        list.where((element) => set.add(element.name)).toList();
+        list.where((element) => set.add(element.fullName)).toList();
 
     return uniqueList;
   }

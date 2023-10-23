@@ -44,9 +44,13 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     RegisterRoute.name: (routeData) {
+      final args = routeData.argsAs<RegisterRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const RegisterScreen(),
+        child: RegisterScreen(
+          key: args.key,
+          isShipper: args.isShipper,
+        ),
       );
     },
     SearchingRoute.name: (routeData) {
@@ -145,16 +149,40 @@ class PhoneVerificationRouteArgs {
 
 /// generated route for
 /// [RegisterScreen]
-class RegisterRoute extends PageRouteInfo<void> {
-  const RegisterRoute({List<PageRouteInfo>? children})
-      : super(
+class RegisterRoute extends PageRouteInfo<RegisterRouteArgs> {
+  RegisterRoute({
+    Key? key,
+    required bool isShipper,
+    List<PageRouteInfo>? children,
+  }) : super(
           RegisterRoute.name,
+          args: RegisterRouteArgs(
+            key: key,
+            isShipper: isShipper,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'RegisterRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<RegisterRouteArgs> page =
+      PageInfo<RegisterRouteArgs>(name);
+}
+
+class RegisterRouteArgs {
+  const RegisterRouteArgs({
+    this.key,
+    required this.isShipper,
+  });
+
+  final Key? key;
+
+  final bool isShipper;
+
+  @override
+  String toString() {
+    return 'RegisterRouteArgs{key: $key, isShipper: $isShipper}';
+  }
 }
 
 /// generated route for

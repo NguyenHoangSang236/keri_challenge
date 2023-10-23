@@ -73,7 +73,7 @@
 43-->[androidx.core:core:1.9.0] /home/mr/.gradle/caches/transforms-3/3711f82dd128aea0e8c9e809ff31d0b3/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
 44        android:debuggable="true"
 45        android:icon="@mipmap/ic_launcher"
-46        android:label="keri_challenge"
+46        android:label="BSS Delivery"
 47        android:networkSecurityConfig="@xml/network_security_config" >
 48        <meta-data
 49            android:name="com.google.android.geo.API_KEY"

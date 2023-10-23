@@ -4,7 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:keri_challenge/core/extension/string%20_extension.dart';
-import 'package:keri_challenge/entities/user.dart';
+import 'package:keri_challenge/data/entities/user.dart';
 import 'package:keri_challenge/services/local_storage_service.dart';
 
 import '../../services/firebase_database_service.dart';
@@ -32,13 +32,13 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
 
           if (currentUser != null) {
             if (event.password == currentUser?.password) {
-              currentUser?.fcmToken =
+              currentUser?.phoneFcmToken =
                   await LocalStorageService.getLocalStorageData('phoneToken')
                       as String;
 
-              await FirebaseDatabaseService.set(
+              await FirebaseDatabaseService.add(
                 currentUser,
-                "/users/${currentUser!.name}",
+                "/users/${currentUser!.fullName}",
               );
 
               emit(AuthorLoggedInState(currentUser!));
@@ -65,18 +65,18 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
             await FirebaseDatabaseService.get('users/${event.userName}');
 
         if (response.contains('No data available')) {
-          User newUser = User(
-            event.userName,
-            event.password,
-            event.phoneNumber,
-            await LocalStorageService.getLocalStorageData('phoneToken')
-                as String,
-          );
+          // User newUser = User(
+          //   event.,
+          //   event.password,
+          //   event.phoneNumber,
+          //   await LocalStorageService.getLocalStorageData('phoneToken')
+          //       as String,
+          // );
 
-          await FirebaseDatabaseService.set(
-            newUser,
-            "users/${newUser.name}",
-          );
+          // await FirebaseDatabaseService.set(
+          //   newUser,
+          //   "users/${newUser.name}",
+          // );
 
           emit(const AuthorRegisteredState('Register successfully'));
         } else {

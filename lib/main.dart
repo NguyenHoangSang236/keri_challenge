@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,10 +14,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/bloc/account/account_bloc.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
-import 'package:keri_challenge/repository/google_map_repository.dart';
+import 'package:keri_challenge/core/theme/app_theme.dart';
 
 import 'config/http_client_config.dart';
 import 'core/router/app_router_config.dart';
+import 'data/repository/google_map_repository.dart';
 import 'firebase_options.dart';
 
 const emulatorPort = 9000;
@@ -26,7 +28,7 @@ const webServerKey =
 final Dio dio = Dio();
 
 final FirebaseAuth auth = FirebaseAuth.instance;
-
+final FirebaseFirestore fireStore = FirebaseFirestore.instance;
 final emulatorHost =
     (!kIsWeb && defaultTargetPlatform == TargetPlatform.android)
         ? '10.0.2.2'
@@ -97,9 +99,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           routerConfig: appRouter.config(),
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-          ),
+          theme: appTheme,
         );
       },
     );

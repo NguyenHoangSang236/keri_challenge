@@ -1,12 +1,14 @@
 # This is a generated file; do not edit or check into version control.
-firebase_auth=/home/mr/.pub-cache/hosted/pub.dev/firebase_auth-4.10.1/
-firebase_auth_web=/home/mr/.pub-cache/hosted/pub.dev/firebase_auth_web-5.8.2/
-firebase_core=/home/mr/.pub-cache/hosted/pub.dev/firebase_core-2.17.0/
-firebase_core_web=/home/mr/.pub-cache/hosted/pub.dev/firebase_core_web-2.8.0/
-firebase_database=/home/mr/.pub-cache/hosted/pub.dev/firebase_database-10.2.7/
-firebase_database_web=/home/mr/.pub-cache/hosted/pub.dev/firebase_database_web-0.2.3+7/
-firebase_messaging=/home/mr/.pub-cache/hosted/pub.dev/firebase_messaging-14.6.9/
-firebase_messaging_web=/home/mr/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.5.8/
+cloud_firestore=/home/mr/.pub-cache/hosted/pub.dev/cloud_firestore-4.11.0/
+cloud_firestore_web=/home/mr/.pub-cache/hosted/pub.dev/cloud_firestore_web-3.8.1/
+firebase_auth=/home/mr/.pub-cache/hosted/pub.dev/firebase_auth-4.11.1/
+firebase_auth_web=/home/mr/.pub-cache/hosted/pub.dev/firebase_auth_web-5.8.4/
+firebase_core=/home/mr/.pub-cache/hosted/pub.dev/firebase_core-2.19.0/
+firebase_core_web=/home/mr/.pub-cache/hosted/pub.dev/firebase_core_web-2.8.1/
+firebase_database=/home/mr/.pub-cache/hosted/pub.dev/firebase_database-10.3.1/
+firebase_database_web=/home/mr/.pub-cache/hosted/pub.dev/firebase_database_web-0.2.3+9/
+firebase_messaging=/home/mr/.pub-cache/hosted/pub.dev/firebase_messaging-14.7.1/
+firebase_messaging_web=/home/mr/.pub-cache/hosted/pub.dev/firebase_messaging_web-3.5.10/
 flutter_keyboard_visibility=/home/mr/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility-5.4.1/
 flutter_keyboard_visibility_linux=/home/mr/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility_linux-1.0.0/
 flutter_keyboard_visibility_macos=/home/mr/.pub-cache/hosted/pub.dev/flutter_keyboard_visibility_macos-1.0.0/

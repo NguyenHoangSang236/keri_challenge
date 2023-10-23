@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import '../main.dart';
 
 class FirebaseDatabaseService {
-  static Future<void> set(dynamic object, String path) async {
+  static Future<void> add(dynamic object, String path) async {
     try {
       DatabaseReference ref = firebaseDatabase.ref(path);
 

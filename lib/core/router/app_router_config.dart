@@ -1,13 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 
-import '../../entities/user.dart';
-import '../../screens/account_list.dart';
-import '../../screens/login_screen.dart';
-import '../../screens/map_screen.dart';
-import '../../screens/phone_verification_screen.dart';
-import '../../screens/register_screen.dart';
-import '../../screens/searching_screen.dart';
+import '../../data/entities/user.dart';
+import '../../view/screens/account_list.dart';
+import '../../view/screens/login_screen.dart';
+import '../../view/screens/map_screen.dart';
+import '../../view/screens/phone_verification_screen.dart';
+import '../../view/screens/register_screen.dart';
+import '../../view/screens/searching_screen.dart';
 import 'app_router_path.dart';
 
 part 'app_router_config.gr.dart';
