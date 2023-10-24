@@ -19,6 +19,7 @@ import 'package:keri_challenge/view/screens/searching_screen.dart';
 
 import '../../bloc/authorization/author_bloc.dart';
 import '../../data/entities/user.dart';
+import '../../data/enum/local_storage_enum.dart';
 import '../../main.dart';
 import '../../services/local_storage_service.dart';
 import '../../util/ui_render.dart';
@@ -282,8 +283,9 @@ class _MapState extends State<MapScreen> {
       content:
           '${user.fullName} is finding a way from ${startPre?.description!.contains('My Location') == false ? startPre?.description : 'Position of ${user.fullName}'} to ${endPre?.description!.contains('My Location') == false ? endPre?.description : 'Position of ${user.fullName}'}',
       data: {
-        'fromPhoneToken':
-            await LocalStorageService.getLocalStorageData('phoneToken'),
+        'fromPhoneToken': await LocalStorageService.getLocalStorageData(
+          LocalStorageEnum.phoneToken.name,
+        ) as String,
         'startDes': startPre?.description!.contains('My Location') == false
             ? startPre?.description
             : 'Location of ${user.fullName}',

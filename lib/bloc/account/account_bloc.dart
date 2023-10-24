@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:keri_challenge/core/extension/string%20_extension.dart';
 
 import '../../data/entities/user.dart';
-import '../../services/firebase_database_service.dart';
 
 part 'account_event.dart';
 part 'account_state.dart';
@@ -22,17 +18,17 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<OnLoadAllUserListEvent>((event, emit) async {
       emit(AccountLoadingState());
       try {
-        String jsonString = await FirebaseDatabaseService.get('users');
-
-        Map<String, dynamic> jsonMap = json.decode(jsonString.formatToJson);
-
-        allUserList = List.from(
-          jsonMap.entries.map((e) => User.fromJson(e.value)),
-        );
-
-        filterUserList = allUserList;
-
-        add(const OnLoadPaginationUserListEvent(1));
+        // String jsonString = await FirebaseDatabaseService.get('users');
+        //
+        // Map<String, dynamic> jsonMap = json.decode(jsonString.formatToJson);
+        //
+        // allUserList = List.from(
+        //   jsonMap.entries.map((e) => User.fromJson(e.value)),
+        // );
+        //
+        // filterUserList = allUserList;
+        //
+        // add(const OnLoadPaginationUserListEvent(1));
 
         emit(AllAccountListByNameLoadedState(allUserList));
       } catch (e, stackTrace) {

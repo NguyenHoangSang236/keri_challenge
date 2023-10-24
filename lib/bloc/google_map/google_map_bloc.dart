@@ -12,6 +12,7 @@ import 'package:keri_challenge/core/extension/position_extension.dart';
 import 'package:keri_challenge/services/firebase_message_service.dart';
 
 import '../../data/entities/user.dart';
+import '../../data/enum/local_storage_enum.dart';
 import '../../data/repository/google_map_repository.dart';
 import '../../main.dart';
 import '../../services/local_storage_service.dart';
@@ -189,15 +190,15 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
       try {
         if (event.message.isNotEmpty) {
           debugPrint(
-              'Send message back from ${await LocalStorageService.getLocalStorageData('phoneToken') as String} to $selectedPhoneTokenFromMessage ');
+              'Send message back from ${await LocalStorageService.getLocalStorageData(LocalStorageEnum.phoneToken.name) as String} to $selectedPhoneTokenFromMessage ');
 
           FirebaseMessageService.sendMessage(
             title: 'You have message from ${event.senderUser.fullName}',
             content: event.message,
             data: {
-              'fromPhoneToken':
-                  await LocalStorageService.getLocalStorageData('phoneToken')
-                      as String,
+              'fromPhoneToken': await LocalStorageService.getLocalStorageData(
+                LocalStorageEnum.phoneToken.name,
+              ) as String,
               'senderDes': 'Location of ${event.senderUser.fullName}',
               'senderLat': event.senderLatLng.latitude.toString(),
               'senderLng': event.senderLatLng.longitude.toString(),

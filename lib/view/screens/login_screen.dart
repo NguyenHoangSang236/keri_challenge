@@ -77,6 +77,28 @@ class _LoginScreenState extends State<LoginScreen> {
     //   );
     // }
 
+    // User newAdmin = User(
+    //   fullName: 'Nguyen Van A',
+    //   birthYear: '1998',
+    //   phoneNumber: '0321546789',
+    //   sex: 'male',
+    //   address: 'Ho chi minh',
+    //   idCertificateNumber: '012365478965',
+    //   password: '123',
+    //   registerDate: DateTime.now(),
+    // );
+    //
+    // FirebaseDatabaseService.getObjectMap(
+    //   collection: 'users',
+    //   document: '0321564897',
+    // );
+    // FirebaseDatabaseService.getObjectMapList(collection: 'users');
+    // FirebaseDatabaseService.addData(
+    //   data: newAdmin.toJson(),
+    //   collection: 'admins',
+    //   document: newAdmin.phoneNumber,
+    // );
+
     if (_formKey.currentState!.validate()) {
       context.read<AuthorBloc>().add(
             OnLoginEvent(
@@ -156,6 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: _phoneNumberTextEditingController,
                     hintText: 'Số điện thoại',
                     additionalValidator: _phoneNumberAndPasswordValidator,
+                    keyboardType: TextInputType.number,
                   ),
                   _customTextField(
                     controller: _passwordTextEditingController,

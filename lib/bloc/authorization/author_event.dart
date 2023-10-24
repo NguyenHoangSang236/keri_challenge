@@ -14,16 +14,14 @@ class OnSaveVerificationIdEvent extends AuthorEvent {
 }
 
 class OnLoginEvent extends AuthorEvent {
-  final String userName;
+  final String phoneNumber;
   final String password;
 
-  const OnLoginEvent(this.userName, this.password);
+  const OnLoginEvent(this.phoneNumber, this.password);
 }
 
 class OnRegisterEvent extends AuthorEvent {
-  final String userName;
-  final String password;
-  final String phoneNumber;
+  final User newUser;
 
-  const OnRegisterEvent(this.userName, this.password, this.phoneNumber);
+  const OnRegisterEvent(this.newUser);
 }

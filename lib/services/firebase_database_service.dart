@@ -1,56 +1,81 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../main.dart';
 
 class FirebaseDatabaseService {
-  static Future<void> add(dynamic object, String path) async {
-    try {
-      DatabaseReference ref = firebaseDatabase.ref(path);
+  static Future<Map<String, dynamic>?> getObjectMap({
+    required String collection,
+    required String document,
+  }) async {
+    final docRef = fireStore.collection(collection).doc(document);
 
-      await ref.set(object.toJson());
+    docRef.get().then(
+      (docSnap) {
+        debugPrint(docSnap.data().toString());
+        return docSnap.data();
+      },
+      onError: (e) => print("Error getting document: $e"),
+    );
 
-      debugPrint('Added /$path');
-    } catch (e, stacktrace) {
-      debugPrint(e.toString());
-      debugPrint(stacktrace.toString());
-    }
+    return null;
   }
 
-  static Future<String> get(String path) async {
-    try {
-      String result = '';
+  static Future<List<Map<String, dynamic>>> getObjectMapList({
+    required String collection,
+  }) async {
+    final docRef = fireStore.collection(collection);
+    List<Map<String, dynamic>> mapList = [];
 
-      DatabaseReference databaseRef = firebaseDatabase.ref();
+    docRef.get().then(
+      (querySnap) {
+        for (var docSnapshot in querySnap.docs) {
+          mapList.add(docSnapshot.data());
+        }
 
-      DataSnapshot snapshot = await databaseRef.child(path).get();
+        return mapList;
+      },
+      onError: (e) => debugPrint("Error getting document list: $e"),
+    );
 
-      if (snapshot.exists) {
-        result = snapshot.value.toString();
-      } else {
-        result = 'No data available';
-      }
-
-      return result;
-    } catch (e, stacktrace) {
-      debugPrint(e.toString());
-      debugPrint(stacktrace.toString());
-
-      return e.toString();
-    }
+    return mapList;
   }
 
-  static Future<void> remove(String name) async {
-    try {
-      DatabaseReference ref = firebaseDatabase.ref("/$name");
+  static Future<void> addData({
+    required Map<String, dynamic> data,
+    required String collection,
+    required String document,
+    bool needMerge = false,
+  }) async {
+    fireStore
+        .collection(collection)
+        .doc(document)
+        .set(data, SetOptions(merge: needMerge))
+        .onError(
+          (error, stackTrace) => debugPrint(
+              'Error adding data: ${error.toString()}\n${stackTrace.toString()}'),
+        );
+  }
 
-      await ref.remove();
+  static Future<void> updateData({
+    required Map<String, dynamic> data,
+    required String collection,
+    required String document,
+  }) async {
+    fireStore.collection(collection).doc(document).update(data).then(
+        (value) => debugPrint("Data successfully updated!"),
+        onError: (e) => debugPrint("Error updating data: $e"));
+  }
 
-      debugPrint('removed $name');
-    } catch (e, stacktrace) {
-      debugPrint(e.toString());
-      debugPrint(stacktrace.toString());
-    }
+  static Future<void> deleteData({
+    required String collection,
+    required String document,
+  }) async {
+    fireStore.collection(collection).doc(document).delete().then(
+          (doc) => debugPrint("Document deleted"),
+          onError: (e) => debugPrint("Error deleting document: $e"),
+        );
   }
 
   static Future<void> searchAccount(String username) async {

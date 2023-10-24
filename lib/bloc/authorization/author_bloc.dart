@@ -1,12 +1,11 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:keri_challenge/core/extension/string%20_extension.dart';
 import 'package:keri_challenge/data/entities/user.dart';
+import 'package:keri_challenge/data/enum/firestore_enum.dart';
 import 'package:keri_challenge/services/local_storage_service.dart';
 
+import '../../data/enum/local_storage_enum.dart';
 import '../../services/firebase_database_service.dart';
 
 part 'author_event.dart';
@@ -20,39 +19,33 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
       emit(AuthorLoadingState());
 
       try {
-        final String response =
-            await FirebaseDatabaseService.get('users/${event.userName}');
-
-        if (!response.contains('No data available')) {
-          String jsonString = response.substring(response.indexOf('{'));
-
-          Map<String, dynamic> jsonMap = json.decode(jsonString.formatToJson);
-
-          currentUser = User.fromJson(jsonMap);
-
-          if (currentUser != null) {
-            if (event.password == currentUser?.password) {
-              currentUser?.phoneFcmToken =
-                  await LocalStorageService.getLocalStorageData('phoneToken')
-                      as String;
-
-              await FirebaseDatabaseService.add(
-                currentUser,
-                "/users/${currentUser!.fullName}",
-              );
-
-              emit(AuthorLoggedInState(currentUser!));
-            } else {
-              emit(const AuthorErrorState('Wrong password'));
+        await FirebaseDatabaseService.getObjectMap(
+          collection: FireStoreCollectionEnum.users.name,
+          document: event.phoneNumber,
+        ).then((responseMap) async {
+          if (responseMap != null) {
+            if (responseMap['password'] != event.password) {
+              emit(const AuthorErrorState('Sai mật khẩu'));
             }
+
+            String fcmToken = await LocalStorageService.getLocalStorageData(
+              LocalStorageEnum.phoneToken.name,
+            ) as String;
+
+            await FirebaseDatabaseService.updateData(
+              data: {'phoneFcmToken': fcmToken},
+              collection: FireStoreCollectionEnum.users.name,
+              document: event.phoneNumber,
+            );
+
+            emit(AuthorLoggedInState(User.fromJson(responseMap)));
           } else {
-            emit(AuthorErrorState(response));
+            emit(const AuthorErrorState('Tài khoản này không tồn tại'));
           }
-        } else {
-          emit(const AuthorErrorState('This user is not existed'));
-        }
+        });
       } catch (e, stackTrace) {
-        debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
+        debugPrint(
+            'Caught login error: ${e.toString()} \n${stackTrace.toString()}');
         emit(AuthorErrorState(e.toString()));
       }
     });
@@ -61,29 +54,31 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
       emit(AuthorLoadingState());
 
       try {
-        final String response =
-            await FirebaseDatabaseService.get('users/${event.userName}');
+        final responseMap = await FirebaseDatabaseService.getObjectMap(
+          collection: FireStoreCollectionEnum.users.name,
+          document: event.newUser.phoneNumber,
+        );
 
-        if (response.contains('No data available')) {
-          // User newUser = User(
-          //   event.,
-          //   event.password,
-          //   event.phoneNumber,
-          //   await LocalStorageService.getLocalStorageData('phoneToken')
-          //       as String,
-          // );
+        if (responseMap == null) {
+          Map<String, dynamic> userMap = event.newUser.toJson();
 
-          // await FirebaseDatabaseService.set(
-          //   newUser,
-          //   "users/${newUser.name}",
-          // );
+          String fcmToken = await LocalStorageService.getLocalStorageData(
+            LocalStorageEnum.phoneToken.name,
+          ) as String;
 
-          emit(const AuthorRegisteredState('Register successfully'));
+          await FirebaseDatabaseService.addData(
+            data: userMap,
+            collection: FireStoreCollectionEnum.users.name,
+            document: event.newUser.phoneNumber,
+          );
+
+          emit(const AuthorRegisteredState('Đăng ký tài khoản mới thành công'));
         } else {
-          emit(const AuthorErrorState('This user has been existed'));
+          emit(const AuthorErrorState('Tài khoản này đã tồn tại'));
         }
       } catch (e, stackTrace) {
-        debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
+        debugPrint(
+            'Caught register error: ${e.toString()} \n${stackTrace.toString()}');
         emit(AuthorErrorState(e.toString()));
       }
     });

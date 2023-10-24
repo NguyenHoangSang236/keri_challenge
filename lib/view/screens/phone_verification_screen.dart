@@ -51,11 +51,7 @@ class _PhoneVerificationState extends State<PhoneVerificationScreen> {
 
         await auth.signInWithCredential(credential).then((value) {
           BlocProvider.of<AuthorBloc>(context).add(
-            OnRegisterEvent(
-              widget.user.fullName,
-              widget.user.password,
-              widget.user.phoneNumber,
-            ),
+            OnRegisterEvent(widget.user),
           );
 
           UiRender.showSnackBar(

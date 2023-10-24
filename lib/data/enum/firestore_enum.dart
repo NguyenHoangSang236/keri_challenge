@@ -1,0 +1,4 @@
+enum FireStoreCollectionEnum {
+  users,
+  orders,
+}
