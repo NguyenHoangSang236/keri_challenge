@@ -68,6 +68,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         password: _passwordTextEditingController.text,
         phoneNumber: _phoneNumberTextEditingController.text,
         phoneFcmToken: '',
+        role: widget.isShipper ? 'shipper' : 'client',
         birthYear: _birthYearTextEditingController.text,
         address: _addressTextEditingController.text,
         idCertificateNumber: _idCertNumTextEditingController.text,

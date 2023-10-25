@@ -11,15 +11,18 @@ class FirebaseDatabaseService {
   }) async {
     final docRef = fireStore.collection(collection).doc(document);
 
-    docRef.get().then(
+    Map<String, dynamic>? resultMap = {};
+
+    await docRef.get().then(
       (docSnap) {
         debugPrint(docSnap.data().toString());
-        return docSnap.data();
+
+        resultMap = docSnap.data();
       },
       onError: (e) => print("Error getting document: $e"),
     );
 
-    return null;
+    return resultMap;
   }
 
   static Future<List<Map<String, dynamic>>> getObjectMapList({
@@ -28,7 +31,7 @@ class FirebaseDatabaseService {
     final docRef = fireStore.collection(collection);
     List<Map<String, dynamic>> mapList = [];
 
-    docRef.get().then(
+    await docRef.get().then(
       (querySnap) {
         for (var docSnapshot in querySnap.docs) {
           mapList.add(docSnapshot.data());
@@ -48,7 +51,7 @@ class FirebaseDatabaseService {
     required String document,
     bool needMerge = false,
   }) async {
-    fireStore
+    await fireStore
         .collection(collection)
         .doc(document)
         .set(data, SetOptions(merge: needMerge))
@@ -63,7 +66,7 @@ class FirebaseDatabaseService {
     required String collection,
     required String document,
   }) async {
-    fireStore.collection(collection).doc(document).update(data).then(
+    await fireStore.collection(collection).doc(document).update(data).then(
         (value) => debugPrint("Data successfully updated!"),
         onError: (e) => debugPrint("Error updating data: $e"));
   }
@@ -72,7 +75,7 @@ class FirebaseDatabaseService {
     required String collection,
     required String document,
   }) async {
-    fireStore.collection(collection).doc(document).delete().then(
+    await fireStore.collection(collection).doc(document).delete().then(
           (doc) => debugPrint("Document deleted"),
           onError: (e) => debugPrint("Error deleting document: $e"),
         );

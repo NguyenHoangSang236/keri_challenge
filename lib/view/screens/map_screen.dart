@@ -13,7 +13,6 @@ import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/core/extension/latLng_extenstion.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/extension/position_extension.dart';
-import 'package:keri_challenge/core/router/app_router_path.dart';
 import 'package:keri_challenge/services/firebase_message_service.dart';
 import 'package:keri_challenge/view/screens/searching_screen.dart';
 
@@ -107,8 +106,8 @@ class _MapState extends State<MapScreen> {
             ? context.read<GoogleMapBloc>().currentSelectedFromPrediction
             : context.read<GoogleMapBloc>().currentSelectedToPrediction;
 
-        if (prediction.description == 'Search start location...' ||
-            prediction.description == 'Search end location...') {
+        if (prediction.description == 'Tìm điểm đến...' ||
+            prediction.description == 'Tìm điểm đi...') {
           context.read<GoogleMapBloc>().add(
                 OnLoadDefaultLocationEvent(
                   isFromLocation,
@@ -324,16 +323,27 @@ class _MapState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () => context.router.pop(),
+          color: Colors.white,
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 30.size,
+            color: Theme.of(context).colorScheme.secondary,
+          ),
+        ),
+        leadingWidth: 40.width,
         toolbarHeight: 180.height,
-        backgroundColor: const Color(0xFF0F9D58),
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           children: [
-            const Text(
-              "Keri Google Map",
+            Text(
+              "BSS Map",
               style: TextStyle(
-                color: Colors.white,
+                fontWeight: FontWeight.w600,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
             searchingButton(true),
@@ -365,178 +375,168 @@ class _MapState extends State<MapScreen> {
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
-        onPressed: () {
-          context.router.pushNamed(AppRouterPath.accountList);
-
-          // getUserCurrentLocation().then((value) async {
-          //   final latLng = LatLng(value.latitude, value.longitude);
-          //   // marker added for current users location
-          //   _markers.add(
-          //     Marker(
-          //       markerId: const MarkerId("My location"),
-          //       position: latLng,
-          //       infoWindow: const InfoWindow(
-          //         title: 'My Current Location',
-          //       ),
-          //     ),
-          //   );
-          //
-          //   addMarkerAndAnimateCameraToPosition(
-          //     latLng: latLng,
-          //     isFromLocation: false,
-          //   );
-          // });
-        },
-        child: const Icon(Icons.list_alt),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: Colors.green,
+      //   onPressed: () {
+      //     context.router.pushNamed(AppRouterPath.accountList);
+      //   },
+      //   child: const Icon(Icons.list_alt),
+      // ),
     );
   }
 
   Widget searchingButton(bool isFromLocation) {
-    return Row(children: [
-      Expanded(
-        child: GestureDetector(
-          onTap: () => onPressTextBox(isFromLocation),
-          child: Container(
-            // width: MediaQuery.of().size.width,
-            margin: EdgeInsets.only(top: 10.height),
-            padding: EdgeInsets.symmetric(
-              vertical: 10.height,
-              horizontal: 5.width,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.radius),
-            ),
-            child: BlocConsumer<GoogleMapBloc, GoogleMapState>(
-              listener: (context, state) async {
-                if (state is GoogleMapNewLocationLoadedState) {
-                  addMarkerAndAnimateCameraToPosition(
-                    latLng: state.latLng,
-                    isFromLocation: state.isFromLocation,
+    return Row(
+      children: [
+        Expanded(
+          child: GestureDetector(
+            onTap: () => onPressTextBox(isFromLocation),
+            child: Container(
+              // width: MediaQuery.of().size.width,
+              margin: EdgeInsets.only(top: 10.height),
+              padding: EdgeInsets.symmetric(
+                vertical: 10.height,
+                horizontal: 5.width,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10.radius),
+              ),
+              child: BlocConsumer<GoogleMapBloc, GoogleMapState>(
+                listener: (context, state) async {
+                  if (state is GoogleMapNewLocationLoadedState) {
+                    addMarkerAndAnimateCameraToPosition(
+                      latLng: state.latLng,
+                      isFromLocation: state.isFromLocation,
+                    );
+                  } else if (state is GoogleMapLocationClearedState) {
+                    clearMarker(state.isFromLocation);
+                  } else if (state is GoogleMapMessageSentBackState) {
+                    UiRender.showSnackBar(context, state.message);
+                  } else if (state
+                      is GoogleMapDirectionFromPublicMessageLoadedState) {
+                    addMarkerAndAnimateCameraToPosition(
+                      latLng: state.fromLatLng,
+                      isFromLocation: true,
+                    );
+
+                    addMarkerAndAnimateCameraToPosition(
+                      latLng: state.toLatLng,
+                      isFromLocation: false,
+                    );
+
+                    showDirection(
+                      start: state.fromLatLng.toPointLatLng,
+                      end: state.toLatLng.toPointLatLng,
+                      needMessage: false,
+                    );
+
+                    if (isFromLocation) {
+                      String? message =
+                          await UiRender.showSingleTextFieldDialog(
+                                  context, _messageBackController,
+                                  hintText: 'Type your message here...')
+                              .then((value) {
+                        if (value.isNotEmpty) {
+                          context.read<GoogleMapBloc>().add(
+                                OnSendMessageBackEvent(
+                                  value,
+                                  context.read<AuthorBloc>().currentUser!,
+                                  currentPosition.toLatLng,
+                                ),
+                              );
+                        }
+
+                        return null;
+                      });
+                    }
+                  } else if (state
+                      is GoogleMapLocationFromPrivateMessageLoadedState) {
+                    onPressPinLocationButton(false);
+                  } else if (state is GoogleMapErrorState) {
+                    UiRender.showDialog(context, 'Error', state.message);
+                  }
+                },
+                builder: (context, state) {
+                  String? currentLocation = isFromLocation
+                      ? context
+                          .read<GoogleMapBloc>()
+                          .currentSelectedFromPrediction
+                          .description
+                      : context
+                          .read<GoogleMapBloc>()
+                          .currentSelectedToPrediction
+                          .description;
+
+                  if (state is GoogleMapSelectedState) {
+                    if (state.isFromLocation == isFromLocation) {
+                      currentLocation =
+                          state.prediction?.description ?? 'UNDEFINED';
+                    }
+                  }
+                  if (state is GoogleMapNewLocationLoadedState) {
+                    if (state.isFromLocation == isFromLocation) {
+                      currentLocation = state.prediction?.description;
+                    }
+                  } else if (state is GoogleMapLocationClearedState) {
+                    if (state.isFromLocation == isFromLocation) {
+                      currentLocation = currentLocation = isFromLocation
+                          ? context
+                              .read<GoogleMapBloc>()
+                              .currentSelectedFromPrediction
+                              .description
+                          : context
+                              .read<GoogleMapBloc>()
+                              .currentSelectedToPrediction
+                              .description;
+                    }
+                  } else if (state
+                      is GoogleMapDirectionFromPublicMessageLoadedState) {
+                    currentLocation = isFromLocation
+                        ? state.fromDescription
+                        : state.toDescription;
+                  } else if (state
+                      is GoogleMapLocationFromPrivateMessageLoadedState) {
+                    if (!isFromLocation) {
+                      currentLocation = state.description;
+                    }
+                  }
+
+                  return Text(
+                    currentLocation ?? '---',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 15.size,
+                    ),
                   );
-                } else if (state is GoogleMapLocationClearedState) {
-                  clearMarker(state.isFromLocation);
-                } else if (state is GoogleMapMessageSentBackState) {
-                  UiRender.showSnackBar(context, state.message);
-                } else if (state
-                    is GoogleMapDirectionFromPublicMessageLoadedState) {
-                  addMarkerAndAnimateCameraToPosition(
-                    latLng: state.fromLatLng,
-                    isFromLocation: true,
-                  );
-
-                  addMarkerAndAnimateCameraToPosition(
-                    latLng: state.toLatLng,
-                    isFromLocation: false,
-                  );
-
-                  showDirection(
-                    start: state.fromLatLng.toPointLatLng,
-                    end: state.toLatLng.toPointLatLng,
-                    needMessage: false,
-                  );
-
-                  if (isFromLocation) {
-                    String? message = await UiRender.showSingleTextFieldDialog(
-                            context, _messageBackController,
-                            hintText: 'Type your message here...')
-                        .then((value) {
-                      if (value.isNotEmpty) {
-                        context.read<GoogleMapBloc>().add(
-                              OnSendMessageBackEvent(
-                                value,
-                                context.read<AuthorBloc>().currentUser!,
-                                currentPosition.toLatLng,
-                              ),
-                            );
-                      }
-
-                      return null;
-                    });
-                  }
-                } else if (state
-                    is GoogleMapLocationFromPrivateMessageLoadedState) {
-                  onPressPinLocationButton(false);
-                } else if (state is GoogleMapErrorState) {
-                  UiRender.showDialog(context, 'Error', state.message);
-                }
-              },
-              builder: (context, state) {
-                String? currentLocation = isFromLocation
-                    ? context
-                        .read<GoogleMapBloc>()
-                        .currentSelectedFromPrediction
-                        .description
-                    : context
-                        .read<GoogleMapBloc>()
-                        .currentSelectedToPrediction
-                        .description;
-
-                if (state is GoogleMapSelectedState) {
-                  if (state.isFromLocation == isFromLocation) {
-                    currentLocation =
-                        state.prediction?.description ?? 'UNDEFINED';
-                  }
-                }
-                if (state is GoogleMapNewLocationLoadedState) {
-                  if (state.isFromLocation == isFromLocation) {
-                    currentLocation = state.prediction?.description;
-                  }
-                } else if (state is GoogleMapLocationClearedState) {
-                  if (state.isFromLocation == isFromLocation) {
-                    currentLocation = currentLocation = isFromLocation
-                        ? context
-                            .read<GoogleMapBloc>()
-                            .currentSelectedFromPrediction
-                            .description
-                        : context
-                            .read<GoogleMapBloc>()
-                            .currentSelectedToPrediction
-                            .description;
-                  }
-                } else if (state
-                    is GoogleMapDirectionFromPublicMessageLoadedState) {
-                  currentLocation = isFromLocation
-                      ? state.fromDescription
-                      : state.toDescription;
-                } else if (state
-                    is GoogleMapLocationFromPrivateMessageLoadedState) {
-                  if (!isFromLocation) {
-                    currentLocation = state.description;
-                  }
-                }
-
-                return Text(
-                  currentLocation ?? '---',
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 15.size,
-                  ),
-                );
-              },
+                },
+              ),
             ),
           ),
         ),
-      ),
-      SizedBox(
-        width: 35.size,
-        height: 35.size,
-        child: IconButton(
-          onPressed: () => onPressRemoveLocationButton(isFromLocation),
-          icon: const Icon(Icons.clear),
+        SizedBox(
+          width: 35.size,
+          height: 35.size,
+          child: IconButton(
+            onPressed: () => onPressRemoveLocationButton(isFromLocation),
+            icon: Icon(
+              Icons.clear,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
         ),
-      ),
-      SizedBox(
-        width: 35.size,
-        height: 35.size,
-        child: IconButton(
-          onPressed: () => onPressPinLocationButton(isFromLocation),
-          icon: const Icon(Icons.pin_drop_sharp),
+        SizedBox(
+          width: 35.size,
+          height: 35.size,
+          child: IconButton(
+            onPressed: () => onPressPinLocationButton(isFromLocation),
+            icon: Icon(
+              Icons.pin_drop_sharp,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
+          ),
         ),
-      ),
-    ]);
+      ],
+    );
   }
 }

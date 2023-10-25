@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -27,9 +28,9 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
 
   /// for product
   Prediction currentSelectedFromPrediction =
-      Prediction(description: 'Search start location...');
+      Prediction(description: 'Tìm điểm đi...');
   Prediction currentSelectedToPrediction =
-      Prediction(description: 'Search end location...');
+      Prediction(description: 'Tìm điểm đến...');
   PointLatLng? currentSelectedFromPointLatLng;
   PointLatLng? currentSelectedToPointLatLng;
 
@@ -71,7 +72,7 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
         );
 
         PlacesDetailsResponse details = await places.getDetailsByPlaceId(
-          event.prediction!.placeId!,
+          event.prediction.placeId!,
         );
 
         if (details.isOkay) {
@@ -137,30 +138,41 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
     on<OnClearLocationEvent>((event, emit) {
       if (event.isFromLocation) {
         currentSelectedFromPrediction =
-            Prediction(description: 'Search start location...');
+            Prediction(description: 'Tìm điểm đến...');
         currentSelectedFromPointLatLng = null;
       } else {
-        currentSelectedToPrediction =
-            Prediction(description: 'Search end location...');
+        currentSelectedToPrediction = Prediction(description: 'Tìm điểm đi...');
         currentSelectedToPointLatLng = null;
       }
 
       emit(GoogleMapLocationClearedState(event.isFromLocation));
     });
 
-    on<OnLoadDefaultLocationEvent>((event, emit) {
+    on<OnLoadDefaultLocationEvent>((event, emit) async {
+      List<Placemark> addresses = await placemarkFromCoordinates(
+        event.currentPosition.latitude,
+        event.currentPosition.longitude,
+      );
+
+      String currentAddress =
+          '${addresses.first.street}, ${addresses.first.subAdministrativeArea}, ${addresses.first.administrativeArea}, ${addresses.first.country}';
+
       if (event.isFromLocation) {
-        currentSelectedFromPrediction = Prediction(description: 'My Location');
+        currentSelectedFromPrediction = Prediction(
+          description: currentAddress,
+        );
         currentSelectedFromPointLatLng = event.currentPosition.toPointLatLng;
       } else {
-        currentSelectedToPrediction = Prediction(description: 'My Location');
+        currentSelectedToPrediction = Prediction(
+          description: currentAddress,
+        );
         currentSelectedToPointLatLng = event.currentPosition.toPointLatLng;
       }
 
       emit(GoogleMapNewLocationLoadedState(
         event.currentPosition.toLatLng,
         event.isFromLocation,
-        Prediction(description: 'My Location'),
+        Prediction(description: currentAddress),
       ));
     });
 

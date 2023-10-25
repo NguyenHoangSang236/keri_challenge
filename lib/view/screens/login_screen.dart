@@ -132,7 +132,10 @@ class _LoginScreenState extends State<LoginScreen> {
           child: BlocListener<AuthorBloc, AuthorState>(
             listener: (context, state) {
               if (state is AuthorLoggedInState) {
-                context.router.pushNamed(AppRouterPath.googleMap);
+                if (state.user.role == 'client') {
+                  context.router.pushNamed(AppRouterPath.clientIndex);
+                } else if (state.user.role == 'shipper') {
+                } else if (state.user.role == 'admin') {}
               } else if (state is AuthorErrorState) {
                 UiRender.showSnackBar(context, state.message);
               }
@@ -246,6 +249,9 @@ class _LoginScreenState extends State<LoginScreen> {
             child: TextFormField(
               controller: controller,
               keyboardType: keyboardType,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onError,
+              ),
               decoration: InputDecoration(
                 hintText: hintText,
                 border: InputBorder.none,

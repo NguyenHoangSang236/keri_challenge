@@ -2,7 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../data/entities/user.dart';
-import '../../view/screens/account_list.dart';
+import '../../view/screens/account_list_screen.dart';
+import '../../view/screens/client_index_screen.dart';
 import '../../view/screens/login_screen.dart';
 import '../../view/screens/map_screen.dart';
 import '../../view/screens/phone_verification_screen.dart';
@@ -42,6 +43,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: AccountListRoute.page,
           path: AppRouterPath.accountList,
+        ),
+        AutoRoute(
+          page: ClientIndexRoute.page,
+          path: AppRouterPath.clientIndex,
         ),
       ];
 }

@@ -6,4 +6,5 @@ class AppRouterPath {
   static String searching = '/searching';
   static String phoneVerification = '/phoneVerification';
   static String accountList = '/accountList';
+  static String clientIndex = '/clientIndex';
 }
