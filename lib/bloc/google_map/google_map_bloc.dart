@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:either_dart/either.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:keri_challenge/core/extension/latLng_extenstion.dart';
@@ -15,7 +15,6 @@ import 'package:keri_challenge/services/firebase_message_service.dart';
 import '../../data/entities/user.dart';
 import '../../data/enum/local_storage_enum.dart';
 import '../../data/repository/google_map_repository.dart';
-import '../../main.dart';
 import '../../services/local_storage_service.dart';
 
 part 'google_map_event.dart';
@@ -66,44 +65,44 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
 
       try {
         /// for production
-        GoogleMapsPlaces places = GoogleMapsPlaces(
-          apiKey: apiKey,
-          apiHeaders: await const GoogleApiHeaders().getHeaders(),
+        final response = _googleMapRepository.getDetailsByPlaceId(
+          event.prediction.id!,
         );
 
-        PlacesDetailsResponse details = await places.getDetailsByPlaceId(
-          event.prediction.placeId!,
+        response.fold(
+          (failure) => emit(GoogleMapErrorState(failure.message)),
+          (details) {
+            if (details.isOkay) {
+              final location = details.result.geometry?.location;
+              final latLng = LatLng(
+                location!.lat,
+                location.lng,
+              );
+
+              if (event.isFromLocation) {
+                currentSelectedFromPrediction = event.prediction;
+                currentSelectedFromPointLatLng = PointLatLng(
+                  location.lat,
+                  location.lng,
+                );
+              } else {
+                currentSelectedToPrediction = event.prediction;
+                currentSelectedToPointLatLng = PointLatLng(
+                  location.lat,
+                  location.lng,
+                );
+              }
+
+              emit(GoogleMapNewLocationLoadedState(
+                latLng,
+                event.isFromLocation,
+                event.prediction,
+              ));
+            } else {
+              emit(GoogleMapErrorState(details.result.name));
+            }
+          },
         );
-
-        if (details.isOkay) {
-          final location = details.result.geometry?.location;
-          final latLng = LatLng(
-            location!.lat,
-            location.lng,
-          );
-
-          if (event.isFromLocation) {
-            currentSelectedFromPrediction = event.prediction;
-            currentSelectedFromPointLatLng = PointLatLng(
-              location.lat,
-              location.lng,
-            );
-          } else {
-            currentSelectedToPrediction = event.prediction;
-            currentSelectedToPointLatLng = PointLatLng(
-              location.lat,
-              location.lng,
-            );
-          }
-
-          emit(GoogleMapNewLocationLoadedState(
-            latLng,
-            event.isFromLocation,
-            event.prediction,
-          ));
-        } else {
-          emit(GoogleMapErrorState(details.result.name));
-        }
       } catch (e, stackTrace) {
         if (e.toString().contains(
             'type \'Null\' is not a subtype of type \'Map<String, dynamic>\' in type cast')) {

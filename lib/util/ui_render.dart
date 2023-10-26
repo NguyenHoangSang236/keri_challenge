@@ -26,10 +26,10 @@ class UiRender {
     );
   }
 
-  static Widget loadingCircle() {
-    return const Center(
+  static Widget loadingCircle(BuildContext context) {
+    return Center(
       child: CircularProgressIndicator(
-        color: Colors.orange,
+        color: Theme.of(context).colorScheme.primary,
       ),
     );
   }
@@ -73,7 +73,7 @@ class UiRender {
                 context.router.pop(false);
               },
               isDestructiveAction: true,
-              child: const Text('Cancel'),
+              child: const Text('Huỷ'),
             )
           ],
         );
@@ -84,17 +84,20 @@ class UiRender {
   }
 
   static Future<void> showDialog(
-    BuildContext context,
-    String title,
-    String message,
-  ) async {
+      BuildContext context, String title, String message,
+      {TextAlign textAlign = TextAlign.center}) async {
     return showCupertinoDialog(
       barrierDismissible: true,
       context: context,
       builder: (BuildContext ctx) {
         return CupertinoAlertDialog(
           title: title.isNotEmpty ? Text(title) : null,
-          content: message.isNotEmpty ? Text(message) : null,
+          content: message.isNotEmpty
+              ? Text(
+                  message,
+                  textAlign: textAlign,
+                )
+              : null,
           actions: [
             CupertinoDialogAction(
               onPressed: () {
@@ -102,7 +105,7 @@ class UiRender {
               },
               isDefaultAction: true,
               child: const Text(
-                'Got it',
+                'Xác nhận',
                 style: TextStyle(
                   color: CupertinoColors.activeBlue,
                 ),
@@ -153,7 +156,7 @@ class UiRender {
               },
               isDefaultAction: true,
               child: const Text(
-                'Send',
+                'Gửi',
                 style: TextStyle(
                   color: CupertinoColors.activeBlue,
                 ),
@@ -165,7 +168,7 @@ class UiRender {
                 context.router.pop('');
               },
               isDestructiveAction: true,
-              child: const Text('Cancel'),
+              child: const Text('Huỷ'),
             )
           ],
         );

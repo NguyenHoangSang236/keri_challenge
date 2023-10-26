@@ -14,7 +14,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/bloc/account/account_bloc.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
+import 'package:keri_challenge/bloc/order/order_bloc.dart';
 import 'package:keri_challenge/core/theme/app_theme.dart';
+import 'package:keri_challenge/data/repository/account_repository.dart';
+import 'package:keri_challenge/data/repository/order_repository.dart';
 
 import 'config/http_client_config.dart';
 import 'core/router/app_router_config.dart';
@@ -69,15 +72,35 @@ Future<void> main() async {
     MultiRepositoryProvider(
       providers: [
         RepositoryProvider<GoogleMapRepository>(
-            create: (context) => GoogleMapRepository()),
+          create: (context) => GoogleMapRepository(),
+        ),
+        RepositoryProvider<OrderRepository>(
+          create: (context) => OrderRepository(),
+        ),
+        RepositoryProvider<AccountRepository>(
+          create: (context) => AccountRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider<GoogleMapBloc>(
-              create: (context) => GoogleMapBloc(
-                  RepositoryProvider.of<GoogleMapRepository>(context))),
-          BlocProvider<AuthorBloc>(create: (context) => AuthorBloc()),
-          BlocProvider<AccountBloc>(create: (context) => AccountBloc()),
+            create: (context) => GoogleMapBloc(
+              RepositoryProvider.of<GoogleMapRepository>(context),
+            ),
+          ),
+          BlocProvider<OrderBloc>(
+            create: (context) => OrderBloc(
+              RepositoryProvider.of<OrderRepository>(context),
+            ),
+          ),
+          BlocProvider<AuthorBloc>(
+            create: (context) => AuthorBloc(
+              RepositoryProvider.of<AccountRepository>(context),
+            ),
+          ),
+          BlocProvider<AccountBloc>(
+            create: (context) => AccountBloc(),
+          ),
         ],
         child: const MyApp(),
       ),

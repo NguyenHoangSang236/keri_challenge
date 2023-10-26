@@ -14,7 +14,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       distance: (json['distance'] as num?)?.toDouble(),
       status: json['status'] as String?,
       role: json['role'] as String,
-      address: json['address'] as String,
+      address: json['address'] as String?,
       idCertificateNumber: json['idCertificateNumber'] as String,
       password: json['password'] as String,
       registerDate: const TimestampConverter()

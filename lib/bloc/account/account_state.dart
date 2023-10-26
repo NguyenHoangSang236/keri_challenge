@@ -48,7 +48,7 @@ class AllAccountListByNameLoadedState extends AccountState {
 
 class PaginationAccountListLoadedState extends AccountState {
   final List<User> userList;
-  final page;
+  final int page;
 
   const PaginationAccountListLoadedState(this.userList, this.page);
 

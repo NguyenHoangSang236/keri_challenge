@@ -22,7 +22,15 @@ class FirebaseMessageService {
 
   Future<void> initNotifications() async {
     // request for permission to get notifications from app
-    await firebaseMessaging.requestPermission();
+    await firebaseMessaging.requestPermission(
+      alert: true,
+      announcement: true,
+      badge: true,
+      carPlay: true,
+      criticalAlert: true,
+      provisional: true,
+      sound: true,
+    );
 
     // get FCM token for this device
     final fcmToken = await firebaseMessaging.getToken();

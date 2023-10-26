@@ -11,7 +11,7 @@ class User {
   String fullName;
   String birthYear;
   String sex;
-  String address;
+  String? address;
   String idCertificateNumber;
   String password;
   double? distance;

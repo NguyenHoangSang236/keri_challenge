@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:keri_challenge/data/entities/user.dart';
 import 'package:keri_challenge/data/enum/firestore_enum.dart';
+import 'package:keri_challenge/data/repository/account_repository.dart';
 import 'package:keri_challenge/services/local_storage_service.dart';
 
 import '../../data/enum/local_storage_enum.dart';
@@ -12,37 +13,26 @@ part 'author_event.dart';
 part 'author_state.dart';
 
 class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
+  final AccountRepository _accountRepository;
   User? currentUser;
 
-  AuthorBloc() : super(AuthorInitial()) {
+  AuthorBloc(this._accountRepository) : super(AuthorInitial()) {
     on<OnLoginEvent>((event, emit) async {
       emit(AuthorLoadingState());
 
       try {
-        await FirebaseDatabaseService.getObjectMap(
-          collection: FireStoreCollectionEnum.users.name,
-          document: event.phoneNumber,
-        ).then((responseMap) async {
-          if (responseMap != null) {
-            if (responseMap['password'] != event.password) {
-              emit(const AuthorErrorState('Sai mật khẩu'));
-            }
+        final response = await _accountRepository.login(
+          event.phoneNumber,
+          event.password,
+        );
 
-            String fcmToken = await LocalStorageService.getLocalStorageData(
-              LocalStorageEnum.phoneToken.name,
-            ) as String;
-
-            await FirebaseDatabaseService.updateData(
-              data: {'phoneFcmToken': fcmToken},
-              collection: FireStoreCollectionEnum.users.name,
-              document: event.phoneNumber,
-            );
-
-            emit(AuthorLoggedInState(User.fromJson(responseMap)));
-          } else {
-            emit(const AuthorErrorState('Tài khoản này không tồn tại'));
-          }
-        });
+        response.fold(
+          (failure) => emit(AuthorErrorState(failure.message)),
+          (user) {
+            currentUser = user;
+            emit(AuthorLoggedInState(currentUser!));
+          },
+        );
       } catch (e, stackTrace) {
         debugPrint(
             'Caught login error: ${e.toString()} \n${stackTrace.toString()}');
