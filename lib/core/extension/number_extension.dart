@@ -11,8 +11,25 @@ extension NumberFormatAndDeviceSizeScale on num {
 
   double get radius => isPhone ? r : this * 1;
 
+  String get formatMoney {
+    String str = toStringAsFixed(0).toString();
+    List<int> commaPos = [3, 7, 12, 18];
+
+    for (int pos in commaPos) {
+      if (pos < str.length) {
+        int length = str.length;
+        str =
+            '${str.substring(0, length - pos)},${str.substring(length - pos)}';
+      } else {
+        break;
+      }
+    }
+
+    return str;
+  }
+
   String get format {
-    String str = toString();
+    String str = toStringAsFixed(2).toString();
     List<int> commaPos = [3, 7, 12, 18];
     bool hasDecimal = this % 1 != 0;
 

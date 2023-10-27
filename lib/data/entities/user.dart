@@ -16,6 +16,7 @@ class User {
   String password;
   double? distance;
   String? status;
+  bool isOnline;
   @TimestampConverter()
   DateTime registerDate;
   String role;
@@ -26,6 +27,7 @@ class User {
     required this.birthYear,
     required this.phoneNumber,
     required this.sex,
+    required this.isOnline,
     this.distance,
     this.status,
     required this.role,
@@ -42,6 +44,6 @@ class User {
 
   @override
   String toString() {
-    return '{phoneNumber: $phoneNumber, fullName: $fullName, birthYear: $birthYear, sex: $sex, address: $address, idCertificateNumber: $idCertificateNumber, password: $password, distance: $distance, status: $status, registerDate: $registerDate, role: $role, phoneFcmToken: $phoneFcmToken}';
+    return '{phoneNumber: $phoneNumber, fullName: $fullName, birthYear: $birthYear, sex: $sex, address: $address, idCertificateNumber: $idCertificateNumber, password: $password, distance: $distance, status: $status, isOnline: $isOnline, registerDate: $registerDate, role: $role, phoneFcmToken: $phoneFcmToken}';
   }
 }

@@ -39,6 +39,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const MapScreen(),
       );
     },
+    OnlineShipperRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const OnlineShipperScreen(),
+      );
+    },
     PhoneVerificationRoute.name: (routeData) {
       final args = routeData.argsAs<PhoneVerificationRouteArgs>();
       return AutoRoutePage<dynamic>(
@@ -125,6 +131,20 @@ class MapRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'MapRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [OnlineShipperScreen]
+class OnlineShipperRoute extends PageRouteInfo<void> {
+  const OnlineShipperRoute({List<PageRouteInfo>? children})
+      : super(
+          OnlineShipperRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OnlineShipperRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

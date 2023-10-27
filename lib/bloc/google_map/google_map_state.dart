@@ -107,6 +107,15 @@ class GoogleMapDirectionFromPublicMessageLoadedState extends GoogleMapState {
       [fromLatLng, toLatLng, fromDescription, toDescription];
 }
 
+class GoogleMapDistanceCalculatedState extends GoogleMapState {
+  final double distance;
+
+  const GoogleMapDistanceCalculatedState(this.distance);
+
+  @override
+  List<Object?> get props => [distance];
+}
+
 class GoogleMapLocationFromPrivateMessageLoadedState extends GoogleMapState {
   final String description;
   final LatLng latLng;

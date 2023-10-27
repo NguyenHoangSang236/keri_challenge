@@ -5,10 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/router/app_router_path.dart';
+import 'package:keri_challenge/data/entities/app_config.dart';
 import 'package:keri_challenge/util/ui_render.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/screens/register_screen.dart';
 
+import '../../bloc/appConfig/app_config_bloc.dart';
 import '../../services/firebase_message_service.dart';
 
 @RoutePage()
@@ -27,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool _isPasswordObscure = true;
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
 
   String? _textFieldValidator(
     String? value,
@@ -99,7 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
     //   document: newAdmin.phoneNumber,
     // );
 
-    if (_formKey.currentState!.validate()) {
+    if (_loginFormKey.currentState!.validate()) {
       context.read<AuthorBloc>().add(
             OnLoginEvent(
               _phoneNumberTextEditingController.text,
@@ -115,9 +117,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   void initState() {
+    context.read<AppConfigBloc>().add(OnLoadAppConfigEvent());
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await FirebaseMessageService(context).initNotifications();
     });
+
     super.initState();
   }
 
@@ -141,38 +146,58 @@ class _LoginScreenState extends State<LoginScreen> {
               }
             },
             child: Form(
-              key: _formKey,
+              key: _loginFormKey,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   50.verticalSpace,
-                  Text(
-                    'Giao Nhận Nhanh, Thanh Toán Đúng',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 18.size,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                  ),
-                  10.verticalSpace,
-                  Text(
-                    'Hotline: 09190707386',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15.size,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
-                  ),
-                  10.verticalSpace,
-                  Text(
-                    'Email: abc@gmail.com',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15.size,
-                      color: Theme.of(context).colorScheme.onPrimary,
-                    ),
+                  BlocBuilder<AppConfigBloc, AppConfigState>(
+                    builder: (context, state) {
+                      AppConfig? appConfig =
+                          context.read<AppConfigBloc>().appConfig;
+
+                      if (state is AppConfigLoadingState) {
+                        return UiRender.loadingCircle(context);
+                      } else if (state is AppConfigLoadState) {
+                        appConfig = state.appConfig;
+                      }
+
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            appConfig?.slogan ?? 'UNDEFINED',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18.size,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          10.verticalSpace,
+                          Text(
+                            'Hotline: ${appConfig?.hotline}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15.size,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
+                          10.verticalSpace,
+                          Text(
+                            'Email: ${appConfig?.email}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 15.size,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                   20.verticalSpace,
                   Image.asset('assets/images/LoGo.png'),

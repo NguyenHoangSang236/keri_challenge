@@ -30,7 +30,10 @@ class AccountRepository {
           ) as String;
 
           await FirebaseDatabaseService.updateData(
-            data: {'phoneFcmToken': fcmToken},
+            data: {
+              'phoneFcmToken': fcmToken,
+              'isOnline': true,
+            },
             collection: FireStoreCollectionEnum.users.name,
             document: phoneNumber,
           );

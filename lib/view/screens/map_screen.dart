@@ -12,6 +12,7 @@ import 'package:google_maps_webservice/places.dart';
 import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/core/extension/latLng_extenstion.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
+import 'package:keri_challenge/core/extension/pointLatLng_extension.dart';
 import 'package:keri_challenge/core/extension/position_extension.dart';
 import 'package:keri_challenge/services/firebase_message_service.dart';
 import 'package:keri_challenge/view/screens/searching_screen.dart';
@@ -223,6 +224,10 @@ class _MapState extends State<MapScreen> {
   }) async {
     // Generating the list of coordinates to be used for drawing the polylines
     // PolylineResult result = PolylineResult();
+    context.read<GoogleMapBloc>().add(
+          OnCalculateDistanceEvent(start.toLatLng, end.toLatLng),
+        );
+
     PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
       apiKey, // Google Maps API Key
       start,

@@ -23,8 +23,9 @@ class _SearchResultOptionState extends State<SearchResultOption> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<GoogleMapBloc>(context).add(
-            OnLoadNewLocationEvent(widget.prediction, widget.isFromLocation));
+        context.read<GoogleMapBloc>().add(
+              OnLoadNewLocationEvent(widget.prediction, widget.isFromLocation),
+            );
 
         context.router.pop();
       },
@@ -40,7 +41,7 @@ class _SearchResultOptionState extends State<SearchResultOption> {
             ),
             Expanded(
               child: Text(
-                widget.prediction?.description ?? 'UNDEFINED',
+                widget.prediction.description ?? 'UNDEFINED',
                 maxLines: 2,
               ),
             ),

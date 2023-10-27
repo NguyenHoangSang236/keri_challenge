@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_button3/dropdown_button3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,10 +10,12 @@ class Layout extends StatefulWidget {
     super.key,
     required this.body,
     required this.title,
+    this.canComeBack = true,
   });
 
   final Widget body;
   final String title;
+  final bool canComeBack;
 
   @override
   State<StatefulWidget> createState() => _LayoutState();
@@ -30,11 +33,21 @@ class _LayoutState extends State<Layout> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
-        leading: Container(
-          margin: EdgeInsets.only(left: 10.width),
-          child: Image.asset('assets/images/LoGo.png'),
-        ),
-        leadingWidth: 100.width,
+        leading: !widget.canComeBack
+            ? Container(
+                margin: EdgeInsets.only(left: 10.width),
+                child: Image.asset('assets/images/LoGo.png'),
+              )
+            : IconButton(
+                onPressed: () => context.router.pop(),
+                color: Colors.white,
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  size: 30.size,
+                  color: Theme.of(context).colorScheme.secondary,
+                ),
+              ),
+        leadingWidth: !widget.canComeBack ? 100.width : 40.width,
         title: Text(
           widget.title,
           style: TextStyle(

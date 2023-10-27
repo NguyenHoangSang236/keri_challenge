@@ -13,6 +13,7 @@ import 'package:keri_challenge/util/ui_render.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/components/layout.dart';
 
+import '../../bloc/appConfig/app_config_bloc.dart';
 import '../../bloc/authorization/author_bloc.dart';
 
 @RoutePage()
@@ -35,15 +36,18 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
   final TextEditingController _noteController = TextEditingController();
 
   int orderListLimit = 10;
+  double distance = 0;
 
   void _onPressShipperBookingButton() {
-    if (_clientIndexFormKey.currentState!.validate()) {
-      UiRender.showDialog(
-        context,
-        '',
-        '${_fromLocationController.text}\n${_toLocationController.text}\n${_receiverController.text}\n${_phoneNumberController.text}\n${_codController.text}\n${_fromLocationController.text}\n${_noteController.text}\n',
-      );
-    }
+    context.router.pushNamed(AppRouterPath.onlineShipperList);
+
+    // if (_clientIndexFormKey.currentState!.validate()) {
+    //   UiRender.showDialog(
+    //     context,
+    //     '',
+    //     '${_fromLocationController.text}\n${_toLocationController.text}\n${_receiverController.text}\n${_phoneNumberController.text}\n${_codController.text}\n${_fromLocationController.text}\n${_noteController.text}\n',
+    //   );
+    // }
   }
 
   void _onPressSelectLocation() {
@@ -110,6 +114,8 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
         context.read<GoogleMapBloc>().currentSelectedToPrediction.description ??
             'Điểm đến';
 
+    distance = context.read<GoogleMapBloc>().distance;
+
     context.read<OrderBloc>().add(
           OnLoadOrderListEvent(
             context.read<AuthorBloc>().currentUser!.phoneNumber,
@@ -137,6 +143,7 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
   Widget build(BuildContext context) {
     return Layout(
       title: 'Trang chủ',
+      canComeBack: false,
       body: DefaultTabController(
         length: 2,
         child: SingleChildScrollView(
@@ -212,7 +219,19 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
                 const Text('dòng'),
               ],
             ),
-            30.verticalSpace,
+            20.verticalSpace,
+            Center(
+              child: Text(
+                'Nhẫn và giữ để xem thông tin chi tiết đơn hàng của bạn',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13.size,
+                  fontStyle: FontStyle.italic,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+              ),
+            ),
+            20.verticalSpace,
             BlocBuilder<OrderBloc, OrderState>(
               builder: (context, state) {
                 List<Order> orderList =
@@ -333,7 +352,14 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BlocBuilder<GoogleMapBloc, GoogleMapState>(
+              BlocConsumer<GoogleMapBloc, GoogleMapState>(
+                listener: (context, state) {
+                  if (state is GoogleMapDistanceCalculatedState) {
+                    setState(() {
+                      distance = state.distance;
+                    });
+                  }
+                },
                 builder: (context, state) {
                   _fromLocationController.text = context
                           .read<GoogleMapBloc>()
@@ -408,7 +434,7 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
                 needValidate: false,
               ),
               Text(
-                'Số tiền tạm tính: -VND (- km)',
+                'Số tiền tạm tính: ${(context.read<AppConfigBloc>().appConfig!.pricePerKm * distance).formatMoney}VND (${distance.format} km)',
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.error,
                   fontSize: 15.size,

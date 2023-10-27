@@ -12,15 +12,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/bloc/account/account_bloc.dart';
+import 'package:keri_challenge/bloc/appConfig/app_config_bloc.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/bloc/order/order_bloc.dart';
 import 'package:keri_challenge/core/theme/app_theme.dart';
 import 'package:keri_challenge/data/repository/account_repository.dart';
+import 'package:keri_challenge/data/repository/app_config_repository.dart';
 import 'package:keri_challenge/data/repository/order_repository.dart';
+import 'package:keri_challenge/services/firebase_database_service.dart';
 
 import 'config/http_client_config.dart';
 import 'core/router/app_router_config.dart';
+import 'data/enum/firestore_enum.dart';
 import 'data/repository/google_map_repository.dart';
 import 'firebase_options.dart';
 
@@ -80,6 +84,9 @@ Future<void> main() async {
         RepositoryProvider<AccountRepository>(
           create: (context) => AccountRepository(),
         ),
+        RepositoryProvider<AppConfigRepository>(
+          create: (context) => AppConfigRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -98,6 +105,11 @@ Future<void> main() async {
               RepositoryProvider.of<AccountRepository>(context),
             ),
           ),
+          BlocProvider<AppConfigBloc>(
+            create: (context) => AppConfigBloc(
+              RepositoryProvider.of<AppConfigRepository>(context),
+            ),
+          ),
           BlocProvider<AccountBloc>(
             create: (context) => AccountBloc(),
           ),
@@ -108,10 +120,51 @@ Future<void> main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) async {
+    debugPrint('The app is ${state.name}');
+
+    if (state == AppLifecycleState.paused &&
+        context.read<AuthorBloc>().currentUser != null) {
+      await FirebaseDatabaseService.updateData(
+        data: {
+          'isOnline': false,
+        },
+        collection: FireStoreCollectionEnum.users.name,
+        document: context.read<AuthorBloc>().currentUser!.phoneNumber,
+      );
+    } else if (state == AppLifecycleState.resumed &&
+        context.read<AuthorBloc>().currentUser != null) {
+      await FirebaseDatabaseService.updateData(
+        data: {
+          'isOnline': true,
+        },
+        collection: FireStoreCollectionEnum.users.name,
+        document: context.read<AuthorBloc>().currentUser!.phoneNumber,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(

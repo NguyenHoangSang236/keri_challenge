@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:keri_challenge/core/extension/datetime_extension.dart';
+import 'package:keri_challenge/core/extension/number_extension.dart';
 
 import '../../core/converter/timestamp_converter.dart';
 
@@ -39,7 +40,7 @@ class Order {
   Map<String, dynamic> toJson() => _$OrderToJson(this);
 
   String showFullInfo() {
-    return 'ID: $id \nKhoảng cách: $distance \nGiá tiền: $price \nĐiểm đi: $fromLocation \nĐiểm đến: $toLocation \nSố điện thoại người gửi: $senderPhoneNumber \nSố điện thoại người nhận: $receiverPhoneNumber \nTên người nhận: $receiverName \nTrạng thái: ${status == 'shipping' ? 'Đang giao' : status == 'shipped' ? 'Đã giao' : 'Không xác định'} \nNgày đặt hàng: ${orderDate.date}';
+    return 'ID: $id \nKhoảng cách: ${distance.format}km \nGiá tiền: ${price.format} đồng \nĐiểm đi: $fromLocation \nĐiểm đến: $toLocation \nSố điện thoại người gửi: $senderPhoneNumber \nSố điện thoại người nhận: $receiverPhoneNumber \nTên người nhận: $receiverName \nTrạng thái: ${status == 'shipping' ? 'Đang giao' : status == 'shipped' ? 'Đã giao' : 'Không xác định'} \nNgày đặt hàng: ${orderDate.date}';
   }
 
   @override

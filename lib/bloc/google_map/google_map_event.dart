@@ -61,6 +61,13 @@ class OnLoadLocationFromPublicMessageEvent extends GoogleMapEvent {
   );
 }
 
+class OnCalculateDistanceEvent extends GoogleMapEvent {
+  final LatLng startLatLng;
+  final LatLng endLatLng;
+
+  OnCalculateDistanceEvent(this.startLatLng, this.endLatLng);
+}
+
 class OnLoadLocationFromPrivateMessageEvent extends GoogleMapEvent {
   final String description;
   final LatLng latLng;

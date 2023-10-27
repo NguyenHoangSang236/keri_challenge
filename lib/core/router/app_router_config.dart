@@ -6,6 +6,7 @@ import '../../view/screens/account_list_screen.dart';
 import '../../view/screens/client_index_screen.dart';
 import '../../view/screens/login_screen.dart';
 import '../../view/screens/map_screen.dart';
+import '../../view/screens/online_shipper_list_screen.dart';
 import '../../view/screens/phone_verification_screen.dart';
 import '../../view/screens/register_screen.dart';
 import '../../view/screens/searching_screen.dart';
@@ -47,6 +48,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: ClientIndexRoute.page,
           path: AppRouterPath.clientIndex,
+        ),
+        AutoRoute(
+          page: OnlineShipperRoute.page,
+          path: AppRouterPath.onlineShipperList,
         ),
       ];
 }

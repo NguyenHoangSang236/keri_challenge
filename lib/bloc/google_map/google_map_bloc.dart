@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:either_dart/either.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -24,6 +23,7 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
   final GoogleMapRepository _googleMapRepository;
   String? selectedPhoneTokenFromMessage;
   List<Prediction> predictionList = [];
+  double distance = 0;
 
   /// for product
   Prediction currentSelectedFromPrediction =
@@ -65,8 +65,12 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
 
       try {
         /// for production
-        final response = _googleMapRepository.getDetailsByPlaceId(
-          event.prediction.id!,
+
+        print('@@@');
+        print(event.prediction.placeId);
+
+        final response = await _googleMapRepository.getDetailsByPlaceId(
+          event.prediction.placeId!,
         );
 
         response.fold(
@@ -128,7 +132,8 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
           }
         } else {
           debugPrint(
-              'Catch error: ${e.toString()} \n ${stackTrace.toString()}');
+            'Catch error: ${e.toString()} \n ${stackTrace.toString()}',
+          );
           emit(GoogleMapErrorState(e.toString()));
         }
       }
@@ -143,8 +148,21 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
         currentSelectedToPrediction = Prediction(description: 'Tìm điểm đi...');
         currentSelectedToPointLatLng = null;
       }
+      distance = 0;
 
       emit(GoogleMapLocationClearedState(event.isFromLocation));
+    });
+
+    on<OnCalculateDistanceEvent>((event, emit) {
+      distance = Geolocator.distanceBetween(
+            event.startLatLng.latitude,
+            event.startLatLng.longitude,
+            event.endLatLng.latitude,
+            event.endLatLng.longitude,
+          ) /
+          1000;
+
+      emit(GoogleMapDistanceCalculatedState(distance));
     });
 
     on<OnLoadDefaultLocationEvent>((event, emit) async {

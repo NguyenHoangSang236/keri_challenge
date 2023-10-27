@@ -35,7 +35,8 @@ class GoogleMapRepository {
   }
 
   Future<Either<Failure, PlacesDetailsResponse>> getDetailsByPlaceId(
-      String placeId) async {
+    String placeId,
+  ) async {
     try {
       GoogleMapsPlaces places = GoogleMapsPlaces(
         apiKey: apiKey,
