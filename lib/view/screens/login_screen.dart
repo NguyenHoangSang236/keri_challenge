@@ -6,12 +6,13 @@ import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/router/app_router_path.dart';
 import 'package:keri_challenge/data/entities/app_config.dart';
+import 'package:keri_challenge/data/enum/local_storage_enum.dart';
 import 'package:keri_challenge/util/ui_render.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/screens/register_screen.dart';
 
 import '../../bloc/appConfig/app_config_bloc.dart';
-import '../../services/firebase_message_service.dart';
+import '../../services/local_storage_service.dart';
 
 @RoutePage()
 class LoginScreen extends StatefulWidget {
@@ -28,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
       TextEditingController();
 
   bool _isPasswordObscure = true;
+  bool _rememberPassword = false;
 
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
 
@@ -55,6 +57,53 @@ class _LoginScreenState extends State<LoginScreen> {
   void _onPressPasswordEyeButton() {
     setState(() {
       _isPasswordObscure = !_isPasswordObscure;
+    });
+  }
+
+  void _onChangeRememberPasswordCheckbox(bool? value) {
+    setState(() {
+      if (value == true &&
+          (_phoneNumberTextEditingController.text != '' &&
+              _passwordTextEditingController.text != '')) {
+        LocalStorageService.setLocalStorageData(
+          LocalStorageEnum.phoneNumber.name,
+          _phoneNumberTextEditingController.text,
+        );
+
+        LocalStorageService.setLocalStorageData(
+          LocalStorageEnum.password.name,
+          _passwordTextEditingController.text,
+        );
+
+        _rememberPassword = true;
+
+        LocalStorageService.setLocalStorageData(
+          LocalStorageEnum.rememberLogin.name,
+          _rememberPassword,
+        );
+      } else if (_phoneNumberTextEditingController.text == '' ||
+          _passwordTextEditingController.text == '') {
+        UiRender.showDialog(
+          context,
+          '',
+          'Hãy điền đầy đủ số điện thoại và mật khẩu!',
+        );
+        _rememberPassword = false;
+      } else {
+        _rememberPassword = false;
+
+        LocalStorageService.removeLocalStorageData(
+          LocalStorageEnum.phoneNumber.name,
+        );
+
+        LocalStorageService.removeLocalStorageData(
+          LocalStorageEnum.password.name,
+        );
+
+        LocalStorageService.removeLocalStorageData(
+          LocalStorageEnum.rememberLogin.name,
+        );
+      }
     });
   }
 
@@ -111,17 +160,36 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  Future<void> _initLocalStorageValues() async {
+    _phoneNumberTextEditingController.text =
+        await LocalStorageService.getLocalStorageData(
+      LocalStorageEnum.phoneNumber.name,
+    ) as String;
+
+    _passwordTextEditingController.text =
+        await LocalStorageService.getLocalStorageData(
+      LocalStorageEnum.password.name,
+    ) as String;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        if (_phoneNumberTextEditingController.text != '' &&
+            _passwordTextEditingController.text != '') {
+          _rememberPassword = true;
+        }
+      });
+    });
+  }
+
   void _onPressedRegisterButton(bool isShipper) {
     context.router.pushWidget(RegisterScreen(isShipper: isShipper));
   }
 
   @override
   void initState() {
-    context.read<AppConfigBloc>().add(OnLoadAppConfigEvent());
+    _initLocalStorageValues();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await FirebaseMessageService(context).initNotifications();
-    });
+    context.read<AppConfigBloc>().add(OnLoadAppConfigEvent());
 
     super.initState();
   }
@@ -153,54 +221,58 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   50.verticalSpace,
-                  BlocBuilder<AppConfigBloc, AppConfigState>(
-                    builder: (context, state) {
-                      AppConfig? appConfig =
-                          context.read<AppConfigBloc>().appConfig;
+                  Flexible(
+                    child: BlocBuilder<AppConfigBloc, AppConfigState>(
+                      builder: (context, state) {
+                        AppConfig? appConfig =
+                            context.read<AppConfigBloc>().appConfig;
 
-                      if (state is AppConfigLoadingState) {
-                        return UiRender.loadingCircle(context);
-                      } else if (state is AppConfigLoadState) {
-                        appConfig = state.appConfig;
-                      }
+                        if (state is AppConfigLoadingState) {
+                          return UiRender.loadingCircle(context);
+                        } else if (state is AppConfigLoadState) {
+                          appConfig = state.appConfig;
+                        }
 
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            appConfig?.slogan ?? 'UNDEFINED',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18.size,
-                              color: Theme.of(context).colorScheme.primary,
+                        return Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              appConfig?.slogan ?? 'UNDEFINED',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: 18.size,
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
                             ),
-                          ),
-                          10.verticalSpace,
-                          Text(
-                            'Hotline: ${appConfig?.hotline}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15.size,
-                              color: Theme.of(context).colorScheme.onPrimary,
+                            10.verticalSpace,
+                            Text(
+                              'Hotline: ${appConfig?.hotline}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15.size,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
-                          ),
-                          10.verticalSpace,
-                          Text(
-                            'Email: ${appConfig?.email}',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15.size,
-                              color: Theme.of(context).colorScheme.onPrimary,
+                            10.verticalSpace,
+                            Text(
+                              'Email: ${appConfig?.email}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15.size,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
-                          ),
-                        ],
-                      );
-                    },
+                          ],
+                        );
+                      },
+                    ),
                   ),
                   20.verticalSpace,
-                  Image.asset('assets/images/LoGo.png'),
+                  Flexible(
+                    child: Image.asset('assets/images/LoGo.png'),
+                  ),
                   20.verticalSpace,
                   _customTextField(
                     controller: _phoneNumberTextEditingController,
@@ -214,6 +286,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     isPassword: true,
                     isObscure: _isPasswordObscure,
                   ),
+                  10.verticalSpace,
+                  _rememberPasswordCheckBox('Ghi nhớ mật khẩu'),
+                  10.verticalSpace,
                   GradientElevatedButton(
                     text: 'Đăng nhập',
                     buttonHeight: 50.height,
@@ -302,6 +377,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
         ],
       ),
+    );
+  }
+
+  Widget _rememberPasswordCheckBox(String content) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 24.width,
+          height: 24.height,
+          child: Checkbox(
+            activeColor: Theme.of(context).colorScheme.secondary,
+            checkColor: Theme.of(context).colorScheme.primary,
+            value: _rememberPassword,
+            onChanged: _onChangeRememberPasswordCheckbox,
+          ),
+        ),
+        Text(
+          ' $content',
+          style: TextStyle(
+            fontWeight: FontWeight.w400,
+            fontSize: 15.size,
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
+        )
+      ],
     );
   }
 }

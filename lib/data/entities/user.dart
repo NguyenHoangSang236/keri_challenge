@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:keri_challenge/core/converter/geopoint_converter.dart';
 import 'package:keri_challenge/core/converter/timestamp_converter.dart';
 
 part 'user.g.dart';
@@ -16,6 +17,8 @@ class User {
   String password;
   double? distance;
   String? status;
+  @GeoPointConverter()
+  GeoPoint? currentLocation;
   bool isOnline;
   @TimestampConverter()
   DateTime registerDate;
@@ -29,6 +32,7 @@ class User {
     required this.sex,
     required this.isOnline,
     this.distance,
+    this.currentLocation,
     this.status,
     required this.role,
     required this.address,
@@ -44,6 +48,6 @@ class User {
 
   @override
   String toString() {
-    return '{phoneNumber: $phoneNumber, fullName: $fullName, birthYear: $birthYear, sex: $sex, address: $address, idCertificateNumber: $idCertificateNumber, password: $password, distance: $distance, status: $status, isOnline: $isOnline, registerDate: $registerDate, role: $role, phoneFcmToken: $phoneFcmToken}';
+    return '{phoneNumber: $phoneNumber, fullName: $fullName, birthYear: $birthYear, sex: $sex, address: $address, idCertificateNumber: $idCertificateNumber, password: $password, distance: $distance, status: $status, currentLocation: $currentLocation, isOnline: $isOnline, registerDate: $registerDate, role: $role, phoneFcmToken: $phoneFcmToken}';
   }
 }

@@ -41,6 +41,22 @@
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+<!--        <queries>-->
+<!--            &lt;!&ndash; If your app checks for SMS support &ndash;&gt;-->
+<!--            <intent>-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+<!--                <data android:scheme="sms" />-->
+<!--            </intent>-->
+<!--            &lt;!&ndash; If your app checks for call support &ndash;&gt;-->
+<!--            <intent>-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+<!--                <data android:scheme="tel" />-->
+<!--            </intent>-->
+<!--            &lt;!&ndash; If your application checks for inAppBrowserView launch mode support &ndash;&gt;-->
+<!--            <intent>-->
+<!--                <action android:name="android.support.customtabs.action.CustomTabsService" />-->
+<!--            </intent>-->
+<!--        </queries>-->
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

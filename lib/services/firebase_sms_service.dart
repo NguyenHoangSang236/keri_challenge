@@ -9,8 +9,7 @@ class FirebaseSmsService {
     await auth.verifyPhoneNumber(
       phoneNumber: phoneNumber.formatPhoneNumber,
       verificationCompleted: (PhoneAuthCredential credential) async {
-        print('@@@ verificationCompleted');
-        print('Done!');
+        print('Verification done!');
       },
       verificationFailed: (FirebaseAuthException e) {
         // print('@@@ verificationFailed');

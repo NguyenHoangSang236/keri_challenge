@@ -40,6 +40,24 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
       }
     });
 
+    on<OnLogoutEvent>((event, emit) async {
+      // await LocalStorageService.removeLocalStorageData(
+      //   LocalStorageEnum.phoneNumber.name,
+      // );
+      //
+      // await LocalStorageService.removeLocalStorageData(
+      //   LocalStorageEnum.password.name,
+      // );
+      //
+      // await LocalStorageService.removeLocalStorageData(
+      //   LocalStorageEnum.rememberLogin.name,
+      // );
+
+      currentUser = null;
+
+      emit(AuthorLoggedOutState());
+    });
+
     on<OnRegisterEvent>((event, emit) async {
       emit(AuthorLoadingState());
 

@@ -60,9 +60,6 @@ class OrderRepository {
           newId = querySnap.docs.isNotEmpty
               ? (querySnap.docs.first.data()['id'] as int)
               : 0;
-
-          print('@@@--');
-          print(newId);
         },
         onError: (e) => debugPrint("Error getting document list: $e"),
       );

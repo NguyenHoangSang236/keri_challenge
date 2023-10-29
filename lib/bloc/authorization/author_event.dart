@@ -25,3 +25,5 @@ class OnRegisterEvent extends AuthorEvent {
 
   const OnRegisterEvent(this.newUser);
 }
+
+class OnLogoutEvent extends AuthorEvent {}

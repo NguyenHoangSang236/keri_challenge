@@ -13,6 +13,8 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       sex: json['sex'] as String,
       isOnline: json['isOnline'] as bool,
       distance: (json['distance'] as num?)?.toDouble(),
+      currentLocation: _$JsonConverterFromJson<GeoPoint, GeoPoint>(
+          json['currentLocation'], const GeoPointConverter().fromJson),
       status: json['status'] as String?,
       role: json['role'] as String,
       address: json['address'] as String?,
@@ -33,8 +35,22 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'password': instance.password,
       'distance': instance.distance,
       'status': instance.status,
+      'currentLocation': _$JsonConverterToJson<GeoPoint, GeoPoint>(
+          instance.currentLocation, const GeoPointConverter().toJson),
       'isOnline': instance.isOnline,
       'registerDate': const TimestampConverter().toJson(instance.registerDate),
       'role': instance.role,
       'phoneFcmToken': instance.phoneFcmToken,
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) =>
+    json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) =>
+    value == null ? null : toJson(value);

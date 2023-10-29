@@ -39,15 +39,19 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
   double distance = 0;
 
   void _onPressShipperBookingButton() {
-    context.router.pushNamed(AppRouterPath.onlineShipperList);
+    // context.router.pushNamed(AppRouterPath.onlineShipperList);
 
-    // if (_clientIndexFormKey.currentState!.validate()) {
-    //   UiRender.showDialog(
-    //     context,
-    //     '',
-    //     '${_fromLocationController.text}\n${_toLocationController.text}\n${_receiverController.text}\n${_phoneNumberController.text}\n${_codController.text}\n${_fromLocationController.text}\n${_noteController.text}\n',
-    //   );
-    // }
+    if (_clientIndexFormKey.currentState!.validate()) {
+      UiRender.showConfirmDialog(
+        context,
+        'Thông tin đơn hàng của bạn',
+        '${_fromLocationController.text}\n${_toLocationController.text}\n${_receiverController.text}\n${_phoneNumberController.text}\n${_codController.text}\n${_fromLocationController.text}\n${_noteController.text}\n',
+      ).then((value) {
+        if (value) {
+          context.router.pushNamed(AppRouterPath.onlineShipperList);
+        }
+      });
+    }
   }
 
   void _onPressSelectLocation() {

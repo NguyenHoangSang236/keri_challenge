@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:dropdown_button3/dropdown_button3.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/router/app_router_path.dart';
 
@@ -27,6 +29,17 @@ class _LayoutState extends State<Layout> {
     AppRouterPath.login
   ];
   final List<String> _clientRouteNameList = ['Trang chủ', 'Đăng xuất'];
+
+  void _onChangePage(String? path) {
+    if (path != null && path.isNotEmpty) {
+      if (path == AppRouterPath.clientIndex) {
+        context.router.pushNamed(path);
+      } else if (path == AppRouterPath.login) {
+        context.read<AuthorBloc>().add(OnLogoutEvent());
+        context.router.pushNamed(path);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +83,7 @@ class _LayoutState extends State<Layout> {
                   child: Text(_clientRouteNameList[index]),
                 ),
               ),
-              onChanged: (value) {
-                print(value);
-              },
+              onChanged: _onChangePage,
               dropdownPadding: const EdgeInsets.symmetric(vertical: 6),
               dropdownWidth: 160.width,
               dropdownDecoration: BoxDecoration(

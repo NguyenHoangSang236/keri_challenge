@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import '../../data/entities/user.dart';
 import '../../view/screens/account_list_screen.dart';
 import '../../view/screens/client_index_screen.dart';
+import '../../view/screens/initial_loading_screen.dart';
 import '../../view/screens/login_screen.dart';
 import '../../view/screens/map_screen.dart';
 import '../../view/screens/online_shipper_list_screen.dart';
@@ -31,7 +32,6 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: LoginRoute.page,
           path: AppRouterPath.login,
-          initial: true,
         ),
         AutoRoute(
           page: SearchingRoute.page,
@@ -52,6 +52,11 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: OnlineShipperRoute.page,
           path: AppRouterPath.onlineShipperList,
+        ),
+        AutoRoute(
+          page: InitialLoadingRoute.page,
+          path: AppRouterPath.initialLoading,
+          initial: true,
         ),
       ];
 }

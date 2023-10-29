@@ -23,6 +23,11 @@ class AuthorLoggedInState extends AuthorState {
   List<Object?> get props => [user];
 }
 
+class AuthorLoggedOutState extends AuthorState {
+  @override
+  List<Object?> get props => [];
+}
+
 class AuthorRegisteredState extends AuthorState {
   final String message;
 

@@ -65,10 +65,6 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
 
       try {
         /// for production
-
-        print('@@@');
-        print(event.prediction.placeId);
-
         final response = await _googleMapRepository.getDetailsByPlaceId(
           event.prediction.placeId!,
         );

@@ -39,7 +39,7 @@ class _SearchingScreenState extends State<SearchingScreen> {
             border: InputBorder.none,
           ),
           onChanged: (text) {
-            if (text.isNotEmpty) {
+            if (text.trim().isNotEmpty) {
               BlocProvider.of<GoogleMapBloc>(context).add(
                 OnLoadPredictionsEvent(text),
               );
