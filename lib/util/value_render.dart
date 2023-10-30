@@ -1,11 +1,15 @@
 import 'dart:math';
 
+import '../data/entities/user.dart';
+
 class ValueRender {
   ValueRender._();
 
   static final instance = ValueRender._();
 
   String? verificationId;
+
+  static User? currentUser;
 
   static String randomPhoneNumber() {
     const chars = '1234567890';
