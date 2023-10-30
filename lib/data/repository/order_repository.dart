@@ -1,9 +1,12 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:keri_challenge/data/enum/ship_status_enum.dart';
 
 import '../../core/failure/failure.dart';
 import '../../main.dart';
+import '../../services/firebase_database_service.dart';
 import '../entities/order.dart';
+import '../enum/firestore_enum.dart';
 
 class OrderRepository {
   Future<Either<Failure, List<Order>>> getOrderList({
@@ -91,6 +94,67 @@ class OrderRepository {
     } catch (e, stackTrace) {
       debugPrint(
         'Caught getting order list from firestore error: ${e.toString()} \n${stackTrace.toString()}',
+      );
+      return Left(ExceptionFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, Order>> getShippingOrder(
+    String shipperPhoneNumber,
+  ) async {
+    try {
+      final docRef = fireStore
+          .collection('orders')
+          .orderBy('id', descending: false)
+          .where('shipperPhoneNumber', isEqualTo: shipperPhoneNumber)
+          .where('status', isEqualTo: ShipStatusEnum.shipping.name)
+          .limit(1);
+
+      Order? shippingOrder;
+
+      await docRef.get().then(
+        (querySnap) {
+          if (querySnap.docs.isNotEmpty) {
+            shippingOrder = Order.fromJson(querySnap.docs.first.data());
+          }
+        },
+        onError: (e) => debugPrint("Error getting document list: $e"),
+      );
+
+      if (shippingOrder != null) {
+        return Right(shippingOrder!);
+      } else {
+        return const Left(ExceptionFailure('Không có dữ liêụ'));
+      }
+    } catch (e, stackTrace) {
+      debugPrint(
+        'Caught getting shipping order error: ${e.toString()} \n${stackTrace.toString()}',
+      );
+      return Left(ExceptionFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, String>> updateOrder(
+    Map<String, dynamic> data,
+    String orderId,
+  ) async {
+    String result = '';
+
+    try {
+      await FirebaseDatabaseService.updateData(
+        data: data,
+        collection: FireStoreCollectionEnum.orders.name,
+        document: orderId,
+      ).then(
+        (value) {
+          result = 'Update order successfully';
+        },
+      );
+
+      return Right(result);
+    } catch (e, stackTrace) {
+      debugPrint(
+        'Caught updating order error: ${e.toString()} \n${stackTrace.toString()}',
       );
       return Left(ExceptionFailure(e.toString()));
     }

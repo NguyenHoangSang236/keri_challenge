@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -6,9 +7,10 @@ import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
-import 'package:keri_challenge/core/extension/latLng_extenstion.dart';
+import 'package:keri_challenge/core/extension/latLng_extension.dart';
 import 'package:keri_challenge/core/extension/pointLatLng_extension.dart';
 import 'package:keri_challenge/core/extension/position_extension.dart';
+import 'package:keri_challenge/data/repository/account_repository.dart';
 import 'package:keri_challenge/services/firebase_message_service.dart';
 
 import '../../data/entities/user.dart';
@@ -32,6 +34,7 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
       Prediction(description: 'Tìm điểm đến...');
   PointLatLng? currentSelectedFromPointLatLng;
   PointLatLng? currentSelectedToPointLatLng;
+  PointLatLng? currentPointLatLng;
 
   /// for test
   PointLatLng testPoint1 =
@@ -161,6 +164,47 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
       emit(GoogleMapDistanceCalculatedState(distance));
     });
 
+    on<OnLoadCurrentLocationEvent>((event, emit) async {
+      emit(GoogleMapLoadingState());
+
+      try {
+        await Geolocator.requestPermission()
+            .then((value) {})
+            .onError((error, stackTrace) async {
+          await Geolocator.requestPermission();
+          debugPrint("ERROR: $error");
+        });
+
+        final Position pos = await Geolocator.getCurrentPosition();
+
+        currentPointLatLng = pos.toPointLatLng;
+
+        if (currentPointLatLng != null) {
+          final response = await AccountRepository().updateUser(
+            {
+              'currentLocation': GeoPoint(
+                currentPointLatLng!.latitude,
+                currentPointLatLng!.longitude,
+              )
+            },
+            event.phoneNumber,
+          );
+
+          response.fold(
+            (failure) => emit(GoogleMapErrorState(failure.message)),
+            (success) => emit(GoogleMapCurrentLocationLoadedState(pos)),
+          );
+        } else {
+          emit(GoogleMapErrorState(
+            'Không thể lấy địa điểm hiện tại của bạn, hãy kiểm tra xem bạn đã kết nối mạng, mở truy cập định vị chưa và đã cho phép ứng dụng quyền truy cập vị trí chưa',
+          ));
+        }
+      } catch (e, stackTrace) {
+        debugPrint('Catch error: ${e.toString()} \n ${stackTrace.toString()}');
+        emit(GoogleMapErrorState(e.toString()));
+      }
+    });
+
     on<OnLoadDefaultLocationEvent>((event, emit) async {
       List<Placemark> addresses = await placemarkFromCoordinates(
         event.currentPosition.latitude,
@@ -181,6 +225,8 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
         );
         currentSelectedToPointLatLng = event.currentPosition.toPointLatLng;
       }
+
+      currentPointLatLng = event.currentPosition.toPointLatLng;
 
       emit(GoogleMapNewLocationLoadedState(
         event.currentPosition.toLatLng,
@@ -252,6 +298,37 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
         event.description,
         event.latLng,
       ));
+    });
+
+    on<OnLoadOrderRouteEvent>((event, emit) {
+      currentSelectedFromPrediction = Prediction(
+        description: event.fromDescription,
+      );
+      currentSelectedToPrediction = Prediction(
+        description: event.toDescription,
+      );
+      currentSelectedFromPointLatLng = event.fromLatLng.toPointLatLng;
+      currentSelectedToPointLatLng = event.toLatLng.toPointLatLng;
+
+      emit(
+        GoogleMapOrderDirectionLoadedState(
+          event.fromLatLng,
+          event.toLatLng,
+          event.fromDescription,
+          event.toDescription,
+        ),
+      );
+    });
+
+    on<OnClearMapEvent>((event, emit) {
+      selectedPhoneTokenFromMessage;
+      predictionList.clear();
+      distance = 0;
+      currentSelectedFromPrediction = Prediction(description: 'Tìm điểm đi...');
+      currentSelectedToPrediction = Prediction(description: 'Tìm điểm đến...');
+      currentSelectedFromPointLatLng = null;
+      currentSelectedToPointLatLng = null;
+      currentPointLatLng = null;
     });
   }
 }

@@ -55,10 +55,35 @@ class OrderAddedState extends OrderState {
   List<Object?> get props => [message];
 }
 
+class OrderUpdatedState extends OrderState {
+  final String message;
+
+  const OrderUpdatedState(this.message);
+  @override
+  List<Object?> get props => [message];
+}
+
 class OrderErrorState extends OrderState {
   final String message;
 
   const OrderErrorState(this.message);
+  @override
+  List<Object?> get props => [message];
+}
+
+class ShippingOrderLoadedState extends OrderState {
+  final Order shippingOrder;
+
+  const ShippingOrderLoadedState(this.shippingOrder);
+
+  @override
+  List<Object> get props => [shippingOrder];
+}
+
+class OrderForwardedState extends OrderState {
+  final String message;
+
+  const OrderForwardedState(this.message);
   @override
   List<Object?> get props => [message];
 }

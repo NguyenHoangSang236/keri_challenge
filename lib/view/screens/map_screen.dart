@@ -10,7 +10,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
 import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
-import 'package:keri_challenge/core/extension/latLng_extenstion.dart';
+import 'package:keri_challenge/core/extension/latLng_extension.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/extension/pointLatLng_extension.dart';
 import 'package:keri_challenge/core/extension/position_extension.dart';
@@ -153,7 +153,19 @@ class _MapState extends State<MapScreen> {
     );
   }
 
-  void addMarkerAndAnimateCameraToPosition({
+  void animateCameraToPosition(LatLng latLng) async {
+    CameraPosition cameraPosition = CameraPosition(
+      target: latLng,
+      zoom: 14,
+    );
+
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(
+      CameraUpdate.newCameraPosition(cameraPosition),
+    );
+  }
+
+  void addMarkerOnMap({
     required LatLng latLng,
     bool isFromLocation = true,
   }) async {
@@ -168,16 +180,15 @@ class _MapState extends State<MapScreen> {
         ),
       );
     });
+  }
 
-    CameraPosition cameraPosition = CameraPosition(
-      target: latLng,
-      zoom: 14,
-    );
+  void addMarkerAndAnimateCameraToPosition({
+    required LatLng latLng,
+    bool isFromLocation = true,
+  }) async {
+    addMarkerOnMap(latLng: latLng, isFromLocation: isFromLocation);
 
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(
-      CameraUpdate.newCameraPosition(cameraPosition),
-    );
+    animateCameraToPosition(latLng);
   }
 
   void onPressShowDirectionButton() {
@@ -317,9 +328,15 @@ class _MapState extends State<MapScreen> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      currentPosition = await getUserCurrentLocation();
-    });
+    context.read<GoogleMapBloc>().add(
+          OnLoadCurrentLocationEvent(
+            context.read<AuthorBloc>().currentUser!.phoneNumber,
+          ),
+        );
+
+    // WidgetsBinding.instance.addPostFrameCallback((_) async {
+    //   currentPosition = await getUserCurrentLocation();
+    // });
 
     super.initState();
   }
@@ -414,13 +431,19 @@ class _MapState extends State<MapScreen> {
                       latLng: state.latLng,
                       isFromLocation: state.isFromLocation,
                     );
+                  } else if (state is GoogleMapCurrentLocationLoadedState) {
+                    setState(() {
+                      currentPosition = state.currentPosition;
+
+                      animateCameraToPosition(currentPosition.toLatLng);
+                    });
                   } else if (state is GoogleMapLocationClearedState) {
                     clearMarker(state.isFromLocation);
                   } else if (state is GoogleMapMessageSentBackState) {
                     UiRender.showSnackBar(context, state.message);
                   } else if (state
                       is GoogleMapDirectionFromPublicMessageLoadedState) {
-                    addMarkerAndAnimateCameraToPosition(
+                    addMarkerOnMap(
                       latLng: state.fromLatLng,
                       isFromLocation: true,
                     );
@@ -460,6 +483,22 @@ class _MapState extends State<MapScreen> {
                     onPressPinLocationButton(false);
                   } else if (state is GoogleMapErrorState) {
                     UiRender.showDialog(context, 'Error', state.message);
+                  } else if (state is GoogleMapOrderDirectionLoadedState) {
+                    addMarkerAndAnimateCameraToPosition(
+                      latLng: state.fromLatLng,
+                      isFromLocation: true,
+                    );
+
+                    addMarkerAndAnimateCameraToPosition(
+                      latLng: state.toLatLng,
+                      isFromLocation: false,
+                    );
+
+                    showDirection(
+                      start: state.fromLatLng.toPointLatLng,
+                      end: state.toLatLng.toPointLatLng,
+                      needMessage: false,
+                    );
                   }
                 },
                 builder: (context, state) {
@@ -505,6 +544,10 @@ class _MapState extends State<MapScreen> {
                     if (!isFromLocation) {
                       currentLocation = state.description;
                     }
+                  } else if (state is GoogleMapOrderDirectionLoadedState) {
+                    currentLocation = isFromLocation
+                        ? state.fromDescription
+                        : state.toDescription;
                   }
 
                   return Text(

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../bloc/appConfig/app_config_bloc.dart';
 import '../../bloc/authorization/author_bloc.dart';
+import '../../bloc/google_map/google_map_bloc.dart';
 import '../../core/router/app_router_path.dart';
 import '../../data/enum/local_storage_enum.dart';
 import '../../services/firebase_message_service.dart';
@@ -62,6 +63,11 @@ class _InitialLoadingState extends State<InitialLoadingScreen> {
                   if (authenState.user.role == 'client') {
                     context.router.pushNamed(AppRouterPath.clientIndex);
                   } else if (authenState.user.role == 'shipper') {
+                    context.read<GoogleMapBloc>().add(
+                          OnLoadCurrentLocationEvent(
+                              authenState.user.phoneNumber),
+                        );
+                    context.router.pushNamed(AppRouterPath.shipperIndex);
                   } else if (authenState.user.role == 'admin') {}
                 } else if (authenState is AuthorErrorState) {
                   context.router.replaceNamed(AppRouterPath.login);

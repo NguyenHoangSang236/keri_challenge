@@ -15,6 +15,12 @@ class OnLoadOrderListEvent extends OrderEvent {
   OnLoadOrderListEvent(this.senderPhoneNumber, this.limit, this.page);
 }
 
+class OnLoadShippingOrderEvent extends OrderEvent {
+  final String shipperPhoneNumber;
+
+  OnLoadShippingOrderEvent(this.shipperPhoneNumber);
+}
+
 class OnAddNewOrderEvent extends OrderEvent {
   final Order newOrder;
 
@@ -32,3 +38,18 @@ class OnSearchOrderByPhoneNumberEvent extends OrderEvent {
 
   OnSearchOrderByPhoneNumberEvent(this.phoneNumber);
 }
+
+class OnForwardOrderEvent extends OrderEvent {
+  final String shipperPhoneNumber;
+
+  OnForwardOrderEvent(this.shipperPhoneNumber);
+}
+
+class OnUpdateOrderEvent extends OrderEvent {
+  final String doc;
+  final Map<String, dynamic> data;
+
+  OnUpdateOrderEvent(this.doc, this.data);
+}
+
+class OnClearOrderEvent extends OrderEvent {}

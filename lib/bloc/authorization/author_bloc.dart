@@ -5,6 +5,7 @@ import 'package:keri_challenge/data/entities/user.dart';
 import 'package:keri_challenge/data/enum/firestore_enum.dart';
 import 'package:keri_challenge/data/repository/account_repository.dart';
 import 'package:keri_challenge/services/local_storage_service.dart';
+import 'package:keri_challenge/util/value_render.dart';
 
 import '../../data/enum/local_storage_enum.dart';
 import '../../services/firebase_database_service.dart';
@@ -28,8 +29,11 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
 
         response.fold(
           (failure) => emit(AuthorErrorState(failure.message)),
-          (user) {
+          (user) async {
             currentUser = user;
+
+            ValueRender.currentUser = user;
+
             emit(AuthorLoggedInState(currentUser!));
           },
         );
@@ -41,19 +45,9 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
     });
 
     on<OnLogoutEvent>((event, emit) async {
-      // await LocalStorageService.removeLocalStorageData(
-      //   LocalStorageEnum.phoneNumber.name,
-      // );
-      //
-      // await LocalStorageService.removeLocalStorageData(
-      //   LocalStorageEnum.password.name,
-      // );
-      //
-      // await LocalStorageService.removeLocalStorageData(
-      //   LocalStorageEnum.rememberLogin.name,
-      // );
-
       currentUser = null;
+
+      ValueRender.currentUser = null;
 
       emit(AuthorLoggedOutState());
     });

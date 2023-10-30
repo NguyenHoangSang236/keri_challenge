@@ -74,3 +74,25 @@ class OnLoadLocationFromPrivateMessageEvent extends GoogleMapEvent {
 
   OnLoadLocationFromPrivateMessageEvent(this.description, this.latLng);
 }
+
+class OnLoadCurrentLocationEvent extends GoogleMapEvent {
+  final String phoneNumber;
+
+  OnLoadCurrentLocationEvent(this.phoneNumber);
+}
+
+class OnLoadOrderRouteEvent extends GoogleMapEvent {
+  final String fromDescription;
+  final String toDescription;
+  final LatLng fromLatLng;
+  final LatLng toLatLng;
+
+  OnLoadOrderRouteEvent(
+    this.fromDescription,
+    this.toDescription,
+    this.fromLatLng,
+    this.toLatLng,
+  );
+}
+
+class OnClearMapEvent extends GoogleMapEvent {}

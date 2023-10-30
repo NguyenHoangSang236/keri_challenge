@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
+import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
+import 'package:keri_challenge/bloc/order/order_bloc.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
+import 'package:keri_challenge/core/router/app_router_config.dart';
 import 'package:keri_challenge/core/router/app_router_path.dart';
 
 class Layout extends StatefulWidget {
@@ -35,8 +38,10 @@ class _LayoutState extends State<Layout> {
       if (path == AppRouterPath.clientIndex) {
         context.router.pushNamed(path);
       } else if (path == AppRouterPath.login) {
+        context.read<GoogleMapBloc>().add(OnClearMapEvent());
+        context.read<OrderBloc>().add(OnClearOrderEvent());
         context.read<AuthorBloc>().add(OnLogoutEvent());
-        context.router.pushNamed(path);
+        context.router.replaceAll([const LoginRoute()]);
       }
     }
   }

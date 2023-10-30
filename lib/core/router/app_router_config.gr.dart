@@ -82,6 +82,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    ShipperIndexRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ShipperIndexScreen(),
+      );
+    },
   };
 }
 
@@ -281,4 +287,18 @@ class SearchingRouteArgs {
   String toString() {
     return 'SearchingRouteArgs{key: $key, isFromLocation: $isFromLocation}';
   }
+}
+
+/// generated route for
+/// [ShipperIndexScreen]
+class ShipperIndexRoute extends PageRouteInfo<void> {
+  const ShipperIndexRoute({List<PageRouteInfo>? children})
+      : super(
+          ShipperIndexRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ShipperIndexRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }

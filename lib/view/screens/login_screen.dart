@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
+import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/router/app_router_path.dart';
 import 'package:keri_challenge/data/entities/app_config.dart';
@@ -208,6 +209,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 if (state.user.role == 'client') {
                   context.router.pushNamed(AppRouterPath.clientIndex);
                 } else if (state.user.role == 'shipper') {
+                  context.read<GoogleMapBloc>().add(
+                        OnLoadCurrentLocationEvent(state.user.phoneNumber),
+                      );
+                  context.router.pushNamed(AppRouterPath.shipperIndex);
                 } else if (state.user.role == 'admin') {}
               } else if (state is AuthorErrorState) {
                 UiRender.showSnackBar(context, state.message);

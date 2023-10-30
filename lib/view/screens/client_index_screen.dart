@@ -7,8 +7,10 @@ import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/bloc/order/order_bloc.dart';
 import 'package:keri_challenge/core/extension/datetime_extension.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
+import 'package:keri_challenge/core/extension/pointLatLng_extension.dart';
 import 'package:keri_challenge/core/router/app_router_path.dart';
 import 'package:keri_challenge/data/entities/order.dart';
+import 'package:keri_challenge/data/enum/ship_status_enum.dart';
 import 'package:keri_challenge/util/ui_render.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/components/layout.dart';
@@ -48,6 +50,36 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
         '${_fromLocationController.text}\n${_toLocationController.text}\n${_receiverController.text}\n${_phoneNumberController.text}\n${_codController.text}\n${_fromLocationController.text}\n${_noteController.text}\n',
       ).then((value) {
         if (value) {
+          context.read<OrderBloc>().add(
+                OnAddNewOrderEvent(
+                  Order(
+                    id: 0,
+                    distance: distance,
+                    price: context.read<AppConfigBloc>().appConfig!.pricePerKm *
+                        distance,
+                    fromLocationGeoPoint: context
+                        .read<GoogleMapBloc>()
+                        .currentSelectedFromPointLatLng!
+                        .toGeoPoint,
+                    toLocationGeoPoint: context
+                        .read<GoogleMapBloc>()
+                        .currentSelectedToPointLatLng!
+                        .toGeoPoint,
+                    packageName: _packageNameController.text,
+                    cod: _codController.text,
+                    noteForShipper: _noteController.text,
+                    fromLocation: _fromLocationController.text,
+                    toLocation: _toLocationController.text,
+                    senderPhoneNumber:
+                        context.read<AuthorBloc>().currentUser!.phoneNumber,
+                    receiverPhoneNumber: _phoneNumberController.text,
+                    receiverName: _receiverController.text,
+                    status: ShipStatusEnum.shipper_waiting.name,
+                    orderDate: DateTime.now(),
+                  ),
+                ),
+              );
+
           context.router.pushNamed(AppRouterPath.onlineShipperList);
         }
       });
@@ -100,11 +132,13 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
   };
 
   String _covertShippingStatus(String status) {
-    return status == 'shipping'
+    return status == ShipStatusEnum.shipping.name
         ? 'Đang giao'
-        : status == 'shipped'
+        : status == ShipStatusEnum.shipped.name
             ? 'Đã giao'
-            : 'Không xác định';
+            : status == ShipStatusEnum.shipper_waiting.name
+                ? 'Đợi shipper'
+                : 'Không xác định';
   }
 
   @override
@@ -127,18 +161,6 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
             1,
           ),
         );
-
-    // context.read<OrderBloc>().add(OnAddNewOrderEvent(Order(
-    //     0,
-    //     3,
-    //     30000,
-    //     'ABC',
-    //     'XYZ',
-    //     '0123456789',
-    //     '0212456789',
-    //     'Test user',
-    //     'shipping',
-    //     DateTime.now())));
 
     super.initState();
   }

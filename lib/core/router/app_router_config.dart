@@ -11,6 +11,7 @@ import '../../view/screens/online_shipper_list_screen.dart';
 import '../../view/screens/phone_verification_screen.dart';
 import '../../view/screens/register_screen.dart';
 import '../../view/screens/searching_screen.dart';
+import '../../view/screens/shipper_index_screen.dart';
 import 'app_router_path.dart';
 
 part 'app_router_config.gr.dart';
@@ -21,6 +22,11 @@ class AppRouter extends _$AppRouter {
 
   @override
   List<AutoRoute> get routes => [
+        AutoRoute(
+          page: InitialLoadingRoute.page,
+          path: AppRouterPath.initialLoading,
+          initial: true,
+        ),
         AutoRoute(
           page: MapRoute.page,
           path: AppRouterPath.googleMap,
@@ -54,9 +60,8 @@ class AppRouter extends _$AppRouter {
           path: AppRouterPath.onlineShipperList,
         ),
         AutoRoute(
-          page: InitialLoadingRoute.page,
-          path: AppRouterPath.initialLoading,
-          initial: true,
+          page: ShipperIndexRoute.page,
+          path: AppRouterPath.shipperIndex,
         ),
       ];
 }

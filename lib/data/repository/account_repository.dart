@@ -43,10 +43,46 @@ class AccountRepository {
       });
 
       if (user != null) {
+        String? rememberPass = await LocalStorageService.getLocalStorageData(
+            LocalStorageEnum.rememberLogin.name) as String?;
+
+        if (rememberPass != null && rememberPass == 'true') {
+          LocalStorageService.setLocalStorageData(
+            LocalStorageEnum.phoneNumber.name,
+            user!.phoneNumber,
+          );
+          LocalStorageService.setLocalStorageData(
+            LocalStorageEnum.password.name,
+            user!.password,
+          );
+        }
+
         return Right(user!);
       } else {
         return const Left(ApiFailure('Tài khoản này không tồn tại'));
       }
+    } catch (e, stackTrace) {
+      debugPrint(
+        'Caught login error: ${e.toString()} \n${stackTrace.toString()}',
+      );
+      return Left(ExceptionFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, String>> updateUser(
+    Map<String, dynamic> data,
+    String phoneNumber,
+  ) async {
+    String result = '';
+
+    try {
+      await FirebaseDatabaseService.updateData(
+        data: data,
+        collection: FireStoreCollectionEnum.users.name,
+        document: phoneNumber,
+      ).then((value) => result = 'Update user successfully');
+
+      return Right(result);
     } catch (e, stackTrace) {
       debugPrint(
         'Caught login error: ${e.toString()} \n${stackTrace.toString()}',
