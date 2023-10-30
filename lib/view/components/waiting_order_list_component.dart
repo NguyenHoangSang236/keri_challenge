@@ -1,59 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:keri_challenge/bloc/order/order_bloc.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-import '../../data/entities/user.dart';
+import '../../data/entities/order.dart';
 
-class ShipperListComponent extends StatefulWidget {
-  const ShipperListComponent({super.key, required this.shipper});
+class WaitingOrderListComponent extends StatefulWidget {
+  const WaitingOrderListComponent({super.key, required this.order});
 
-  final User shipper;
+  final Order order;
 
   @override
-  State<StatefulWidget> createState() => _ShipperListComponentState();
+  State<StatefulWidget> createState() => _WaitingOrderListComponentState();
 }
 
-class _ShipperListComponentState extends State<ShipperListComponent> {
+class _WaitingOrderListComponentState extends State<WaitingOrderListComponent> {
   bool _isSelected = false;
 
-  void _onSelectShipper(User shipper) {
+  void _onSelectOrder(Order order) {
     setState(() {
       _isSelected = !_isSelected;
     });
   }
 
-  Future<void> _makePhoneCall(String phoneNumber) async {
-    final Uri launchUri = Uri(
-      scheme: 'tel',
-      path: phoneNumber,
-    );
-    await launchUrl(launchUri);
-  }
+  void _acceptOrder(Order order) {}
 
-  void _forwardOrder() {
-    context
-        .read<OrderBloc>()
-        .add(OnForwardOrderEvent(widget.shipper.phoneNumber));
-  }
+  void _refuseOrder(Order order) {}
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _onSelectShipper(widget.shipper),
+      onTap: () => _onSelectOrder(widget.order),
       child: Column(
         children: [
           ListTile(
             title: Text(
-              widget.shipper.fullName,
+              widget.order.packageName,
               style: const TextStyle(
                 fontWeight: FontWeight.w500,
               ),
             ),
-            subtitle: Text(widget.shipper.phoneNumber),
-            trailing: Text('${widget.shipper.distance?.format}km'),
+            subtitle: Text(
+              'SĐT người gửi: ${widget.order.senderPhoneNumber}',
+              maxLines: 2,
+              softWrap: true,
+            ),
+            trailing: Text('${widget.order.distance.format}km'),
           ),
           AnimatedContainer(
             height: _isSelected ? 70.height : 0,
@@ -64,18 +55,20 @@ class _ShipperListComponentState extends State<ShipperListComponent> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 GradientElevatedButton(
-                  text: 'Gọi ngay',
+                  text: 'Nhận đơn',
                   buttonWidth: 150.width,
                   buttonHeight: 40.height,
                   buttonMargin: EdgeInsets.zero,
-                  onPress: () => _makePhoneCall(widget.shipper.phoneNumber),
+                  onPress: () => _acceptOrder(widget.order),
                 ),
                 GradientElevatedButton(
-                  text: 'Chuyển đơn',
+                  text: 'Từ chối',
                   buttonWidth: 150.width,
                   buttonHeight: 40.height,
                   buttonMargin: EdgeInsets.zero,
-                  onPress: () => _forwardOrder,
+                  endColor: Theme.of(context).colorScheme.error,
+                  beginColor: Theme.of(context).colorScheme.error,
+                  onPress: () => _refuseOrder(widget.order),
                 ),
               ],
             ),
