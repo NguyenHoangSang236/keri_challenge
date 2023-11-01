@@ -100,7 +100,8 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
           if (state is OrderErrorState) {
             UiRender.showDialog(context, '', state.message);
           } else if (state is OrderForwardedState) {
-            UiRender.showDialog(context, '', state.message);
+            UiRender.showDialog(context, '', state.message)
+                .then((value) => context.router.pop());
           }
         },
         child: SingleChildScrollView(

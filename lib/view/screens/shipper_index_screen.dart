@@ -5,10 +5,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/bloc/order/order_bloc.dart';
+import 'package:keri_challenge/core/extension/datetime_extension.dart';
 import 'package:keri_challenge/core/extension/geopoint_extension.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/router/app_router_path.dart';
-import 'package:keri_challenge/data/enum/ship_status_enum.dart';
+import 'package:keri_challenge/data/enum/shipper_enum.dart';
 import 'package:keri_challenge/util/ui_render.dart';
 import 'package:keri_challenge/util/value_render.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
@@ -21,7 +22,9 @@ import '../../main.dart';
 
 @RoutePage()
 class ShipperIndexScreen extends StatefulWidget {
-  const ShipperIndexScreen({super.key});
+  const ShipperIndexScreen({super.key, required this.initialTabIndex});
+
+  final int initialTabIndex;
 
   @override
   State<StatefulWidget> createState() => _ShipperIndexScreenState();
@@ -36,11 +39,14 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
   final TextEditingController _packageNameController = TextEditingController();
   final TextEditingController _codController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
-  final TextEditingController _limitController = TextEditingController();
+  final TextEditingController _waitingListLimitController =
+      TextEditingController();
+  final TextEditingController _historyListLimitController =
+      TextEditingController();
 
   Stream<QuerySnapshot> _waitingOrdersStream = fireStore
       .collection('orders')
-      .where('status', isEqualTo: ShipStatusEnum.shipper_waiting.name)
+      .where('status', isEqualTo: ShipperEnum.shipper_waiting.name)
       .where(
         'shipperPhoneNumber',
         isEqualTo: ValueRender.currentUser!.phoneNumber,
@@ -48,15 +54,46 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
       .limit(10)
       .snapshots();
 
-  void _increaseLimit() {
+  void _increaseHistoryListLimit() {
     setState(() {
-      int limit = int.parse(_limitController.text);
+      int limit = int.parse(_historyListLimitController.text);
       limit++;
-      _limitController.text = limit.toString();
+      _historyListLimitController.text = limit.toString();
+
+      context.read<OrderBloc>().add(OnLoadShipperHistoryOrderList(
+            context.read<AuthorBloc>().currentUser!.phoneNumber,
+            limit,
+            1,
+          ));
+    });
+  }
+
+  void _decreaseHistoryListLimit() {
+    setState(() {
+      int limit = int.parse(_historyListLimitController.text);
+
+      if (limit > 1) {
+        limit--;
+        _historyListLimitController.text = limit.toString();
+
+        context.read<OrderBloc>().add(OnLoadShipperHistoryOrderList(
+              context.read<AuthorBloc>().currentUser!.phoneNumber,
+              limit,
+              1,
+            ));
+      }
+    });
+  }
+
+  void _increaseWaitingListLimit() {
+    setState(() {
+      int limit = int.parse(_waitingListLimitController.text);
+      limit++;
+      _waitingListLimitController.text = limit.toString();
 
       _waitingOrdersStream = fireStore
           .collection('orders')
-          .where('status', isEqualTo: ShipStatusEnum.shipper_waiting.name)
+          .where('status', isEqualTo: ShipperEnum.shipper_waiting.name)
           .where(
             'shipperPhoneNumber',
             isEqualTo: context.read<AuthorBloc>().currentUser!.phoneNumber,
@@ -66,17 +103,17 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
     });
   }
 
-  void _decreaseLimit() {
+  void _decreaseWaitingListLimit() {
     setState(() {
-      int limit = int.parse(_limitController.text);
+      int limit = int.parse(_waitingListLimitController.text);
 
       if (limit > 1) {
         limit--;
-        _limitController.text = limit.toString();
+        _waitingListLimitController.text = limit.toString();
 
         _waitingOrdersStream = fireStore
             .collection('orders')
-            .where('status', isEqualTo: ShipStatusEnum.shipper_waiting.name)
+            .where('status', isEqualTo: ShipperEnum.shipper_waiting.name)
             .where(
               'shipperPhoneNumber',
               isEqualTo: context.read<AuthorBloc>().currentUser!.phoneNumber,
@@ -87,23 +124,50 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
     });
   }
 
-  void _onChangeLimit(String value) {
+  void _showOrderInfo(my_order.Order order) {
+    UiRender.showDialog(
+      context,
+      'Thông tin đơn hàng',
+      order.showFullInfo(),
+      textAlign: TextAlign.start,
+    );
+  }
+
+  void _changeWaitingOrderListLimit(String value) {
     setState(() {
       if (value.isNotEmpty) {
         int limit = int.parse(value);
 
         if (limit > 0) {
-          _limitController.text = limit.toString();
+          _waitingListLimitController.text = limit.toString();
 
           _waitingOrdersStream = fireStore
               .collection('orders')
-              .where('status', isEqualTo: ShipStatusEnum.shipper_waiting.name)
+              .where('status', isEqualTo: ShipperEnum.shipper_waiting.name)
               .where(
                 'shipperPhoneNumber',
                 isEqualTo: context.read<AuthorBloc>().currentUser!.phoneNumber,
               )
               .limit(limit)
               .snapshots();
+        }
+      }
+    });
+  }
+
+  void _changeHistoryOrderListLimit(String value) {
+    setState(() {
+      if (value.isNotEmpty) {
+        int limit = int.parse(value);
+
+        if (limit > 0) {
+          _historyListLimitController.text = limit.toString();
+
+          context.read<OrderBloc>().add(OnLoadShipperHistoryOrderList(
+                context.read<AuthorBloc>().currentUser!.phoneNumber,
+                limit,
+                1,
+              ));
         }
       }
     });
@@ -120,16 +184,10 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
     context.router.pushNamed(AppRouterPath.googleMap);
   }
 
-  void _confirmFinishShipping(int id, String senderPhoneNumber) {
-    context.read<OrderBloc>().add(
-          OnUpdateOrderEvent(
-            '$senderPhoneNumber-$id',
-            {
-              'shipDate': DateTime.now(),
-              'status': ShipStatusEnum.shipped.name,
-            },
-          ),
-        );
+  void _confirmFinishShipping(my_order.Order order) {
+    context
+        .read<OrderBloc>()
+        .add(OnFinishShippingOrderEvent(order.getOrderDoc()));
   }
 
   void _reloadShippingOrder() {
@@ -148,17 +206,24 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
           ),
         );
 
-    _limitController.text = '10';
+    _waitingListLimitController.text = '10';
+    _historyListLimitController.text = '10';
 
     _waitingOrdersStream = fireStore
         .collection('orders')
-        .where('status', isEqualTo: ShipStatusEnum.shipper_waiting.name)
+        .where('status', isEqualTo: ShipperEnum.shipper_waiting.name)
         .where(
           'shipperPhoneNumber',
           isEqualTo: context.read<AuthorBloc>().currentUser!.phoneNumber,
         )
         .limit(10)
         .snapshots();
+
+    context.read<OrderBloc>().add(OnLoadShipperHistoryOrderList(
+          context.read<AuthorBloc>().currentUser!.phoneNumber,
+          10,
+          1,
+        ));
 
     super.initState();
   }
@@ -167,11 +232,14 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
   Widget build(BuildContext context) {
     return Layout(
       title: 'Trang chủ',
+      canComeBack: false,
       body: DefaultTabController(
         length: 3,
+        initialIndex: widget.initialTabIndex,
         child: Column(
           children: [
             TabBar(
+              unselectedLabelColor: Theme.of(context).colorScheme.tertiary,
               tabAlignment: TabAlignment.fill,
               padding: EdgeInsets.symmetric(
                 vertical: 5.height,
@@ -187,7 +255,7 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
                   child: const Expanded(
                     child: Text(
                       "Đang giao",
-                      textAlign: TextAlign.center, // Đặt căn giữa văn bản
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
@@ -220,12 +288,11 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
               ],
             ),
             Expanded(
-              // height: MediaQuery.of(context).size.height * 2 / 3,
               child: TabBarView(
                 children: [
                   _shippingOrder(),
                   _waitingOrders(),
-                  Container(),
+                  _historyOrderList(),
                 ],
               ),
             ),
@@ -237,10 +304,41 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
 
   Widget _shippingOrder() {
     return RefreshIndicator(
-      onRefresh: () async => _reloadShippingOrder,
+      onRefresh: () async {
+        _reloadShippingOrder();
+      },
       child: BlocConsumer<OrderBloc, OrderState>(
         listener: (context, state) {
           if (state is OrderErrorState) {
+            setState(() {
+              _fromLocationController.clear();
+              _toLocationController.clear();
+              _receiverController.clear();
+              _phoneNumberController.clear();
+              _packageNameController.clear();
+              _codController.clear();
+              _noteController.clear();
+              _senderController.clear();
+            });
+
+            context.read<OrderBloc>().add(OnClearOrderEvent());
+
+            UiRender.showDialog(context, '', state.message);
+          } else if (state is OrderAcceptedState) {
+            UiRender.showDialog(context, '', state.message);
+          } else if (state is OrderFinishedShippingState) {
+            context.read<GoogleMapBloc>().add(OnClearMapEvent());
+            setState(() {
+              _fromLocationController.clear();
+              _toLocationController.clear();
+              _receiverController.clear();
+              _phoneNumberController.clear();
+              _packageNameController.clear();
+              _codController.clear();
+              _noteController.clear();
+              _senderController.clear();
+            });
+
             UiRender.showDialog(context, '', state.message);
           } else if (state is ShippingOrderLoadedState) {
             my_order.Order shippingOrder = state.shippingOrder;
@@ -327,8 +425,7 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
                         text: 'Xác nhận hoàn tất',
                         buttonMargin: EdgeInsets.only(top: 20.height),
                         onPress: () => _confirmFinishShipping(
-                          shippingOrder!.id,
-                          shippingOrder.senderPhoneNumber,
+                          shippingOrder!,
                         ),
                         buttonHeight: 50.height,
                       )
@@ -347,96 +444,282 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
         vertical: 15.height,
         horizontal: 10.width,
       ),
-      child: Column(
-        children: [
-          Text(
-            'Nhấn vào đơn hàng để xem các hành động',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-              color: Theme.of(context).colorScheme.tertiary,
-            ),
-          ),
-          Text(
-            'Nhấn và giữ vào đơn hàng để xem thông tin',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
-              color: Theme.of(context).colorScheme.tertiary,
-            ),
-          ),
-          20.verticalSpace,
-          Row(
-            children: [
-              15.horizontalSpace,
-              const Text('Xem '),
-              GradientElevatedButton(
-                text: '-',
-                buttonHeight: 30.size,
-                textSize: 18.size,
-                buttonWidth: 30.size,
-                buttonMargin: EdgeInsets.zero,
-                onPress: _decreaseLimit,
+      child: BlocListener<OrderBloc, OrderState>(
+        listener: (context, state) {
+          if (state is OrderAcceptedState) {
+            DefaultTabController.of(context).animateTo(0);
+
+            context.read<OrderBloc>().add(
+                  OnLoadShippingOrderEvent(
+                    context.read<AuthorBloc>().currentUser!.phoneNumber,
+                  ),
+                );
+          } else if (state is OrderRefusedState) {
+            UiRender.showDialog(context, '', state.message);
+          } else if (state is OrderErrorState) {
+            UiRender.showDialog(context, '', state.message);
+          }
+        },
+        child: Column(
+          children: [
+            Text(
+              'Nhấn vào đơn hàng để xem các hành động',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+                color: Theme.of(context).colorScheme.tertiary,
               ),
-              Flexible(
-                child: SizedBox(
-                  width: 60.width,
-                  child: TextField(
-                    textAlign: TextAlign.center,
-                    controller: _limitController,
-                    showCursor: false,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      contentPadding: EdgeInsets.zero,
+            ),
+            Text(
+              'Nhấn và giữ vào đơn hàng để xem thông tin',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+            ),
+            20.verticalSpace,
+            Row(
+              children: [
+                15.horizontalSpace,
+                const Text('Xem '),
+                GradientElevatedButton(
+                  text: '-',
+                  buttonHeight: 30.size,
+                  textSize: 18.size,
+                  buttonWidth: 30.size,
+                  buttonMargin: EdgeInsets.zero,
+                  onPress: _decreaseWaitingListLimit,
+                ),
+                Flexible(
+                  child: SizedBox(
+                    width: 60.width,
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      controller: _waitingListLimitController,
+                      showCursor: false,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.zero,
+                      ),
+                      onChanged: _changeWaitingOrderListLimit,
                     ),
-                    onChanged: _onChangeLimit,
                   ),
                 ),
-              ),
-              GradientElevatedButton(
-                text: '+',
-                textSize: 18.size,
-                buttonHeight: 30.size,
-                buttonWidth: 30.size,
-                buttonMargin: EdgeInsets.zero,
-                onPress: _increaseLimit,
-              ),
-              5.horizontalSpace,
-              const Text('dòng'),
-            ],
-          ),
-          20.verticalSpace,
-          StreamBuilder(
-            stream: _waitingOrdersStream,
-            builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return const Text('Xảy ra lỗi');
-              }
-
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Text("Đang tải");
-              }
-
-              return SizedBox(
-                height: 500.height,
-                child: ListView(
-                  shrinkWrap: true,
-                  children: snapshot.data!.docs
-                      .map((DocumentSnapshot document) {
-                        Map<String, dynamic> data =
-                            document.data()! as Map<String, dynamic>;
-                        return WaitingOrderListComponent(
-                          order: my_order.Order.fromJson(data),
-                        );
-                      })
-                      .toList()
-                      .cast(),
+                GradientElevatedButton(
+                  text: '+',
+                  textSize: 18.size,
+                  buttonHeight: 30.size,
+                  buttonWidth: 30.size,
+                  buttonMargin: EdgeInsets.zero,
+                  onPress: _increaseWaitingListLimit,
                 ),
-              );
-            },
-          ),
-        ],
+                5.horizontalSpace,
+                const Text('dòng'),
+              ],
+            ),
+            20.verticalSpace,
+            StreamBuilder(
+              stream: _waitingOrdersStream,
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return const Text('Xảy ra lỗi');
+                }
+
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Text("Đang tải");
+                }
+
+                return SizedBox(
+                  height: 500.height,
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: snapshot.data!.docs
+                        .map((DocumentSnapshot document) {
+                          Map<String, dynamic> data =
+                              document.data()! as Map<String, dynamic>;
+                          return WaitingOrderListComponent(
+                            order: my_order.Order.fromJson(data),
+                          );
+                        })
+                        .toList()
+                        .cast(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _historyOrderList() {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: 10.height,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                15.horizontalSpace,
+                const Text('Xem '),
+                GradientElevatedButton(
+                  text: '-',
+                  buttonHeight: 30.size,
+                  textSize: 18.size,
+                  buttonWidth: 30.size,
+                  buttonMargin: EdgeInsets.zero,
+                  onPress: _decreaseHistoryListLimit,
+                ),
+                Flexible(
+                  child: SizedBox(
+                    width: 60.width,
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      controller: _historyListLimitController,
+                      showCursor: false,
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.zero,
+                      ),
+                      onChanged: _changeHistoryOrderListLimit,
+                    ),
+                  ),
+                ),
+                GradientElevatedButton(
+                  text: '+',
+                  textSize: 18.size,
+                  buttonHeight: 30.size,
+                  buttonWidth: 30.size,
+                  buttonMargin: EdgeInsets.zero,
+                  onPress: _increaseHistoryListLimit,
+                ),
+                5.horizontalSpace,
+                const Text('dòng'),
+              ],
+            ),
+            20.verticalSpace,
+            Center(
+              child: Text(
+                'Nhẫn và giữ để xem thông tin chi tiết đơn hàng của bạn',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 13.size,
+                  fontStyle: FontStyle.italic,
+                  color: Theme.of(context).colorScheme.tertiary,
+                ),
+              ),
+            ),
+            20.verticalSpace,
+            BlocBuilder<OrderBloc, OrderState>(
+              builder: (context, state) {
+                List<my_order.Order> orderList =
+                    context.read<OrderBloc>().currentOrderList;
+                int page = context.read<OrderBloc>().currentPage;
+
+                if (state is ShipperHistoryOrderListLoadedState) {
+                  orderList = state.orderList;
+                  page = state.page;
+                } else if (state is OrderLoadingState) {
+                  return UiRender.loadingCircle(context);
+                }
+
+                return DataTable(
+                  columnSpacing: 10.width,
+                  dataRowMinHeight: 30.height,
+                  dataRowMaxHeight: 100.height,
+                  dataTextStyle: TextStyle(
+                    fontSize: 15.size,
+                    fontWeight: FontWeight.w400,
+                    color: Theme.of(context).colorScheme.onError,
+                  ),
+                  columns: [
+                    _dataColumn('ID'),
+                    _dataColumn('Tên người nhận'),
+                    _dataColumn('SĐT người nhận'),
+                    _dataColumn('Ngày giao'),
+                    _dataColumn('Tình trạng'),
+                  ],
+                  rows: List.generate(
+                    orderList.length,
+                    (index) => _dataRow(orderList[index]),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  DataColumn _dataColumn(String name) {
+    return DataColumn(
+      label: Expanded(
+        child: Text(
+          name,
+          textAlign: TextAlign.center,
+          softWrap: true,
+          maxLines: 5,
+          overflow: TextOverflow.visible,
+          style: TextStyle(
+            fontSize: 15.size,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  DataRow _dataRow(my_order.Order order) {
+    return DataRow(
+      onLongPress: () => _showOrderInfo(order),
+      cells: [
+        DataCell(
+          Text(
+            order.shipperOrderId.toString(),
+            softWrap: true,
+            textAlign: TextAlign.center,
+            maxLines: 5,
+          ),
+        ),
+        DataCell(
+          Text(
+            order.receiverName,
+            softWrap: true,
+            textAlign: TextAlign.center,
+            maxLines: 5,
+          ),
+        ),
+        DataCell(
+          Text(
+            order.receiverPhoneNumber,
+            softWrap: true,
+            textAlign: TextAlign.center,
+            maxLines: 5,
+          ),
+        ),
+        DataCell(
+          Text(
+            order.shipDate?.date ?? '',
+            softWrap: true,
+            textAlign: TextAlign.center,
+            maxLines: 5,
+          ),
+        ),
+        DataCell(
+          Text(
+            order.getShippingStatus(),
+            softWrap: true,
+            textAlign: TextAlign.center,
+            maxLines: 5,
+          ),
+        ),
+      ],
     );
   }
 

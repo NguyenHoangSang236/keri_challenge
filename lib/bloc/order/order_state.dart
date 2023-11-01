@@ -37,11 +37,21 @@ class OrderListByPhoneNumberLoadedState extends OrderState {
   List<Object> get props => [orderList];
 }
 
-class OrderListLoadedState extends OrderState {
+class ClientHistoryOrderListLoadedState extends OrderState {
   final List<Order> orderList;
   final int page;
 
-  const OrderListLoadedState(this.orderList, this.page);
+  const ClientHistoryOrderListLoadedState(this.orderList, this.page);
+
+  @override
+  List<Object> get props => [orderList, page];
+}
+
+class ShipperHistoryOrderListLoadedState extends OrderState {
+  final List<Order> orderList;
+  final int page;
+
+  const ShipperHistoryOrderListLoadedState(this.orderList, this.page);
 
   @override
   List<Object> get props => [orderList, page];
@@ -84,6 +94,34 @@ class OrderForwardedState extends OrderState {
   final String message;
 
   const OrderForwardedState(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class OrderAcceptedState extends OrderState {
+  final String message;
+
+  const OrderAcceptedState(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class OrderRefusedState extends OrderState {
+  final String message;
+
+  const OrderRefusedState(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
+class OrderFinishedShippingState extends OrderState {
+  final String message;
+
+  const OrderFinishedShippingState(this.message);
+
   @override
   List<Object?> get props => [message];
 }

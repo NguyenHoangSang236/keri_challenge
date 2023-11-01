@@ -5,7 +5,7 @@ import 'package:keri_challenge/core/extension/number_extension.dart';
 
 import '../../core/converter/geopoint_converter.dart';
 import '../../core/converter/timestamp_converter.dart';
-import '../enum/ship_status_enum.dart';
+import '../enum/shipper_enum.dart';
 
 part 'order.g.dart';
 
@@ -13,6 +13,7 @@ part 'order.g.dart';
 class Order {
   @JsonKey(name: 'id')
   int id;
+  int? shipperOrderId;
   double distance;
   double price;
   String fromLocation;
@@ -49,6 +50,7 @@ class Order {
     required this.fromLocationGeoPoint,
     required this.toLocationGeoPoint,
     this.noteForShipper,
+    this.shipperOrderId,
     this.shipperPhoneNumber,
     this.shipDate,
     required this.orderDate,
@@ -59,15 +61,25 @@ class Order {
   Map<String, dynamic> toJson() => _$OrderToJson(this);
 
   String showFullInfo() {
-    return 'ID: $id \nKhoảng cách: ${distance.format}km \nGiá tiền: ${price.format} đồng \nĐiểm đi: $fromLocation \n Số điện thoại shipper: ${shipperPhoneNumber == null || shipperPhoneNumber!.isEmpty ? 'Chưa xác định' : shipperPhoneNumber} \nĐiểm đến: $toLocation \nSố điện thoại người gửi: $senderPhoneNumber \nSố điện thoại người nhận: $receiverPhoneNumber \nTên người nhận: $receiverName \nTrạng thái: ${status == ShipStatusEnum.shipping.name ? 'Đang giao' : status == ShipStatusEnum.shipped.name ? 'Đã giao' : status == ShipStatusEnum.shipper_waiting.name ? 'Đợi shipper' : 'Không xác định'} \nNgày đặt hàng: ${orderDate.date} \nNgày giao hàng: ${shipDate ?? 'Chưa xác định'} \nGhi chú cho shipper: $noteForShipper \nTên kiện hàng: $packageName \nCod: $cod';
+    return 'ID: $id \nKhoảng cách: ${distance.format}km \nGiá tiền: ${price.format} đồng \nĐiểm đi: $fromLocation \n Số điện thoại shipper: ${shipperPhoneNumber == null || shipperPhoneNumber!.isEmpty ? 'Chưa xác định' : shipperPhoneNumber} \nĐiểm đến: $toLocation \nSố điện thoại người gửi: $senderPhoneNumber \nSố điện thoại người nhận: $receiverPhoneNumber \nTên người nhận: $receiverName \nTrạng thái: ${status == ShipperEnum.shipping.name ? 'Đang giao' : status == ShipperEnum.shipped.name ? 'Đã giao' : status == ShipperEnum.shipper_waiting.name ? 'Đợi shipper' : 'Không xác định'} \nNgày đặt hàng: ${orderDate.date} \nNgày giao hàng: ${shipDate ?? 'Chưa xác định'} \nGhi chú cho shipper: $noteForShipper \nTên kiện hàng: $packageName \nCod: $cod';
   }
 
   String getOrderDoc() {
     return '$senderPhoneNumber-$id';
   }
 
+  String getShippingStatus() {
+    return status == ShipperEnum.shipping.name
+        ? 'Đang giao'
+        : status == ShipperEnum.shipped.name
+            ? 'Đã giao'
+            : status == ShipperEnum.shipper_waiting.name
+                ? 'Đợi shipper'
+                : 'Không xác định';
+  }
+
   @override
   String toString() {
-    return 'Order{id: $id, distance: $distance, price: $price, fromLocation: $fromLocation, toLocation: $toLocation, senderPhoneNumber: $senderPhoneNumber, receiverPhoneNumber: $receiverPhoneNumber, receiverName: $receiverName, status: $status, packageName: $packageName, cod: $cod, noteForShipper: $noteForShipper, shipperPhoneNumber: $shipperPhoneNumber, fromLocationGeoPoint: $fromLocationGeoPoint, toLocationGeoPoint: $toLocationGeoPoint, shipDate: $shipDate, orderDate: $orderDate}';
+    return '{id: $id, shipperOrderId: $shipperOrderId, distance: $distance, price: $price, fromLocation: $fromLocation, toLocation: $toLocation, senderPhoneNumber: $senderPhoneNumber, receiverPhoneNumber: $receiverPhoneNumber, receiverName: $receiverName, status: $status, packageName: $packageName, cod: $cod, noteForShipper: $noteForShipper, shipperPhoneNumber: $shipperPhoneNumber, fromLocationGeoPoint: $fromLocationGeoPoint, toLocationGeoPoint: $toLocationGeoPoint, shipDate: $shipDate, orderDate: $orderDate}';
   }
 }

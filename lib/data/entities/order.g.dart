@@ -23,6 +23,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       toLocationGeoPoint: const GeoPointConverter()
           .fromJson(json['toLocationGeoPoint'] as GeoPoint),
       noteForShipper: json['noteForShipper'] as String?,
+      shipperOrderId: json['shipperOrderId'] as int?,
       shipperPhoneNumber: json['shipperPhoneNumber'] as String?,
       shipDate: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['shipDate'], const TimestampConverter().fromJson),
@@ -32,6 +33,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'id': instance.id,
+      'shipperOrderId': instance.shipperOrderId,
       'distance': instance.distance,
       'price': instance.price,
       'fromLocation': instance.fromLocation,

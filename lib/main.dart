@@ -16,10 +16,12 @@ import 'package:keri_challenge/bloc/appConfig/app_config_bloc.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/bloc/order/order_bloc.dart';
+import 'package:keri_challenge/bloc/shipper_service/shipper_service_bloc.dart';
 import 'package:keri_challenge/core/theme/app_theme.dart';
 import 'package:keri_challenge/data/repository/account_repository.dart';
 import 'package:keri_challenge/data/repository/app_config_repository.dart';
 import 'package:keri_challenge/data/repository/order_repository.dart';
+import 'package:keri_challenge/data/repository/shipper_service_repository.dart';
 import 'package:keri_challenge/services/firebase_database_service.dart';
 
 import 'config/http_client_config.dart';
@@ -87,6 +89,9 @@ Future<void> main() async {
         RepositoryProvider<AppConfigRepository>(
           create: (context) => AppConfigRepository(),
         ),
+        RepositoryProvider<ShipperServiceRepository>(
+          create: (context) => ShipperServiceRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -108,6 +113,11 @@ Future<void> main() async {
           BlocProvider<AppConfigBloc>(
             create: (context) => AppConfigBloc(
               RepositoryProvider.of<AppConfigRepository>(context),
+            ),
+          ),
+          BlocProvider<ShipperServiceBloc>(
+            create: (context) => ShipperServiceBloc(
+              RepositoryProvider.of<ShipperServiceRepository>(context),
             ),
           ),
           BlocProvider<AccountBloc>(

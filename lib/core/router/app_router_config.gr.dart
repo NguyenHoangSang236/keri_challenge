@@ -83,9 +83,19 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ShipperIndexRoute.name: (routeData) {
+      final args = routeData.argsAs<ShipperIndexRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ShipperIndexScreen(),
+        child: ShipperIndexScreen(
+          key: args.key,
+          initialTabIndex: args.initialTabIndex,
+        ),
+      );
+    },
+    ShipperServiceRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ShipperServiceScreen(),
       );
     },
   };
@@ -291,14 +301,52 @@ class SearchingRouteArgs {
 
 /// generated route for
 /// [ShipperIndexScreen]
-class ShipperIndexRoute extends PageRouteInfo<void> {
-  const ShipperIndexRoute({List<PageRouteInfo>? children})
-      : super(
+class ShipperIndexRoute extends PageRouteInfo<ShipperIndexRouteArgs> {
+  ShipperIndexRoute({
+    Key? key,
+    required int initialTabIndex,
+    List<PageRouteInfo>? children,
+  }) : super(
           ShipperIndexRoute.name,
+          args: ShipperIndexRouteArgs(
+            key: key,
+            initialTabIndex: initialTabIndex,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ShipperIndexRoute';
+
+  static const PageInfo<ShipperIndexRouteArgs> page =
+      PageInfo<ShipperIndexRouteArgs>(name);
+}
+
+class ShipperIndexRouteArgs {
+  const ShipperIndexRouteArgs({
+    this.key,
+    required this.initialTabIndex,
+  });
+
+  final Key? key;
+
+  final int initialTabIndex;
+
+  @override
+  String toString() {
+    return 'ShipperIndexRouteArgs{key: $key, initialTabIndex: $initialTabIndex}';
+  }
+}
+
+/// generated route for
+/// [ShipperServiceScreen]
+class ShipperServiceRoute extends PageRouteInfo<void> {
+  const ShipperServiceRoute({List<PageRouteInfo>? children})
+      : super(
+          ShipperServiceRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ShipperServiceRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

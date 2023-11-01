@@ -12,6 +12,7 @@ import '../../view/screens/phone_verification_screen.dart';
 import '../../view/screens/register_screen.dart';
 import '../../view/screens/searching_screen.dart';
 import '../../view/screens/shipper_index_screen.dart';
+import '../../view/screens/shipper_service_screen.dart';
 import 'app_router_path.dart';
 
 part 'app_router_config.gr.dart';
@@ -62,6 +63,10 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: ShipperIndexRoute.page,
           path: AppRouterPath.shipperIndex,
+        ),
+        AutoRoute(
+          page: ShipperServiceRoute.page,
+          path: AppRouterPath.shipperService,
         ),
       ];
 }

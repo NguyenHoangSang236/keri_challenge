@@ -10,7 +10,7 @@ import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/extension/pointLatLng_extension.dart';
 import 'package:keri_challenge/core/router/app_router_path.dart';
 import 'package:keri_challenge/data/entities/order.dart';
-import 'package:keri_challenge/data/enum/ship_status_enum.dart';
+import 'package:keri_challenge/data/enum/shipper_enum.dart';
 import 'package:keri_challenge/util/ui_render.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/components/layout.dart';
@@ -74,13 +74,11 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
                         context.read<AuthorBloc>().currentUser!.phoneNumber,
                     receiverPhoneNumber: _phoneNumberController.text,
                     receiverName: _receiverController.text,
-                    status: ShipStatusEnum.shipper_waiting.name,
+                    status: ShipperEnum.shipper_waiting.name,
                     orderDate: DateTime.now(),
                   ),
                 ),
               );
-
-          context.router.pushNamed(AppRouterPath.onlineShipperList);
         }
       });
     }
@@ -93,7 +91,7 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
   void _onChangeCounter(num value) {
     int limit = value as int;
 
-    context.read<OrderBloc>().add(OnLoadOrderListEvent(
+    context.read<OrderBloc>().add(OnLoadClientHistoryOrderList(
           context.read<AuthorBloc>().currentUser!.phoneNumber,
           limit,
           1,
@@ -131,16 +129,6 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
     return null;
   };
 
-  String _covertShippingStatus(String status) {
-    return status == ShipStatusEnum.shipping.name
-        ? 'Đang giao'
-        : status == ShipStatusEnum.shipped.name
-            ? 'Đã giao'
-            : status == ShipStatusEnum.shipper_waiting.name
-                ? 'Đợi shipper'
-                : 'Không xác định';
-  }
-
   @override
   void initState() {
     _fromLocationController.text = context
@@ -155,7 +143,7 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
     distance = context.read<GoogleMapBloc>().distance;
 
     context.read<OrderBloc>().add(
-          OnLoadOrderListEvent(
+          OnLoadClientHistoryOrderList(
             context.read<AuthorBloc>().currentUser!.phoneNumber,
             10,
             1,
@@ -172,48 +160,57 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
       canComeBack: false,
       body: DefaultTabController(
         length: 2,
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(
-              vertical: 10.height,
-              horizontal: 10.width,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                10.verticalSpace,
-                Text(
-                  'Giao hàng',
-                  style: TextStyle(
-                    fontSize: 25.size,
-                    color: Theme.of(context).colorScheme.primary,
-                    fontWeight: FontWeight.w600,
+        child: BlocListener<OrderBloc, OrderState>(
+          listener: (context, state) {
+            if (state is OrderAddedState) {
+              context.router.pushNamed(AppRouterPath.onlineShipperList);
+            }
+          },
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                vertical: 10.height,
+                horizontal: 10.width,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  10.verticalSpace,
+                  Text(
+                    'Giao hàng',
+                    style: TextStyle(
+                      fontSize: 25.size,
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                20.verticalSpace,
-                const TabBar(
-                  tabs: [
-                    Tab(
-                      icon: Icon(Icons.delivery_dining),
-                      text: "Đặt shipper",
-                    ),
-                    Tab(
-                      icon: Icon(Icons.featured_play_list_outlined),
-                      text: "Danh sách đã đặt",
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 2 / 3,
-                  child: TabBarView(
-                    children: [
-                      _shipperBooking(),
-                      _myOrderList(),
+                  20.verticalSpace,
+                  TabBar(
+                    unselectedLabelColor:
+                        Theme.of(context).colorScheme.tertiary,
+                    tabs: const [
+                      Tab(
+                        icon: Icon(Icons.delivery_dining),
+                        text: "Đặt shipper",
+                      ),
+                      Tab(
+                        icon: Icon(Icons.featured_play_list_outlined),
+                        text: "Danh sách đã đặt",
+                      ),
                     ],
                   ),
-                ),
-              ],
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 2 / 3,
+                    child: TabBarView(
+                      children: [
+                        _shipperBooking(),
+                        _myOrderList(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -264,7 +261,7 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
                     context.read<OrderBloc>().currentOrderList;
                 int page = context.read<OrderBloc>().currentPage;
 
-                if (state is OrderListLoadedState) {
+                if (state is ClientHistoryOrderListLoadedState) {
                   orderList = state.orderList;
                   page = state.page;
                 } else if (state is OrderLoadingState) {
@@ -356,7 +353,7 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
         ),
         DataCell(
           Text(
-            _covertShippingStatus(order.status),
+            order.getShippingStatus(),
             softWrap: true,
             textAlign: TextAlign.center,
             maxLines: 5,

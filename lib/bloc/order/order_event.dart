@@ -7,12 +7,20 @@ abstract class OrderEvent extends Equatable {
   List<Object?> props = [];
 }
 
-class OnLoadOrderListEvent extends OrderEvent {
+class OnLoadClientHistoryOrderList extends OrderEvent {
   final String senderPhoneNumber;
   final int limit;
   final int page;
 
-  OnLoadOrderListEvent(this.senderPhoneNumber, this.limit, this.page);
+  OnLoadClientHistoryOrderList(this.senderPhoneNumber, this.limit, this.page);
+}
+
+class OnLoadShipperHistoryOrderList extends OrderEvent {
+  final String shipperPhoneNumber;
+  final int limit;
+  final int page;
+
+  OnLoadShipperHistoryOrderList(this.shipperPhoneNumber, this.limit, this.page);
 }
 
 class OnLoadShippingOrderEvent extends OrderEvent {
@@ -50,6 +58,26 @@ class OnUpdateOrderEvent extends OrderEvent {
   final Map<String, dynamic> data;
 
   OnUpdateOrderEvent(this.doc, this.data);
+}
+
+class OnAcceptOrderEvent extends OrderEvent {
+  final String doc;
+  final String shipperPhoneNumber;
+
+  OnAcceptOrderEvent(this.doc, this.shipperPhoneNumber);
+}
+
+class OnRefuseOrderEvent extends OrderEvent {
+  final String doc;
+  final String shipperPhoneNumber;
+
+  OnRefuseOrderEvent(this.doc, this.shipperPhoneNumber);
+}
+
+class OnFinishShippingOrderEvent extends OrderEvent {
+  final String doc;
+
+  OnFinishShippingOrderEvent(this.doc);
 }
 
 class OnClearOrderEvent extends OrderEvent {}

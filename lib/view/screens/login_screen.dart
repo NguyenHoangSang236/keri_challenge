@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
-import 'package:keri_challenge/core/router/app_router_path.dart';
 import 'package:keri_challenge/data/entities/app_config.dart';
 import 'package:keri_challenge/data/enum/local_storage_enum.dart';
 import 'package:keri_challenge/util/ui_render.dart';
@@ -13,6 +12,8 @@ import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/screens/register_screen.dart';
 
 import '../../bloc/appConfig/app_config_bloc.dart';
+import '../../bloc/order/order_bloc.dart';
+import '../../core/router/app_router_config.dart';
 import '../../services/local_storage_service.dart';
 
 @RoutePage()
@@ -203,21 +204,38 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.symmetric(horizontal: 20.size),
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
-          child: BlocListener<AuthorBloc, AuthorState>(
-            listener: (context, state) {
-              if (state is AuthorLoggedInState) {
-                if (state.user.role == 'client') {
-                  context.router.pushNamed(AppRouterPath.clientIndex);
-                } else if (state.user.role == 'shipper') {
-                  context.read<GoogleMapBloc>().add(
-                        OnLoadCurrentLocationEvent(state.user.phoneNumber),
-                      );
-                  context.router.pushNamed(AppRouterPath.shipperIndex);
-                } else if (state.user.role == 'admin') {}
-              } else if (state is AuthorErrorState) {
-                UiRender.showSnackBar(context, state.message);
-              }
-            },
+          child: MultiBlocListener(
+            listeners: [
+              BlocListener<AuthorBloc, AuthorState>(
+                listener: (context, state) {
+                  if (state is AuthorLoggedInState) {
+                    if (state.user.role == 'client') {
+                      context.router.replaceAll([const ClientIndexRoute()]);
+                    } else if (state.user.role == 'shipper') {
+                      context.read<GoogleMapBloc>().add(
+                            OnLoadCurrentLocationEvent(state.user.phoneNumber),
+                          );
+                      context.read<OrderBloc>().add(
+                            OnLoadShippingOrderEvent(state.user.phoneNumber),
+                          );
+                    } else if (state.user.role == 'admin') {}
+                  } else if (state is AuthorErrorState) {
+                    UiRender.showSnackBar(context, state.message);
+                  }
+                },
+              ),
+              BlocListener<OrderBloc, OrderState>(
+                listener: (context, state) {
+                  if (state is ShippingOrderLoadedState) {
+                    context.router
+                        .replaceAll([ShipperIndexRoute(initialTabIndex: 0)]);
+                  } else if (state is OrderErrorState) {
+                    context.router
+                        .replaceAll([ShipperIndexRoute(initialTabIndex: 1)]);
+                  }
+                },
+              ),
+            ],
             child: Form(
               key: _loginFormKey,
               child: Column(

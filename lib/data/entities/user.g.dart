@@ -22,6 +22,10 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       password: json['password'] as String,
       registerDate: const TimestampConverter()
           .fromJson(json['registerDate'] as Timestamp),
+      shipperServiceStartDate: _$JsonConverterFromJson<Timestamp, DateTime>(
+          json['shipperServiceStartDate'], const TimestampConverter().fromJson),
+      shipperServiceEndDate: _$JsonConverterFromJson<Timestamp, DateTime>(
+          json['shipperServiceEndDate'], const TimestampConverter().fromJson),
       phoneFcmToken: json['phoneFcmToken'] as String?,
     );
 
@@ -38,6 +42,10 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'currentLocation': _$JsonConverterToJson<GeoPoint, GeoPoint>(
           instance.currentLocation, const GeoPointConverter().toJson),
       'isOnline': instance.isOnline,
+      'shipperServiceStartDate': _$JsonConverterToJson<Timestamp, DateTime>(
+          instance.shipperServiceStartDate, const TimestampConverter().toJson),
+      'shipperServiceEndDate': _$JsonConverterToJson<Timestamp, DateTime>(
+          instance.shipperServiceEndDate, const TimestampConverter().toJson),
       'registerDate': const TimestampConverter().toJson(instance.registerDate),
       'role': instance.role,
       'phoneFcmToken': instance.phoneFcmToken,

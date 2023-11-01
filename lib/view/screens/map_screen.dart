@@ -326,6 +326,21 @@ class _MapState extends State<MapScreen> {
     return await Geolocator.getCurrentPosition();
   }
 
+  void _comeback() {
+    LatLng? start =
+        context.read<GoogleMapBloc>().currentSelectedFromPointLatLng?.toLatLng;
+    LatLng? end =
+        context.read<GoogleMapBloc>().currentSelectedToPointLatLng?.toLatLng;
+
+    if (start != null && end != null) {
+      context.read<GoogleMapBloc>().add(
+            OnCalculateDistanceEvent(start, end),
+          );
+    }
+
+    context.router.pop();
+  }
+
   @override
   void initState() {
     context.read<GoogleMapBloc>().add(
@@ -346,7 +361,7 @@ class _MapState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () => context.router.pop(),
+          onPressed: _comeback,
           color: Colors.white,
           icon: Icon(
             Icons.arrow_back_ios,

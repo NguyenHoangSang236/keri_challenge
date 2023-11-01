@@ -75,7 +75,7 @@ class _ShipperListComponentState extends State<ShipperListComponent> {
                   buttonWidth: 150.width,
                   buttonHeight: 40.height,
                   buttonMargin: EdgeInsets.zero,
-                  onPress: () => _forwardOrder,
+                  onPress: _forwardOrder,
                 ),
               ],
             ),

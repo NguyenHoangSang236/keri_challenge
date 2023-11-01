@@ -1,6 +1,6 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:keri_challenge/data/enum/ship_status_enum.dart';
+import 'package:keri_challenge/data/enum/shipper_enum.dart';
 
 import '../../core/failure/failure.dart';
 import '../../main.dart';
@@ -9,19 +9,36 @@ import '../entities/order.dart';
 import '../enum/firestore_enum.dart';
 
 class OrderRepository {
-  Future<Either<Failure, List<Order>>> getOrderList({
+  Future<Either<Failure, List<Order>>> getDescendingClientHistoryOrderList({
     required int page,
     int limit = 20,
     required String senderPhoneNumber,
   }) async {
     try {
-      final start = limit * (page - 1);
+      int latestId = 0;
+
+      final ref = fireStore
+          .collection('orders')
+          .orderBy('id', descending: false)
+          .where('senderPhoneNumber', isEqualTo: senderPhoneNumber)
+          .limitToLast(1);
+
+      await ref.get().then(
+        (querySnap) {
+          latestId = querySnap.docs.isNotEmpty
+              ? (querySnap.docs.first.data()['id'] as int)
+              : 0;
+        },
+        onError: (e) => debugPrint("Error getting document list: $e"),
+      );
+
+      final int start = limit * (page - 1);
 
       final docRef = fireStore
           .collection('orders')
-          .orderBy('id')
+          .orderBy('id', descending: true)
           .where('senderPhoneNumber', isEqualTo: senderPhoneNumber)
-          .startAfter([start]).limit(limit * page);
+          .startAt([latestId - start]).limit(limit * page);
 
       List<Map<String, dynamic>> mapList = [];
 
@@ -40,7 +57,61 @@ class OrderRepository {
       return Right(orderList);
     } catch (e, stackTrace) {
       debugPrint(
-        'Caught getting order list from firestore error: ${e.toString()} \n${stackTrace.toString()}',
+        'Caught getting client history order list error: ${e.toString()} \n${stackTrace.toString()}',
+      );
+      return Left(ExceptionFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, List<Order>>> getDescendingShipperHistoryOrderList({
+    required int page,
+    int limit = 20,
+    required String shipperPhoneNumber,
+  }) async {
+    try {
+      int latestId = 0;
+
+      final ref = fireStore
+          .collection('orders')
+          .orderBy('shipperOrderId', descending: true)
+          .where('shipperPhoneNumber', isEqualTo: shipperPhoneNumber)
+          .limit(1);
+
+      await ref.get().then(
+        (querySnap) {
+          latestId = querySnap.docs.isNotEmpty
+              ? (querySnap.docs.first.data()['id'] as int)
+              : 0;
+        },
+        onError: (e) => debugPrint("Error getting document list: $e"),
+      );
+
+      final int start = limit * (page - 1);
+
+      final docRef = fireStore
+          .collection('orders')
+          .orderBy('id', descending: true)
+          .where('shipperPhoneNumber', isEqualTo: shipperPhoneNumber)
+          .startAt([latestId - start]).limit(limit * page);
+
+      List<Map<String, dynamic>> mapList = [];
+
+      await docRef.get().then(
+        (querySnap) {
+          for (var docSnapshot in querySnap.docs) {
+            mapList.add(docSnapshot.data());
+          }
+        },
+        onError: (e) => debugPrint("Error getting document list: $e"),
+      );
+
+      List<Order> orderList =
+          mapList.map((json) => Order.fromJson(json)).toList();
+
+      return Right(orderList);
+    } catch (e, stackTrace) {
+      debugPrint(
+        'Caught getting shipper history order list error: ${e.toString()} \n${stackTrace.toString()}',
       );
       return Left(ExceptionFailure(e.toString()));
     }
@@ -107,7 +178,7 @@ class OrderRepository {
           .collection('orders')
           .orderBy('id', descending: false)
           .where('shipperPhoneNumber', isEqualTo: shipperPhoneNumber)
-          .where('status', isEqualTo: ShipStatusEnum.shipping.name)
+          .where('status', isEqualTo: ShipperEnum.shipping.name)
           .limit(1);
 
       Order? shippingOrder;
@@ -134,6 +205,69 @@ class OrderRepository {
     }
   }
 
+  Future<Either<Failure, String>> actionsOnOrder(
+    String orderId,
+    String shipperPhoneNumber,
+    ShipperEnum action,
+  ) async {
+    String result = '';
+    Map<String, dynamic> data = {};
+    int latestShipperOrderId = 0;
+
+    if (action == ShipperEnum.acceptOrder) {
+      data = {'status': ShipperEnum.shipping.name};
+
+      final docRef = fireStore
+          .collection('orders')
+          .orderBy('shipperOrderId', descending: true)
+          .where('shipperPhoneNumber', isEqualTo: shipperPhoneNumber)
+          .limit(1);
+
+      await docRef.get().then(
+        (querySnap) {
+          if (querySnap.docs.isNotEmpty) {
+            latestShipperOrderId = querySnap.docs.isNotEmpty
+                ? (querySnap.docs.first.data()['id'] as int)
+                : 0;
+
+            data['shipperOrderID'] = latestShipperOrderId;
+          }
+        },
+        onError: (e) => debugPrint("Error getting document list: $e"),
+      );
+    } else if (action == ShipperEnum.refuseOrder) {
+      data = {
+        'shipperPhoneNumber': null,
+        'status': ShipperEnum.shipper_waiting.name,
+        'shipperOrderId': null,
+        'shipDate': null,
+      };
+    } else {
+      return const Left(ExceptionFailure('Wrong action!'));
+    }
+
+    try {
+      await FirebaseDatabaseService.updateData(
+        data: data,
+        collection: FireStoreCollectionEnum.orders.name,
+        document: orderId,
+      ).then(
+        (value) {
+          result = action == ShipperEnum.acceptOrder
+              ? 'Đã nhận đơn hàng'
+              : 'Đã từ chối đơn hàng';
+        },
+      );
+
+      return Right(result);
+    } catch (e, stackTrace) {
+      debugPrint(
+        'Caught action on order error: ${e.toString()} \n${stackTrace.toString()}',
+      );
+      return Left(ExceptionFailure(e.toString()));
+    }
+  }
+
   Future<Either<Failure, String>> updateOrder(
     Map<String, dynamic> data,
     String orderId,
@@ -147,7 +281,7 @@ class OrderRepository {
         document: orderId,
       ).then(
         (value) {
-          result = 'Update order successfully';
+          result = 'Chỉnh sửa đơn hàng thành công';
         },
       );
 

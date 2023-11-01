@@ -8,7 +8,7 @@ import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/bloc/order/order_bloc.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/router/app_router_config.dart';
-import 'package:keri_challenge/core/router/app_router_path.dart';
+import 'package:keri_challenge/data/enum/role_enum.dart';
 
 class Layout extends StatefulWidget {
   const Layout({
@@ -27,23 +27,43 @@ class Layout extends StatefulWidget {
 }
 
 class _LayoutState extends State<Layout> {
-  final List<String> _clientRouteList = [
-    AppRouterPath.clientIndex,
-    AppRouterPath.login
-  ];
-  final List<String> _clientRouteNameList = ['Trang chủ', 'Đăng xuất'];
+  List<PageRouteInfo> _clientRouteList = [];
+  List<String> _clientRouteNameList = [];
+  late String _role;
 
-  void _onChangePage(String? path) {
-    if (path != null && path.isNotEmpty) {
-      if (path == AppRouterPath.clientIndex) {
-        context.router.pushNamed(path);
-      } else if (path == AppRouterPath.login) {
+  void _onChangePage(PageRouteInfo? route) {
+    if (route != null) {
+      if (route is LoginRoute) {
         context.read<GoogleMapBloc>().add(OnClearMapEvent());
         context.read<OrderBloc>().add(OnClearOrderEvent());
         context.read<AuthorBloc>().add(OnLogoutEvent());
-        context.router.replaceAll([const LoginRoute()]);
       }
+
+      context.router.replaceAll([route]);
     }
+  }
+
+  @override
+  void initState() {
+    _role = context.read<AuthorBloc>().currentUser!.role;
+
+    if (_role == RoleEnum.shipper.name) {
+      _clientRouteList = [
+        ShipperIndexRoute(initialTabIndex: 0),
+        const ShipperServiceRoute(),
+        const LoginRoute(),
+      ];
+      _clientRouteNameList = ['Trang chủ', 'Gói dịch vụ', 'Đăng xuất'];
+    } else if (_role == RoleEnum.client.name) {
+      _clientRouteList = [
+        ShipperIndexRoute(initialTabIndex: 0),
+        const ShipperServiceRoute(),
+        const LoginRoute(),
+      ];
+      _clientRouteNameList = ['Trang chủ', 'Đăng xuất'];
+    }
+
+    super.initState();
   }
 
   @override
@@ -83,7 +103,7 @@ class _LayoutState extends State<Layout> {
               ),
               items: List.generate(
                 _clientRouteList.length,
-                (index) => DropdownMenuItem<String>(
+                (index) => DropdownMenuItem<PageRouteInfo>(
                   value: _clientRouteList[index],
                   child: Text(_clientRouteNameList[index]),
                 ),

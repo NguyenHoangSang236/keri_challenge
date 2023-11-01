@@ -10,4 +10,5 @@ class AppRouterPath {
   static String onlineShipperList = '/onlineShipperList';
   static String initialLoading = '/initialLoading';
   static String shipperIndex = '/shipperIndex';
+  static String shipperService = '/shipperService';
 }

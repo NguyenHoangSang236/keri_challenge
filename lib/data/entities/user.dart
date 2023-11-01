@@ -21,6 +21,10 @@ class User {
   GeoPoint? currentLocation;
   bool isOnline;
   @TimestampConverter()
+  DateTime? shipperServiceStartDate;
+  @TimestampConverter()
+  DateTime? shipperServiceEndDate;
+  @TimestampConverter()
   DateTime registerDate;
   String role;
   String? phoneFcmToken;
@@ -39,6 +43,8 @@ class User {
     required this.idCertificateNumber,
     required this.password,
     required this.registerDate,
+    this.shipperServiceStartDate,
+    this.shipperServiceEndDate,
     this.phoneFcmToken,
   });
 
@@ -48,6 +54,6 @@ class User {
 
   @override
   String toString() {
-    return '{phoneNumber: $phoneNumber, fullName: $fullName, birthYear: $birthYear, sex: $sex, address: $address, idCertificateNumber: $idCertificateNumber, password: $password, distance: $distance, status: $status, currentLocation: $currentLocation, isOnline: $isOnline, registerDate: $registerDate, role: $role, phoneFcmToken: $phoneFcmToken}';
+    return 'User{phoneNumber: $phoneNumber, fullName: $fullName, birthYear: $birthYear, sex: $sex, address: $address, idCertificateNumber: $idCertificateNumber, password: $password, distance: $distance, status: $status, currentLocation: $currentLocation, isOnline: $isOnline, shipperServiceStartDate: $shipperServiceStartDate, shipperServiceEndDate: $shipperServiceEndDate, registerDate: $registerDate, role: $role, phoneFcmToken: $phoneFcmToken}';
   }
 }

@@ -45,11 +45,29 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
     });
 
     on<OnLogoutEvent>((event, emit) async {
-      currentUser = null;
+      emit(AuthorLoadingState());
 
-      ValueRender.currentUser = null;
+      try {
+        final response = await _accountRepository.updateUser(
+          {'isOnline': false},
+          currentUser!.phoneNumber,
+        );
 
-      emit(AuthorLoggedOutState());
+        response.fold(
+          (failure) => emit(AuthorErrorState(failure.message)),
+          (success) {
+            currentUser = null;
+
+            ValueRender.currentUser = null;
+
+            emit(AuthorLoggedOutState());
+          },
+        );
+      } catch (e, stackTrace) {
+        debugPrint(
+            'Caught logout error: ${e.toString()} \n${stackTrace.toString()}');
+        emit(AuthorErrorState(e.toString()));
+      }
     });
 
     on<OnRegisterEvent>((event, emit) async {
