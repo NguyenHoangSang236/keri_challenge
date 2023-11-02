@@ -93,9 +93,14 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
     ShipperServiceRoute.name: (routeData) {
+      final args = routeData.argsAs<ShipperServiceRouteArgs>(
+          orElse: () => const ShipperServiceRouteArgs());
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const ShipperServiceScreen(),
+        child: ShipperServiceScreen(
+          key: args.key,
+          isShipperServiceExpired: args.isShipperServiceExpired,
+        ),
       );
     },
   };
@@ -339,14 +344,38 @@ class ShipperIndexRouteArgs {
 
 /// generated route for
 /// [ShipperServiceScreen]
-class ShipperServiceRoute extends PageRouteInfo<void> {
-  const ShipperServiceRoute({List<PageRouteInfo>? children})
-      : super(
+class ShipperServiceRoute extends PageRouteInfo<ShipperServiceRouteArgs> {
+  ShipperServiceRoute({
+    Key? key,
+    bool isShipperServiceExpired = false,
+    List<PageRouteInfo>? children,
+  }) : super(
           ShipperServiceRoute.name,
+          args: ShipperServiceRouteArgs(
+            key: key,
+            isShipperServiceExpired: isShipperServiceExpired,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ShipperServiceRoute';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<ShipperServiceRouteArgs> page =
+      PageInfo<ShipperServiceRouteArgs>(name);
+}
+
+class ShipperServiceRouteArgs {
+  const ShipperServiceRouteArgs({
+    this.key,
+    this.isShipperServiceExpired = false,
+  });
+
+  final Key? key;
+
+  final bool isShipperServiceExpired;
+
+  @override
+  String toString() {
+    return 'ShipperServiceRouteArgs{key: $key, isShipperServiceExpired: $isShipperServiceExpired}';
+  }
 }

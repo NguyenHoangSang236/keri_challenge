@@ -7,20 +7,28 @@ abstract class ShipperServiceEvent extends Equatable {
   List<Object?> props = [];
 }
 
-class OnAddNewShipperService extends ShipperServiceEvent {
+class OnAddNewShipperServiceEvent extends ShipperServiceEvent {
   final ShipperService newService;
 
-  OnAddNewShipperService(this.newService);
+  OnAddNewShipperServiceEvent(this.newService);
 }
 
-class OnLoadHistoryShipperServiceList extends ShipperServiceEvent {
+class OnLoadCurrentShipperServiceEvent extends ShipperServiceEvent {
+  final String shipperPhoneNumber;
+
+  OnLoadCurrentShipperServiceEvent(this.shipperPhoneNumber);
+}
+
+class OnLoadHistoryShipperServiceListEvent extends ShipperServiceEvent {
   final String shipperPhoneNumber;
   final int limit;
   final int page;
 
-  OnLoadHistoryShipperServiceList(
+  OnLoadHistoryShipperServiceListEvent(
     this.shipperPhoneNumber,
     this.limit,
     this.page,
   );
 }
+
+class OnClearShipperServiceEvent extends ShipperServiceEvent {}

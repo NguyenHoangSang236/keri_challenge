@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
+import 'package:keri_challenge/core/extension/datetime_extension.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/data/entities/app_config.dart';
 import 'package:keri_challenge/data/enum/local_storage_enum.dart';
@@ -212,12 +213,57 @@ class _LoginScreenState extends State<LoginScreen> {
                     if (state.user.role == 'client') {
                       context.router.replaceAll([const ClientIndexRoute()]);
                     } else if (state.user.role == 'shipper') {
-                      context.read<GoogleMapBloc>().add(
-                            OnLoadCurrentLocationEvent(state.user.phoneNumber),
+                      if (state.user.shipperServiceEndDate != null &&
+                          state.user.shipperServiceEndDate!
+                              .isAfter(DateTime.now())) {
+                        context.read<OrderBloc>().add(
+                              OnLoadShippingOrderEvent(
+                                context
+                                    .read<AuthorBloc>()
+                                    .currentUser!
+                                    .phoneNumber,
+                              ),
+                            );
+                        context.read<GoogleMapBloc>().add(
+                              OnLoadCurrentLocationEvent(
+                                context
+                                    .read<AuthorBloc>()
+                                    .currentUser!
+                                    .phoneNumber,
+                              ),
+                            );
+                      } else {
+                        if (state.user.shipperServiceEndDate == null) {
+                          UiRender.showDialog(
+                            context,
+                            '',
+                            'Bạn chưa đăng kí gói dịch vụ shipper, vui lòng đăng kí gói dịch vụ để sử dụng dịch vụ của chúng tôi',
+                          ).then(
+                            (value) => context.router.replaceAll(
+                              [
+                                ShipperServiceRoute(
+                                  isShipperServiceExpired: true,
+                                )
+                              ],
+                            ),
                           );
-                      context.read<OrderBloc>().add(
-                            OnLoadShippingOrderEvent(state.user.phoneNumber),
+                        } else if (state.user.shipperServiceEndDate!
+                            .isBefore(DateTime.now())) {
+                          UiRender.showDialog(
+                            context,
+                            '',
+                            'Gói dịch vụ của bạn đã hết hạn vào ngày ${state.user.shipperServiceEndDate!.date}, vui lòng đăng kí gói dịch vụ mới để tiếp tục sử dụng dịch vụ',
+                          ).then(
+                            (value) => context.router.replaceAll(
+                              [
+                                ShipperServiceRoute(
+                                  isShipperServiceExpired: true,
+                                )
+                              ],
+                            ),
                           );
+                        }
+                      }
                     } else if (state.user.role == 'admin') {}
                   } else if (state is AuthorErrorState) {
                     UiRender.showSnackBar(context, state.message);

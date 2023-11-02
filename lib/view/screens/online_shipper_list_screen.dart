@@ -27,6 +27,12 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
   Stream<QuerySnapshot> _usersStream = fireStore
       .collection('users')
       .where('role', isEqualTo: 'shipper')
+      .where('isOnline', isEqualTo: true)
+      .where(
+        'shipperServiceEndDate',
+        isNull: false,
+        isGreaterThan: Timestamp.fromDate(DateTime.now()),
+      )
       .limit(10)
       .snapshots();
 
@@ -39,6 +45,12 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
       _usersStream = fireStore
           .collection('users')
           .where('role', isEqualTo: 'shipper')
+          .where('isOnline', isEqualTo: true)
+          .where(
+            'shipperServiceEndDate',
+            isNull: false,
+            isGreaterThan: Timestamp.fromDate(DateTime.now()),
+          )
           .limit(limit)
           .snapshots();
     });
@@ -55,6 +67,12 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
         _usersStream = fireStore
             .collection('users')
             .where('role', isEqualTo: 'shipper')
+            .where('isOnline', isEqualTo: true)
+            .where(
+              'shipperServiceEndDate',
+              isNull: false,
+              isGreaterThan: Timestamp.fromDate(DateTime.now()),
+            )
             .limit(limit)
             .snapshots();
       }
@@ -72,6 +90,12 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
           _usersStream = fireStore
               .collection('users')
               .where('role', isEqualTo: 'shipper')
+              .where('isOnline', isEqualTo: true)
+              .where(
+                'shipperServiceEndDate',
+                isNull: false,
+                isGreaterThan: Timestamp.fromDate(DateTime.now()),
+              )
               .limit(limit)
               .snapshots();
         }

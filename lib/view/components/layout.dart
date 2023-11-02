@@ -10,15 +10,19 @@ import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/router/app_router_config.dart';
 import 'package:keri_challenge/data/enum/role_enum.dart';
 
+import '../../util/value_render.dart';
+
 class Layout extends StatefulWidget {
   const Layout({
     super.key,
     required this.body,
     required this.title,
     this.canComeBack = true,
+    this.canPush = true,
   });
 
   final Widget body;
+  final bool canPush;
   final String title;
   final bool canComeBack;
 
@@ -45,29 +49,32 @@ class _LayoutState extends State<Layout> {
 
   @override
   void initState() {
-    _role = context.read<AuthorBloc>().currentUser!.role;
-
-    if (_role == RoleEnum.shipper.name) {
-      _clientRouteList = [
-        ShipperIndexRoute(initialTabIndex: 0),
-        const ShipperServiceRoute(),
-        const LoginRoute(),
-      ];
-      _clientRouteNameList = ['Trang chủ', 'Gói dịch vụ', 'Đăng xuất'];
-    } else if (_role == RoleEnum.client.name) {
-      _clientRouteList = [
-        ShipperIndexRoute(initialTabIndex: 0),
-        const ShipperServiceRoute(),
-        const LoginRoute(),
-      ];
-      _clientRouteNameList = ['Trang chủ', 'Đăng xuất'];
-    }
+    _role = ValueRender.currentUser!.role;
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_role == RoleEnum.shipper.name) {
+      _clientRouteList = widget.canPush
+          ? [
+              ShipperIndexRoute(initialTabIndex: 0),
+              ShipperServiceRoute(),
+              const LoginRoute(),
+            ]
+          : [const LoginRoute()];
+      _clientRouteNameList = widget.canPush
+          ? ['Trang chủ', 'Gói dịch vụ', 'Đăng xuất']
+          : ['Đăng xuất'];
+    } else if (_role == RoleEnum.client.name) {
+      _clientRouteList = [
+        ShipperIndexRoute(initialTabIndex: 0),
+        const LoginRoute(),
+      ];
+      _clientRouteNameList = ['Trang chủ', 'Đăng xuất'];
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,

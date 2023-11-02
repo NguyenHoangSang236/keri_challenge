@@ -18,7 +18,7 @@ class OrderRepository {
       int latestId = 0;
 
       final ref = fireStore
-          .collection('orders')
+          .collection(FireStoreCollectionEnum.orders.name)
           .orderBy('id', descending: false)
           .where('senderPhoneNumber', isEqualTo: senderPhoneNumber)
           .limitToLast(1);
@@ -35,7 +35,7 @@ class OrderRepository {
       final int start = limit * (page - 1);
 
       final docRef = fireStore
-          .collection('orders')
+          .collection(FireStoreCollectionEnum.orders.name)
           .orderBy('id', descending: true)
           .where('senderPhoneNumber', isEqualTo: senderPhoneNumber)
           .startAt([latestId - start]).limit(limit * page);
@@ -72,7 +72,7 @@ class OrderRepository {
       int latestId = 0;
 
       final ref = fireStore
-          .collection('orders')
+          .collection(FireStoreCollectionEnum.orders.name)
           .orderBy('shipperOrderId', descending: true)
           .where('shipperPhoneNumber', isEqualTo: shipperPhoneNumber)
           .limit(1);
@@ -89,7 +89,7 @@ class OrderRepository {
       final int start = limit * (page - 1);
 
       final docRef = fireStore
-          .collection('orders')
+          .collection(FireStoreCollectionEnum.orders.name)
           .orderBy('id', descending: true)
           .where('shipperPhoneNumber', isEqualTo: shipperPhoneNumber)
           .startAt([latestId - start]).limit(limit * page);
@@ -124,7 +124,7 @@ class OrderRepository {
       int newId = 0;
 
       final docRef = fireStore
-          .collection('orders')
+          .collection(FireStoreCollectionEnum.orders.name)
           .orderBy('id', descending: false)
           .where('senderPhoneNumber', isEqualTo: senderPhoneNumber)
           .limitToLast(1);
@@ -152,7 +152,7 @@ class OrderRepository {
       String result = 'Failed! ';
 
       await fireStore
-          .collection('orders')
+          .collection(FireStoreCollectionEnum.orders.name)
           .doc('${newOrder.senderPhoneNumber}-${newOrder.id}')
           .set(newOrder.toJson())
           .then(
@@ -175,7 +175,7 @@ class OrderRepository {
   ) async {
     try {
       final docRef = fireStore
-          .collection('orders')
+          .collection(FireStoreCollectionEnum.orders.name)
           .orderBy('id', descending: false)
           .where('shipperPhoneNumber', isEqualTo: shipperPhoneNumber)
           .where('status', isEqualTo: ShipperEnum.shipping.name)
@@ -218,7 +218,7 @@ class OrderRepository {
       data = {'status': ShipperEnum.shipping.name};
 
       final docRef = fireStore
-          .collection('orders')
+          .collection(FireStoreCollectionEnum.orders.name)
           .orderBy('shipperOrderId', descending: true)
           .where('shipperPhoneNumber', isEqualTo: shipperPhoneNumber)
           .limit(1);

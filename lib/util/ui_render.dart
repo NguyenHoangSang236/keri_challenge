@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +35,14 @@ class UiRender {
         color: Theme.of(context).colorScheme.primary,
       ),
     );
+  }
+
+  static Image convertBase64ToImage(String base64) {
+    Uint8List bytesImage;
+
+    bytesImage = const Base64Decoder().convert(base64);
+
+    return Image.memory(bytesImage);
   }
 
   static Future<bool> showConfirmDialog(
@@ -84,8 +95,11 @@ class UiRender {
   }
 
   static Future<void> showDialog(
-      BuildContext context, String title, String message,
-      {TextAlign textAlign = TextAlign.center}) async {
+    BuildContext context,
+    String title,
+    String message, {
+    TextAlign textAlign = TextAlign.center,
+  }) async {
     return showCupertinoDialog(
       barrierDismissible: true,
       context: context,

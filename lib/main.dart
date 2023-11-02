@@ -72,8 +72,6 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  // FirebaseDatabase.instance.useDatabaseEmulator(emulatorHost, emulatorPort);
-
   runApp(
     MultiRepositoryProvider(
       providers: [

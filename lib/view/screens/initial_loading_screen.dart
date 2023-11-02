@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:keri_challenge/core/extension/datetime_extension.dart';
 import 'package:keri_challenge/core/router/app_router_config.dart';
+import 'package:keri_challenge/util/ui_render.dart';
 
 import '../../bloc/appConfig/app_config_bloc.dart';
 import '../../bloc/authorization/author_bloc.dart';
@@ -73,23 +75,64 @@ class _InitialLoadingState extends State<InitialLoadingScreen> {
                   },
                 ),
                 BlocListener<AuthorBloc, AuthorState>(
-                  listener: (context, authenState) {
-                    if (authenState is AuthorLoggedInState) {
-                      if (authenState.user.role == 'client') {
+                  listener: (context, state) {
+                    if (state is AuthorLoggedInState) {
+                      if (state.user.role == 'client') {
                         context.router.replaceAll([const ClientIndexRoute()]);
-                      } else if (authenState.user.role == 'shipper') {
-                        context.read<OrderBloc>().add(
-                              OnLoadShippingOrderEvent(
-                                authenState.user.phoneNumber,
+                      } else if (state.user.role == 'shipper') {
+                        if (state.user.shipperServiceEndDate != null &&
+                            state.user.shipperServiceEndDate!
+                                .isAfter(DateTime.now())) {
+                          context.read<OrderBloc>().add(
+                                OnLoadShippingOrderEvent(
+                                  context
+                                      .read<AuthorBloc>()
+                                      .currentUser!
+                                      .phoneNumber,
+                                ),
+                              );
+                          context.read<GoogleMapBloc>().add(
+                                OnLoadCurrentLocationEvent(
+                                  context
+                                      .read<AuthorBloc>()
+                                      .currentUser!
+                                      .phoneNumber,
+                                ),
+                              );
+                        } else {
+                          if (state.user.shipperServiceEndDate == null) {
+                            UiRender.showDialog(
+                              context,
+                              '',
+                              'Bạn chưa đăng kí gói dịch vụ shipper, vui lòng đăng kí gói dịch vụ để sử dụng dịch vụ của chúng tôi',
+                            ).then(
+                              (value) => context.router.replaceAll(
+                                [
+                                  ShipperServiceRoute(
+                                    isShipperServiceExpired: true,
+                                  )
+                                ],
                               ),
                             );
-                        context.read<GoogleMapBloc>().add(
-                              OnLoadCurrentLocationEvent(
-                                authenState.user.phoneNumber,
+                          } else if (state.user.shipperServiceEndDate!
+                              .isBefore(DateTime.now())) {
+                            UiRender.showDialog(
+                              context,
+                              '',
+                              'Gói dịch vụ của bạn đã hết hạn vào ngày ${state.user.shipperServiceEndDate!.date}, vui lòng đăng kí gói dịch vụ mới để tiếp tục sử dụng dịch vụ',
+                            ).then(
+                              (value) => context.router.replaceAll(
+                                [
+                                  ShipperServiceRoute(
+                                    isShipperServiceExpired: true,
+                                  )
+                                ],
                               ),
                             );
-                      } else if (authenState.user.role == 'admin') {}
-                    } else if (authenState is AuthorErrorState) {
+                          }
+                        }
+                      } else if (state.user.role == 'admin') {}
+                    } else if (state is AuthorErrorState) {
                       context.router.replaceNamed(AppRouterPath.login);
                     }
                   },

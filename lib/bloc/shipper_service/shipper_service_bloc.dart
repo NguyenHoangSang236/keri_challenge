@@ -12,9 +12,12 @@ class ShipperServiceBloc
     extends Bloc<ShipperServiceEvent, ShipperServiceState> {
   final ShipperServiceRepository _shipperServiceRepository;
 
+  ShipperService? currentShipperService;
+  List<ShipperService> shipperServiceList = [];
+
   ShipperServiceBloc(this._shipperServiceRepository)
       : super(ShipperServiceInitial()) {
-    on<OnAddNewShipperService>((event, emit) async {
+    on<OnAddNewShipperServiceEvent>((event, emit) async {
       emit(ShipperServiceLoadingState());
 
       try {
@@ -29,6 +32,59 @@ class ShipperServiceBloc
         debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
         emit(ShipperServiceErrorState(e.toString()));
       }
+    });
+
+    on<OnLoadHistoryShipperServiceListEvent>((event, emit) async {
+      emit(ShipperServiceLoadingState());
+
+      try {
+        final response = await _shipperServiceRepository.getShipperServiceList(
+          page: event.page,
+          limit: event.limit,
+          shipperPhoneNumber: event.shipperPhoneNumber,
+        );
+
+        response.fold(
+          (failure) => emit(ShipperServiceErrorState(failure.message)),
+          (list) {
+            shipperServiceList = List.of(list);
+
+            emit(ShipperServiceListLoadedState(list));
+          },
+        );
+      } catch (e, stackTrace) {
+        debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
+        emit(ShipperServiceErrorState(e.toString()));
+      }
+    });
+
+    on<OnLoadCurrentShipperServiceEvent>((event, emit) async {
+      emit(ShipperServiceLoadingState());
+
+      try {
+        final response =
+            await _shipperServiceRepository.getCurrentShipperService(
+                shipperPhoneNumber: event.shipperPhoneNumber);
+
+        response.fold(
+          (failure) => emit(ShipperServiceErrorState(failure.message)),
+          (service) {
+            currentShipperService = service;
+
+            emit(CurrentShipperServiceLoadedState(service));
+          },
+        );
+      } catch (e, stackTrace) {
+        debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
+        emit(ShipperServiceErrorState(e.toString()));
+      }
+    });
+
+    on<OnClearShipperServiceEvent>((event, emit) async {
+      currentShipperService = null;
+      shipperServiceList.clear();
+
+      emit(ShipperServiceClearedState());
     });
   }
 }

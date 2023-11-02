@@ -14,9 +14,26 @@ class ShipperServiceLoadingState extends ShipperServiceState {
   List<Object> get props => [];
 }
 
+class CurrentShipperServiceLoadedState extends ShipperServiceState {
+  final ShipperService shipperService;
+
+  const CurrentShipperServiceLoadedState(this.shipperService);
+
+  @override
+  List<Object> get props => [];
+}
+
 class ShipperServiceClearedState extends ShipperServiceState {
   @override
   List<Object> get props => [];
+}
+
+class ShipperServiceListLoadedState extends ShipperServiceState {
+  final List<ShipperService> shipperServiceList;
+
+  const ShipperServiceListLoadedState(this.shipperServiceList);
+  @override
+  List<Object?> get props => [shipperServiceList];
 }
 
 class ShipperServiceAddedState extends ShipperServiceState {
