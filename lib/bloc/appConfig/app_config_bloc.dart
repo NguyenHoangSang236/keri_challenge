@@ -32,5 +32,29 @@ class AppConfigBloc extends Bloc<AppConfigEvent, AppConfigState> {
         emit(AppConfigErrorState(e.toString()));
       }
     });
+
+    on<OnUpdateAppConfigEvent>((event, emit) async {
+      emit(AppConfigLoadingState());
+
+      try {
+        final response = await _appConfigRepository.editAppConfig(
+          event.appConfig,
+        );
+
+        response.fold(
+          (failure) => emit(AppConfigErrorState(failure.message)),
+          (success) {
+            appConfig = event.appConfig;
+
+            add(OnLoadAppConfigEvent());
+
+            emit(AppConfigUpdatedState(success));
+          },
+        );
+      } catch (e, stackTrace) {
+        debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
+        emit(AppConfigErrorState(e.toString()));
+      }
+    });
   }
 }

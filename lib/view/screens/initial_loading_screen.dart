@@ -11,6 +11,7 @@ import '../../bloc/google_map/google_map_bloc.dart';
 import '../../bloc/order/order_bloc.dart';
 import '../../core/router/app_router_path.dart';
 import '../../data/enum/local_storage_enum.dart';
+import '../../data/enum/role_enum.dart';
 import '../../services/firebase_message_service.dart';
 import '../../services/local_storage_service.dart';
 
@@ -77,9 +78,9 @@ class _InitialLoadingState extends State<InitialLoadingScreen> {
                 BlocListener<AuthorBloc, AuthorState>(
                   listener: (context, state) {
                     if (state is AuthorLoggedInState) {
-                      if (state.user.role == 'client') {
+                      if (state.user.role == RoleEnum.client.name) {
                         context.router.replaceAll([const ClientIndexRoute()]);
-                      } else if (state.user.role == 'shipper') {
+                      } else if (state.user.role == RoleEnum.shipper.name) {
                         if (state.user.shipperServiceEndDate != null &&
                             state.user.shipperServiceEndDate!
                                 .isAfter(DateTime.now())) {
@@ -131,7 +132,9 @@ class _InitialLoadingState extends State<InitialLoadingScreen> {
                             );
                           }
                         }
-                      } else if (state.user.role == 'admin') {}
+                      } else if (state.user.role == RoleEnum.admin.name) {
+                        context.router.replaceAll([const AdminIndexRoute()]);
+                      }
                     } else if (state is AuthorErrorState) {
                       context.router.replaceNamed(AppRouterPath.login);
                     }

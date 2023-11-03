@@ -15,16 +15,22 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    AccountListRoute.name: (routeData) {
+    AdminIndexRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const AccountListScreen(),
+        child: const AdminIndexScreen(),
       );
     },
     ClientIndexRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const ClientIndexScreen(),
+      );
+    },
+    ConfigRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ConfigScreen(),
       );
     },
     InitialLoadingRoute.name: (routeData) {
@@ -92,6 +98,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    ShipperServiceManagementRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const ShipperServiceManagementScreen(),
+      );
+    },
     ShipperServiceRoute.name: (routeData) {
       final args = routeData.argsAs<ShipperServiceRouteArgs>(
           orElse: () => const ShipperServiceRouteArgs());
@@ -107,15 +119,15 @@ abstract class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
-/// [AccountListScreen]
-class AccountListRoute extends PageRouteInfo<void> {
-  const AccountListRoute({List<PageRouteInfo>? children})
+/// [AdminIndexScreen]
+class AdminIndexRoute extends PageRouteInfo<void> {
+  const AdminIndexRoute({List<PageRouteInfo>? children})
       : super(
-          AccountListRoute.name,
+          AdminIndexRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'AccountListRoute';
+  static const String name = 'AdminIndexRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -130,6 +142,20 @@ class ClientIndexRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'ClientIndexRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [ConfigScreen]
+class ConfigRoute extends PageRouteInfo<void> {
+  const ConfigRoute({List<PageRouteInfo>? children})
+      : super(
+          ConfigRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ConfigRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -340,6 +366,20 @@ class ShipperIndexRouteArgs {
   String toString() {
     return 'ShipperIndexRouteArgs{key: $key, initialTabIndex: $initialTabIndex}';
   }
+}
+
+/// generated route for
+/// [ShipperServiceManagementScreen]
+class ShipperServiceManagementRoute extends PageRouteInfo<void> {
+  const ShipperServiceManagementRoute({List<PageRouteInfo>? children})
+      : super(
+          ShipperServiceManagementRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ShipperServiceManagementRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for

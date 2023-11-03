@@ -19,41 +19,22 @@ class AccountClearedState extends AccountState {
   List<Object> get props => [];
 }
 
-class AccountListByNameLoadedState extends AccountState {
+class ClientAccountListLoadedState extends AccountState {
   final List<User> userList;
 
-  const AccountListByNameLoadedState(this.userList);
+  const ClientAccountListLoadedState(this.userList);
 
   @override
   List<Object> get props => [userList];
 }
 
-class AccountListByPhoneNumberLoadedState extends AccountState {
+class ShipperAccountListLoadedState extends AccountState {
   final List<User> userList;
 
-  const AccountListByPhoneNumberLoadedState(this.userList);
+  const ShipperAccountListLoadedState(this.userList);
 
   @override
   List<Object> get props => [userList];
-}
-
-class AllAccountListByNameLoadedState extends AccountState {
-  final List<User> userList;
-
-  const AllAccountListByNameLoadedState(this.userList);
-
-  @override
-  List<Object> get props => [userList];
-}
-
-class PaginationAccountListLoadedState extends AccountState {
-  final List<User> userList;
-  final int page;
-
-  const PaginationAccountListLoadedState(this.userList, this.page);
-
-  @override
-  List<Object> get props => [userList, page];
 }
 
 class AccountErrorState extends AccountState {

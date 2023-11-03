@@ -2,8 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../data/entities/user.dart';
-import '../../view/screens/account_list_screen.dart';
+import '../../view/screens/admin_index_screen.dart';
 import '../../view/screens/client_index_screen.dart';
+import '../../view/screens/config_screen.dart';
 import '../../view/screens/initial_loading_screen.dart';
 import '../../view/screens/login_screen.dart';
 import '../../view/screens/map_screen.dart';
@@ -12,6 +13,7 @@ import '../../view/screens/phone_verification_screen.dart';
 import '../../view/screens/register_screen.dart';
 import '../../view/screens/searching_screen.dart';
 import '../../view/screens/shipper_index_screen.dart';
+import '../../view/screens/shipper_service_management_screen.dart';
 import '../../view/screens/shipper_service_screen.dart';
 import 'app_router_path.dart';
 
@@ -49,10 +51,6 @@ class AppRouter extends _$AppRouter {
           path: AppRouterPath.phoneVerification,
         ),
         AutoRoute(
-          page: AccountListRoute.page,
-          path: AppRouterPath.accountList,
-        ),
-        AutoRoute(
           page: ClientIndexRoute.page,
           path: AppRouterPath.clientIndex,
         ),
@@ -67,6 +65,18 @@ class AppRouter extends _$AppRouter {
         AutoRoute(
           page: ShipperServiceRoute.page,
           path: AppRouterPath.shipperService,
+        ),
+        AutoRoute(
+          page: AdminIndexRoute.page,
+          path: AppRouterPath.adminIndex,
+        ),
+        AutoRoute(
+          page: ConfigRoute.page,
+          path: AppRouterPath.config,
+        ),
+        AutoRoute(
+          page: ShipperServiceManagementRoute.page,
+          path: AppRouterPath.shipperServiceManagement,
         ),
       ];
 }

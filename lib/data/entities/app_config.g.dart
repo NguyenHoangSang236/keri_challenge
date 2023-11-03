@@ -16,6 +16,7 @@ AppConfig _$AppConfigFromJson(Map<String, dynamic> json) => AppConfig(
       (json['oneDayShipperServicePrice'] as num).toDouble(),
       (json['oneMonthShipperServicePrice'] as num).toDouble(),
       json['slogan'] as String,
+      json['websiteUrl'] as String,
     );
 
 Map<String, dynamic> _$AppConfigToJson(AppConfig instance) => <String, dynamic>{
@@ -28,4 +29,5 @@ Map<String, dynamic> _$AppConfigToJson(AppConfig instance) => <String, dynamic>{
       'oneDayShipperServicePrice': instance.oneDayShipperServicePrice,
       'oneMonthShipperServicePrice': instance.oneMonthShipperServicePrice,
       'slogan': instance.slogan,
+      'websiteUrl': instance.websiteUrl,
     };

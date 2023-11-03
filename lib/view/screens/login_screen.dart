@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
+import 'package:keri_challenge/bloc/shipper_service/shipper_service_bloc.dart';
 import 'package:keri_challenge/core/extension/datetime_extension.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/data/entities/app_config.dart';
@@ -15,6 +16,7 @@ import 'package:keri_challenge/view/screens/register_screen.dart';
 import '../../bloc/appConfig/app_config_bloc.dart';
 import '../../bloc/order/order_bloc.dart';
 import '../../core/router/app_router_config.dart';
+import '../../data/enum/role_enum.dart';
 import '../../services/local_storage_service.dart';
 
 @RoutePage()
@@ -111,46 +113,24 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   void _onPressedLoginButton() async {
-    /// for getting total number of users
-    // final snapshot = await FirebaseDatabaseService.get('/users');
-    //
-    // Map jsonMap = jsonDecode(snapshot.toString().formatToJson);
-    //
-    // print(jsonMap.keys.length);
-
-    /// for setting new users
-    // FirebaseDatabaseService.remove('users');
-    // Set<String> phoneList = {};
-    //
-    // for (int i = 0; i < 5000; i++) {
-    //   String phone = '09${ValueRender.randomPhoneNumber()}';
-    //
-    //   FirebaseDatabaseService.set(
-    //     User('user${i + 1}', phone, '123', ''),
-    //     'users/user${i + 1}',
-    //   );
-    // }
-
-    // User newAdmin = User(
-    //   fullName: 'Nguyen Van A',
-    //   birthYear: '1998',
-    //   phoneNumber: '0321546789',
+    // User newUser = User(
+    //   fullName: 'ADMIN dep trai',
+    //   birthYear: '2001',
+    //   phoneNumber: '0231456789',
     //   sex: 'male',
-    //   address: 'Ho chi minh',
-    //   idCertificateNumber: '012365478965',
+    //   isOnline: true,
+    //   role: 'admin',
+    //   address:
+    //       'Công Viên Phần Mềm Quang Trung, Tân Chánh Hiệp, Quận 12, Thành phố Hồ Chí Minh',
+    //   idCertificateNumber: '023154687915',
     //   password: '123',
     //   registerDate: DateTime.now(),
     // );
     //
-    // FirebaseDatabaseService.getObjectMap(
-    //   collection: 'users',
-    //   document: '0321564897',
-    // );
-    // FirebaseDatabaseService.getObjectMapList(collection: 'users');
     // FirebaseDatabaseService.addData(
-    //   data: newAdmin.toJson(),
-    //   collection: 'admins',
-    //   document: newAdmin.phoneNumber,
+    //   data: newUser.toJson(),
+    //   collection: 'users',
+    //   document: '0123456789',
     // );
 
     if (_loginFormKey.currentState!.validate()) {
@@ -210,26 +190,20 @@ class _LoginScreenState extends State<LoginScreen> {
               BlocListener<AuthorBloc, AuthorState>(
                 listener: (context, state) {
                   if (state is AuthorLoggedInState) {
-                    if (state.user.role == 'client') {
+                    if (state.user.role == RoleEnum.client.name) {
                       context.router.replaceAll([const ClientIndexRoute()]);
-                    } else if (state.user.role == 'shipper') {
+                    } else if (state.user.role == RoleEnum.shipper.name) {
                       if (state.user.shipperServiceEndDate != null &&
                           state.user.shipperServiceEndDate!
                               .isAfter(DateTime.now())) {
                         context.read<OrderBloc>().add(
                               OnLoadShippingOrderEvent(
-                                context
-                                    .read<AuthorBloc>()
-                                    .currentUser!
-                                    .phoneNumber,
+                                state.user.phoneNumber,
                               ),
                             );
                         context.read<GoogleMapBloc>().add(
                               OnLoadCurrentLocationEvent(
-                                context
-                                    .read<AuthorBloc>()
-                                    .currentUser!
-                                    .phoneNumber,
+                                state.user.phoneNumber,
                               ),
                             );
                       } else {
@@ -253,18 +227,26 @@ class _LoginScreenState extends State<LoginScreen> {
                             context,
                             '',
                             'Gói dịch vụ của bạn đã hết hạn vào ngày ${state.user.shipperServiceEndDate!.date}, vui lòng đăng kí gói dịch vụ mới để tiếp tục sử dụng dịch vụ',
-                          ).then(
-                            (value) => context.router.replaceAll(
+                          ).then((value) {
+                            context.read<ShipperServiceBloc>().add(
+                                  OnCheckExpiredCurrentShipperServiceEvent(
+                                    state.user.phoneNumber,
+                                  ),
+                                );
+
+                            context.router.replaceAll(
                               [
                                 ShipperServiceRoute(
                                   isShipperServiceExpired: true,
                                 )
                               ],
-                            ),
-                          );
+                            );
+                          });
                         }
                       }
-                    } else if (state.user.role == 'admin') {}
+                    } else if (state.user.role == RoleEnum.admin.name) {
+                      context.router.replaceAll([const AdminIndexRoute()]);
+                    }
                   } else if (state is AuthorErrorState) {
                     UiRender.showSnackBar(context, state.message);
                   }

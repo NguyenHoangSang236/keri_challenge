@@ -3,6 +3,7 @@ import 'package:dropdown_button3/dropdown_button3.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:keri_challenge/bloc/account/account_bloc.dart';
 import 'package:keri_challenge/bloc/authorization/author_bloc.dart';
 import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/bloc/order/order_bloc.dart';
@@ -41,6 +42,7 @@ class _LayoutState extends State<Layout> {
         context.read<GoogleMapBloc>().add(OnClearMapEvent());
         context.read<OrderBloc>().add(OnClearOrderEvent());
         context.read<AuthorBloc>().add(OnLogoutEvent());
+        context.read<AccountBloc>().add(OnClearAccountEvent());
       }
 
       context.router.replaceAll([route]);
@@ -51,11 +53,6 @@ class _LayoutState extends State<Layout> {
   void initState() {
     _role = ValueRender.currentUser!.role;
 
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     if (_role == RoleEnum.shipper.name) {
       _clientRouteList = widget.canPush
           ? [
@@ -69,12 +66,30 @@ class _LayoutState extends State<Layout> {
           : ['Đăng xuất'];
     } else if (_role == RoleEnum.client.name) {
       _clientRouteList = [
-        ShipperIndexRoute(initialTabIndex: 0),
+        const ClientIndexRoute(),
         const LoginRoute(),
       ];
       _clientRouteNameList = ['Trang chủ', 'Đăng xuất'];
+    } else if (_role == RoleEnum.admin.name) {
+      _clientRouteList = [
+        const AdminIndexRoute(),
+        const ShipperServiceManagementRoute(),
+        const ConfigRoute(),
+        const LoginRoute(),
+      ];
+      _clientRouteNameList = [
+        'Trang chủ',
+        'Quản lí gói dịch vụ',
+        'Cấu hình',
+        'Đăng xuất'
+      ];
     }
 
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,

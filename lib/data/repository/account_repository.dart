@@ -2,6 +2,7 @@ import 'package:either_dart/either.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../core/failure/failure.dart';
+import '../../main.dart';
 import '../../services/firebase_database_service.dart';
 import '../../services/local_storage_service.dart';
 import '../entities/user.dart';
@@ -86,6 +87,40 @@ class AccountRepository {
     } catch (e, stackTrace) {
       debugPrint(
         'Caught login error: ${e.toString()} \n${stackTrace.toString()}',
+      );
+      return Left(ExceptionFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, List<User>>> getUserList({
+    required String role,
+    int limit = 10,
+  }) async {
+    List<User> userList = [];
+    List<Map<String, dynamic>> mapList = [];
+
+    try {
+      final ref = fireStore
+          .collection(FireStoreCollectionEnum.users.name)
+          .orderBy('registerDate', descending: true)
+          .where('role', isEqualTo: role)
+          .limit(limit);
+
+      await ref.get().then(
+        (querySnap) {
+          for (var docSnapshot in querySnap.docs) {
+            mapList.add(docSnapshot.data());
+          }
+        },
+        onError: (e) => debugPrint("Error getting document list: $e"),
+      );
+
+      userList = mapList.map((json) => User.fromJson(json)).toList();
+
+      return Right(userList);
+    } catch (e, stackTrace) {
+      debugPrint(
+        'Caught getting client history order list error: ${e.toString()} \n${stackTrace.toString()}',
       );
       return Left(ExceptionFailure(e.toString()));
     }

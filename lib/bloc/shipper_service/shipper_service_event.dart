@@ -19,6 +19,12 @@ class OnLoadCurrentShipperServiceEvent extends ShipperServiceEvent {
   OnLoadCurrentShipperServiceEvent(this.shipperPhoneNumber);
 }
 
+class OnCheckExpiredCurrentShipperServiceEvent extends ShipperServiceEvent {
+  final String shipperPhoneNumber;
+
+  OnCheckExpiredCurrentShipperServiceEvent(this.shipperPhoneNumber);
+}
+
 class OnLoadHistoryShipperServiceListEvent extends ShipperServiceEvent {
   final String shipperPhoneNumber;
   final int limit;

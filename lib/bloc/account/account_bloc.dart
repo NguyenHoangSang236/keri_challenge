@@ -1,117 +1,59 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:keri_challenge/data/enum/role_enum.dart';
 
 import '../../data/entities/user.dart';
+import '../../data/repository/account_repository.dart';
 
 part 'account_event.dart';
 part 'account_state.dart';
 
 class AccountBloc extends Bloc<AccountEvent, AccountState> {
-  List<User> allUserList = [];
-  List<User> filterUserList = [];
-  List<User> paginationUserList = [];
-  int page = 1;
-  int limit = 10;
+  final AccountRepository _accountRepository;
 
-  AccountBloc() : super(AccountInitial()) {
-    on<OnLoadAllUserListEvent>((event, emit) async {
+  List<User> clientUserList = [];
+  List<User> shipperUserList = [];
+  int clientListLimit = 10;
+  int shipperListLimit = 10;
+
+  AccountBloc(this._accountRepository) : super(AccountInitial()) {
+    on<OnLoadUserListEvent>((event, emit) async {
       emit(AccountLoadingState());
-      try {
-        // String jsonString = await FirebaseDatabaseService.get('users');
-        //
-        // Map<String, dynamic> jsonMap = json.decode(jsonString.formatToJson);
-        //
-        // allUserList = List.from(
-        //   jsonMap.entries.map((e) => User.fromJson(e.value)),
-        // );
-        //
-        // filterUserList = allUserList;
-        //
-        // add(const OnLoadPaginationUserListEvent(1));
 
-        emit(AllAccountListByNameLoadedState(allUserList));
+      try {
+        final response = await _accountRepository.getUserList(
+          role: event.role,
+          limit: event.limit,
+        );
+
+        response.fold(
+          (failure) => emit(AccountErrorState(failure.message)),
+          (list) {
+            if (event.role == RoleEnum.client.name) {
+              clientUserList = List.of(list);
+              clientListLimit = event.limit;
+
+              emit(ClientAccountListLoadedState(clientUserList));
+            } else if (event.role == RoleEnum.shipper.name) {
+              shipperUserList = List.of(list);
+              shipperListLimit = event.limit;
+
+              emit(ShipperAccountListLoadedState(shipperUserList));
+            }
+          },
+        );
       } catch (e, stackTrace) {
         debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
         emit(AccountErrorState(e.toString()));
       }
     });
 
-    on<OnSearchUserByNameEvent>((event, emit) async {
-      emit(AccountLoadingState());
-      try {
-        if (allUserList.isNotEmpty) {
-          page = 1;
-
-          filterUserList = allUserList
-              .where((user) => user.fullName.contains(event.userName))
-              .toList();
-
-          add(OnLoadPaginationUserListEvent(page));
-
-          emit(AccountListByNameLoadedState(filterUserList));
-        }
-      } catch (e, stackTrace) {
-        debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
-        emit(AccountErrorState(e.toString()));
-      }
+    on<OnClearAccountEvent>((event, emit) {
+      clientUserList.clear();
+      shipperUserList.clear();
+      clientListLimit = 10;
+      shipperListLimit = 10;
     });
-
-    on<OnSearchUserByPhoneEvent>((event, emit) async {
-      emit(AccountLoadingState());
-      try {
-        if (allUserList.isNotEmpty) {
-          page = 1;
-
-          filterUserList = allUserList
-              .where((user) => user.phoneNumber.contains(event.phoneNumber))
-              .toList();
-
-          add(OnLoadPaginationUserListEvent(page));
-
-          emit(AccountListByPhoneNumberLoadedState(filterUserList));
-        }
-      } catch (e, stackTrace) {
-        debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
-        emit(AccountErrorState(e.toString()));
-      }
-    });
-
-    on<OnLoadPaginationUserListEvent>((event, emit) async {
-      emit(AccountLoadingState());
-      try {
-        if (event.page > 0) {
-          page = event.page;
-
-          paginationUserList = page * limit < filterUserList.length
-              ? filterUserList.sublist(
-                  (page - 1) * limit,
-                  page * limit,
-                )
-              : filterUserList.sublist((page - 1) * limit);
-        }
-
-        emit(PaginationAccountListLoadedState(paginationUserList, page));
-      } catch (e, stackTrace) {
-        debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
-        emit(AccountErrorState(e.toString()));
-      }
-    });
-
-    on<OnClearFilterUserListEvent>((event, emit) {
-      filterUserList = allUserList;
-      page = 1;
-      paginationUserList = filterUserList.sublist(0, limit);
-
-      emit(PaginationAccountListLoadedState(paginationUserList, page));
-    });
-  }
-
-  List<User> _removeDuplicates(List<User> list) {
-    Set<String> set = {};
-    List<User> uniqueList =
-        list.where((element) => set.add(element.fullName)).toList();
-
-    return uniqueList;
   }
 }

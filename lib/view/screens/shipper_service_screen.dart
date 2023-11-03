@@ -42,18 +42,6 @@ class _ShipperServiceScreenState extends State<ShipperServiceScreen> {
   File? imageFile;
   int shipperServiceListLimit = 10;
 
-  String? _textFieldValidator(
-    String? value,
-    String? Function(String?)? additionalValidator,
-  ) {
-    if (value == null || value.isEmpty) {
-      return 'Không được để trống!';
-    } else if (additionalValidator != null) {
-      return additionalValidator(value);
-    }
-    return null;
-  }
-
   void _copyText(String value) {
     Clipboard.setData(ClipboardData(text: value)).then((val) {
       UiRender.showSnackBar(context, 'Đã sao chép văn bản vào bộ nhớ tạm');

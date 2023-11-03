@@ -2,6 +2,7 @@ import 'package:either_dart/either.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:keri_challenge/core/extension/datetime_extension.dart';
 import 'package:keri_challenge/data/entities/shipper_service.dart';
+import 'package:keri_challenge/data/enum/shipper_service_enum.dart';
 
 import '../../core/failure/failure.dart';
 import '../../main.dart';
@@ -61,14 +62,14 @@ class ShipperServiceRepository {
           },
         );
 
-        await FirebaseDatabaseService.updateData(
-          data: {
-            'shipperServiceStartDate': service.beginDate,
-            'shipperServiceEndDate': service.endDate,
-          },
-          collection: FireStoreCollectionEnum.users.name,
-          document: service.shipperPhoneNumber,
-        );
+        // await FirebaseDatabaseService.updateData(
+        //   data: {
+        //     'shipperServiceStartDate': service.beginDate,
+        //     'shipperServiceEndDate': service.endDate,
+        //   },
+        //   collection: FireStoreCollectionEnum.users.name,
+        //   document: service.shipperPhoneNumber,
+        // );
 
         return Right(result);
       }
@@ -162,11 +163,65 @@ class ShipperServiceRepository {
       } else if (latestService!.endDate.isBefore(DateTime.now())) {
         return Left(
           ExceptionFailure(
-            'Bạn vừa hạn gói dịch vụ gần đây nhất vào ngày ${latestService!.endDate.date}. Bạn cần đăng ký gói mới để sử dụng dịch vụ',
+            'Bạn vừa hết hạn gói dịch vụ gần đây nhất vào ngày ${latestService!.endDate.date}. Bạn cần đăng ký gói mới để sử dụng dịch vụ',
           ),
         );
       } else {
         return Right(latestService!);
+      }
+    } catch (e, stackTrace) {
+      debugPrint(
+        'Caught getting current shipper service error: ${e.toString()} \n${stackTrace.toString()}',
+      );
+      return Left(ExceptionFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, String>> checkExpireCurrentShipperService(
+      String shipperPhoneNumber) async {
+    ShipperService? latestService;
+
+    try {
+      final docRef = fireStore
+          .collection(FireStoreCollectionEnum.shipperService.name)
+          .orderBy('id')
+          .where('shipperPhoneNumber', isEqualTo: shipperPhoneNumber)
+          .limitToLast(1);
+
+      await docRef.get().then(
+        (querySnap) {
+          if (querySnap.docs.isNotEmpty) {
+            latestService =
+                ShipperService.fromJson(querySnap.docs.first.data());
+          }
+        },
+        onError: (e) => debugPrint("Error getting document list: $e"),
+      );
+
+      if (latestService == null) {
+        return const Left(
+          ApiFailure(
+            'Bạn chưa đăng ký gói dịch vụ, hãy đăng kí để sử dụng gói dịch vụ của chúng tôi',
+          ),
+        );
+      } else if (latestService!.endDate.isBefore(DateTime.now())) {
+        await FirebaseDatabaseService.updateData(
+          data: {
+            'status': ShipperServiceEnum.expired.name,
+          },
+          collection: FireStoreCollectionEnum.shipperService.name,
+          document: latestService!.getShipperServiceDoc(),
+        );
+
+        return Right(
+          'Bạn vừa hết hạn gói dịch vụ gần đây nhất vào ngày ${latestService!.endDate.date}. Bạn cần đăng ký gói mới để sử dụng dịch vụ',
+        );
+      } else {
+        return Left(
+          ApiFailure(
+            'Bạn sẽ hết hạn gói dịch vụ vào ngày ${latestService!.endDate.date}.',
+          ),
+        );
       }
     } catch (e, stackTrace) {
       debugPrint(

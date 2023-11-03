@@ -23,6 +23,14 @@ class AppConfigLoadState extends AppConfigState {
   List<Object> get props => [appConfig];
 }
 
+class AppConfigUpdatedState extends AppConfigState {
+  final String message;
+
+  const AppConfigUpdatedState(this.message);
+  @override
+  List<Object?> get props => [message];
+}
+
 class AppConfigErrorState extends AppConfigState {
   final String message;
 

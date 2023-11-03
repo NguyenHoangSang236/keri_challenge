@@ -7,24 +7,11 @@ abstract class AccountEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class OnSearchUserByNameEvent extends AccountEvent {
-  final String userName;
+class OnLoadUserListEvent extends AccountEvent {
+  final String role;
+  final int limit;
 
-  const OnSearchUserByNameEvent(this.userName);
+  const OnLoadUserListEvent(this.role, this.limit);
 }
 
-class OnSearchUserByPhoneEvent extends AccountEvent {
-  final String phoneNumber;
-
-  const OnSearchUserByPhoneEvent(this.phoneNumber);
-}
-
-class OnLoadPaginationUserListEvent extends AccountEvent {
-  final int page;
-
-  const OnLoadPaginationUserListEvent(this.page);
-}
-
-class OnLoadAllUserListEvent extends AccountEvent {}
-
-class OnClearFilterUserListEvent extends AccountEvent {}
+class OnClearAccountEvent extends AccountEvent {}

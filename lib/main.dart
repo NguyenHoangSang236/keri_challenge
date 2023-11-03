@@ -8,6 +8,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -72,6 +73,10 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+
   runApp(
     MultiRepositoryProvider(
       providers: [
@@ -119,7 +124,9 @@ Future<void> main() async {
             ),
           ),
           BlocProvider<AccountBloc>(
-            create: (context) => AccountBloc(),
+            create: (context) => AccountBloc(
+              RepositoryProvider.of<AccountRepository>(context),
+            ),
           ),
         ],
         child: const MyApp(),

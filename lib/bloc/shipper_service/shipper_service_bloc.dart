@@ -86,5 +86,24 @@ class ShipperServiceBloc
 
       emit(ShipperServiceClearedState());
     });
+
+    on<OnCheckExpiredCurrentShipperServiceEvent>((event, emit) async {
+      emit(ShipperServiceLoadingState());
+
+      try {
+        final response =
+            await _shipperServiceRepository.checkExpireCurrentShipperService(
+          event.shipperPhoneNumber,
+        );
+
+        response.fold(
+          (failure) => emit(ShipperServiceUnexpiredState(failure.message)),
+          (success) => emit(ShipperServiceExpiredState(success)),
+        );
+      } catch (e, stackTrace) {
+        debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
+        emit(ShipperServiceErrorState(e.toString()));
+      }
+    });
   }
 }

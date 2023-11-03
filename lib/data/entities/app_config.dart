@@ -13,6 +13,7 @@ class AppConfig {
   double oneDayShipperServicePrice;
   double oneMonthShipperServicePrice;
   String slogan;
+  String websiteUrl;
 
   AppConfig(
     this.email,
@@ -24,6 +25,7 @@ class AppConfig {
     this.oneDayShipperServicePrice,
     this.oneMonthShipperServicePrice,
     this.slogan,
+    this.websiteUrl,
   );
 
   factory AppConfig.fromJson(Map<String, dynamic> json) =>
@@ -33,6 +35,6 @@ class AppConfig {
 
   @override
   String toString() {
-    return '{email: $email, hotline: $hotline, bankName: $bankName, bankAccount: $bankAccount, bankReceiverName: $bankReceiverName, pricePerKm: $pricePerKm, oneDayShipperServicePrice: $oneDayShipperServicePrice, oneMonthShipperServicePrice: $oneMonthShipperServicePrice, slogan: $slogan}';
+    return '{email: $email, hotline: $hotline, bankName: $bankName, bankAccount: $bankAccount, bankReceiverName: $bankReceiverName, pricePerKm: $pricePerKm, oneDayShipperServicePrice: $oneDayShipperServicePrice, oneMonthShipperServicePrice: $oneMonthShipperServicePrice, slogan: $slogan, websiteUrl: $websiteUrl}';
   }
 }
