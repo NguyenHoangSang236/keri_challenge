@@ -9,8 +9,9 @@ abstract class ShipperServiceEvent extends Equatable {
 
 class OnAddNewShipperServiceEvent extends ShipperServiceEvent {
   final ShipperService newService;
+  final File billImageFile;
 
-  OnAddNewShipperServiceEvent(this.newService);
+  OnAddNewShipperServiceEvent(this.newService, this.billImageFile);
 }
 
 class OnLoadCurrentShipperServiceEvent extends ShipperServiceEvent {
@@ -38,3 +39,15 @@ class OnLoadHistoryShipperServiceListEvent extends ShipperServiceEvent {
 }
 
 class OnClearShipperServiceEvent extends ShipperServiceEvent {}
+
+class OnAcceptShipperServiceEvent extends ShipperServiceEvent {
+  final ShipperService shipperService;
+
+  OnAcceptShipperServiceEvent(this.shipperService);
+}
+
+class OnRejectShipperServiceEvent extends ShipperServiceEvent {
+  final ShipperService shipperService;
+
+  OnRejectShipperServiceEvent(this.shipperService);
+}

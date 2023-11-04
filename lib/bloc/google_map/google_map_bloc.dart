@@ -73,7 +73,36 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
         );
 
         response.fold(
-          (failure) => emit(GoogleMapErrorState(failure.message)),
+          (failure) {
+            if (failure.message.contains(
+                'type \'Null\' is not a subtype of type \'Map<String, dynamic>\' in type cast')) {
+              /// for test
+              if (event.isFromLocation) {
+                currentSelectedFromPointLatLng = testPoint1;
+                currentSelectedFromPrediction = event.prediction;
+
+                emit(GoogleMapNewLocationLoadedState(
+                  testPoint1.toLatLng,
+                  event.isFromLocation,
+                  event.prediction,
+                ));
+              } else {
+                currentSelectedToPointLatLng = testPoint2;
+                currentSelectedToPrediction = event.prediction;
+
+                emit(GoogleMapNewLocationLoadedState(
+                  testPoint2.toLatLng,
+                  event.isFromLocation,
+                  event.prediction,
+                ));
+              }
+            } else {
+              debugPrint(
+                'Catch error: ${failure.message}',
+              );
+              emit(GoogleMapErrorState(failure.message));
+            }
+          },
           (details) {
             if (details.isOkay) {
               final location = details.result.geometry?.location;
@@ -153,6 +182,8 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
     });
 
     on<OnCalculateDistanceEvent>((event, emit) {
+      emit(GoogleMapLoadingState());
+
       distance = Geolocator.distanceBetween(
             event.startLatLng.latitude,
             event.startLatLng.longitude,
@@ -192,10 +223,14 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
 
           response.fold(
             (failure) => emit(GoogleMapErrorState(failure.message)),
-            (success) => emit(GoogleMapCurrentLocationLoadedState(pos)),
+            (success) => emit(
+              GoogleMapCurrentLocationLoadedState(
+                currentPointLatLng!.toLatLng,
+              ),
+            ),
           );
         } else {
-          emit(GoogleMapErrorState(
+          emit(const GoogleMapErrorState(
             'Không thể lấy địa điểm hiện tại của bạn, hãy kiểm tra xem bạn đã kết nối mạng, mở truy cập định vị chưa và đã cho phép ứng dụng quyền truy cập vị trí chưa',
           ));
         }
@@ -207,8 +242,8 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
 
     on<OnLoadDefaultLocationEvent>((event, emit) async {
       List<Placemark> addresses = await placemarkFromCoordinates(
-        event.currentPosition.latitude,
-        event.currentPosition.longitude,
+        event.currentLatLng.latitude,
+        event.currentLatLng.longitude,
       );
 
       String currentAddress =
@@ -218,18 +253,18 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
         currentSelectedFromPrediction = Prediction(
           description: currentAddress,
         );
-        currentSelectedFromPointLatLng = event.currentPosition.toPointLatLng;
+        currentSelectedFromPointLatLng = event.currentLatLng.toPointLatLng;
       } else {
         currentSelectedToPrediction = Prediction(
           description: currentAddress,
         );
-        currentSelectedToPointLatLng = event.currentPosition.toPointLatLng;
+        currentSelectedToPointLatLng = event.currentLatLng.toPointLatLng;
       }
 
-      currentPointLatLng = event.currentPosition.toPointLatLng;
+      currentPointLatLng = event.currentLatLng.toPointLatLng;
 
       emit(GoogleMapNewLocationLoadedState(
-        event.currentPosition.toLatLng,
+        event.currentLatLng,
         event.isFromLocation,
         Prediction(description: currentAddress),
       ));

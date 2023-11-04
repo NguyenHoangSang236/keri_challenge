@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:keri_challenge/data/entities/shipper_service.dart';
+import 'package:keri_challenge/data/enum/shipper_service_enum.dart';
 
 import '../../data/repository/shipper_service_repository.dart';
 
@@ -21,8 +24,11 @@ class ShipperServiceBloc
       emit(ShipperServiceLoadingState());
 
       try {
-        final response = await _shipperServiceRepository
-            .registerNewShipperService(event.newService);
+        final response =
+            await _shipperServiceRepository.registerNewShipperService(
+          event.newService,
+          event.billImageFile,
+        );
 
         response.fold(
           (failure) => emit(ShipperServiceErrorState(failure.message)),
@@ -99,6 +105,46 @@ class ShipperServiceBloc
         response.fold(
           (failure) => emit(ShipperServiceUnexpiredState(failure.message)),
           (success) => emit(ShipperServiceExpiredState(success)),
+        );
+      } catch (e, stackTrace) {
+        debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
+        emit(ShipperServiceErrorState(e.toString()));
+      }
+    });
+
+    on<OnAcceptShipperServiceEvent>((event, emit) async {
+      emit(ShipperServiceLoadingState());
+
+      try {
+        final response =
+            await _shipperServiceRepository.actionsOnShipperService(
+          event.shipperService,
+          ShipperServiceEnum.accepted,
+        );
+
+        response.fold(
+          (failure) => emit(ShipperServiceErrorState(failure.message)),
+          (success) => emit(ShipperServiceAcceptedState(success)),
+        );
+      } catch (e, stackTrace) {
+        debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
+        emit(ShipperServiceErrorState(e.toString()));
+      }
+    });
+
+    on<OnRejectShipperServiceEvent>((event, emit) async {
+      emit(ShipperServiceLoadingState());
+
+      try {
+        final response =
+            await _shipperServiceRepository.actionsOnShipperService(
+          event.shipperService,
+          ShipperServiceEnum.rejected,
+        );
+
+        response.fold(
+          (failure) => emit(ShipperServiceErrorState(failure.message)),
+          (success) => emit(ShipperServiceRejectedState(success)),
         );
       } catch (e, stackTrace) {
         debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');

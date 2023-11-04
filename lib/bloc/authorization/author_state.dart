@@ -36,6 +36,14 @@ class AuthorRegisteredState extends AuthorState {
   List<Object?> get props => [message];
 }
 
+class AuthorCurrentLocationUpdatedState extends AuthorState {
+  final String message;
+
+  const AuthorCurrentLocationUpdatedState(this.message);
+  @override
+  List<Object?> get props => [message];
+}
+
 class AuthorErrorState extends AuthorState {
   final String message;
 

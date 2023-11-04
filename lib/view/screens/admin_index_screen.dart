@@ -69,7 +69,7 @@ class _AdminIndexScreenState extends State<AdminIndexScreen> {
       builder: (BuildContext ctx) {
         return CupertinoAlertDialog(
           title: const Text('Thông tin người dùng'),
-          content: _shipperServiceInfo(user),
+          content: _userInfo(user),
           actions: [
             CupertinoDialogAction(
               onPressed: () {
@@ -364,7 +364,7 @@ class _AdminIndexScreenState extends State<AdminIndexScreen> {
     );
   }
 
-  Widget _shipperServiceInfo(User user) {
+  Widget _userInfo(User user) {
     return SizedBox(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

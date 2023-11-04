@@ -130,12 +130,12 @@ class GoogleMapLocationFromPrivateMessageLoadedState extends GoogleMapState {
 }
 
 class GoogleMapCurrentLocationLoadedState extends GoogleMapState {
-  final Position currentPosition;
+  final LatLng currentLatLng;
 
-  const GoogleMapCurrentLocationLoadedState(this.currentPosition);
+  const GoogleMapCurrentLocationLoadedState(this.currentLatLng);
 
   @override
-  List<Object?> get props => [currentPosition];
+  List<Object?> get props => [currentLatLng];
 }
 
 class GoogleMapOrderDirectionLoadedState extends GoogleMapState {

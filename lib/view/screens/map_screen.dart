@@ -13,8 +13,8 @@ import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/core/extension/latLng_extension.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/extension/pointLatLng_extension.dart';
-import 'package:keri_challenge/core/extension/position_extension.dart';
 import 'package:keri_challenge/services/firebase_message_service.dart';
+import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/screens/searching_screen.dart';
 
 import '../../bloc/authorization/author_bloc.dart';
@@ -56,7 +56,7 @@ class _MapState extends State<MapScreen> {
   List<LatLng> polylineLatLngList = [];
   final PolylinePoints polylinePoints = PolylinePoints();
   Map<PolylineId, Polyline> polylinesMap = {};
-  late Position currentPosition;
+  late LatLng currentLatLng;
 
   void clearAllMarkers() {
     setState(() {
@@ -112,31 +112,19 @@ class _MapState extends State<MapScreen> {
           context.read<GoogleMapBloc>().add(
                 OnLoadDefaultLocationEvent(
                   isFromLocation,
-                  currentPosition,
+                  currentLatLng,
                 ),
               );
         } else {
           LatLng latLng = isFromLocation
-              ? LatLng(
-                  context
-                      .read<GoogleMapBloc>()
-                      .currentSelectedFromPointLatLng!
-                      .latitude,
-                  context
-                      .read<GoogleMapBloc>()
-                      .currentSelectedFromPointLatLng!
-                      .longitude,
-                )
-              : LatLng(
-                  context
-                      .read<GoogleMapBloc>()
-                      .currentSelectedToPointLatLng!
-                      .latitude,
-                  context
-                      .read<GoogleMapBloc>()
-                      .currentSelectedToPointLatLng!
-                      .longitude,
-                );
+              ? context
+                  .read<GoogleMapBloc>()
+                  .currentSelectedFromPointLatLng!
+                  .toLatLng
+              : context
+                  .read<GoogleMapBloc>()
+                  .currentSelectedToPointLatLng!
+                  .toLatLng;
 
           addMarkerAndAnimateCameraToPosition(
             latLng: latLng,
@@ -343,16 +331,7 @@ class _MapState extends State<MapScreen> {
 
   @override
   void initState() {
-    context.read<GoogleMapBloc>().add(
-          OnLoadCurrentLocationEvent(
-            context.read<AuthorBloc>().currentUser!.phoneNumber,
-          ),
-        );
-
-    // WidgetsBinding.instance.addPostFrameCallback((_) async {
-    //   currentPosition = await getUserCurrentLocation();
-    // });
-
+    currentLatLng = context.read<GoogleMapBloc>().currentPointLatLng!.toLatLng;
     super.initState();
   }
 
@@ -398,27 +377,37 @@ class _MapState extends State<MapScreen> {
           ),
         ],
       ),
-      body: SafeArea(
-        child: GoogleMap(
-          zoomControlsEnabled: false,
-          initialCameraPosition: _kGoogle,
-          markers: Set<Marker>.of(_markers),
-          mapType: MapType.terrain,
-          myLocationEnabled: true,
-          polylines: Set<Polyline>.of(polylinesMap.values),
-          compassEnabled: true,
-          onMapCreated: (GoogleMapController controller) {
-            _controller.complete(controller);
-          },
-        ),
+      body: Stack(
+        children: [
+          SafeArea(
+            child: GoogleMap(
+              zoomControlsEnabled: false,
+              initialCameraPosition: _kGoogle,
+              markers: Set<Marker>.of(_markers),
+              mapType: MapType.terrain,
+              myLocationEnabled: true,
+              polylines: Set<Polyline>.of(polylinesMap.values),
+              compassEnabled: true,
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+            ),
+          ),
+          Positioned(
+            bottom: 10.height,
+            left: 20.width,
+            child: GradientElevatedButton(
+              text: 'Xác nhận địa chỉ giao hàng',
+              buttonWidth: MediaQuery.of(context).size.width - 40.width,
+              buttonHeight: 50.height,
+              buttonMargin: EdgeInsets.symmetric(
+                vertical: 30.height,
+              ),
+              onPress: () => context.router.pop(),
+            ),
+          ),
+        ],
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   backgroundColor: Colors.green,
-      //   onPressed: () {
-      //     context.router.pushNamed(AppRouterPath.accountList);
-      //   },
-      //   child: const Icon(Icons.list_alt),
-      // ),
     );
   }
 
@@ -448,9 +437,9 @@ class _MapState extends State<MapScreen> {
                     );
                   } else if (state is GoogleMapCurrentLocationLoadedState) {
                     setState(() {
-                      currentPosition = state.currentPosition;
+                      currentLatLng = state.currentLatLng;
 
-                      animateCameraToPosition(currentPosition.toLatLng);
+                      animateCameraToPosition(currentLatLng);
                     });
                   } else if (state is GoogleMapLocationClearedState) {
                     clearMarker(state.isFromLocation);
@@ -485,7 +474,7 @@ class _MapState extends State<MapScreen> {
                                 OnSendMessageBackEvent(
                                   value,
                                   context.read<AuthorBloc>().currentUser!,
-                                  currentPosition.toLatLng,
+                                  currentLatLng,
                                 ),
                               );
                         }

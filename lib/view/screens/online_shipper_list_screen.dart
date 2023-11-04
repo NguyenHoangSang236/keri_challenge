@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
+import 'package:keri_challenge/data/enum/firestore_enum.dart';
 import 'package:keri_challenge/main.dart';
 import 'package:keri_challenge/util/ui_render.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
@@ -25,7 +26,7 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
   final TextEditingController _textController = TextEditingController();
 
   Stream<QuerySnapshot> _usersStream = fireStore
-      .collection('users')
+      .collection(FireStoreCollectionEnum.users.name)
       .where('role', isEqualTo: 'shipper')
       .where('isOnline', isEqualTo: true)
       .where(
@@ -43,7 +44,7 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
       _textController.text = limit.toString();
 
       _usersStream = fireStore
-          .collection('users')
+          .collection(FireStoreCollectionEnum.users.name)
           .where('role', isEqualTo: 'shipper')
           .where('isOnline', isEqualTo: true)
           .where(
@@ -65,7 +66,7 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
         _textController.text = limit.toString();
 
         _usersStream = fireStore
-            .collection('users')
+            .collection(FireStoreCollectionEnum.users.name)
             .where('role', isEqualTo: 'shipper')
             .where('isOnline', isEqualTo: true)
             .where(
@@ -88,7 +89,7 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
           _textController.text = limit.toString();
 
           _usersStream = fireStore
-              .collection('users')
+              .collection(FireStoreCollectionEnum.users.name)
               .where('role', isEqualTo: 'shipper')
               .where('isOnline', isEqualTo: true)
               .where(

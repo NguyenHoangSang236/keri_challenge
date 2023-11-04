@@ -21,9 +21,9 @@ class OnClearLocationEvent extends GoogleMapEvent {
 
 class OnLoadDefaultLocationEvent extends GoogleMapEvent {
   final bool isFromLocation;
-  final Position currentPosition;
+  final LatLng currentLatLng;
 
-  OnLoadDefaultLocationEvent(this.isFromLocation, this.currentPosition);
+  OnLoadDefaultLocationEvent(this.isFromLocation, this.currentLatLng);
 }
 
 class OnLoadNewLocationEvent extends GoogleMapEvent {

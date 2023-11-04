@@ -9,6 +9,7 @@ part of 'shipper_service.dart';
 ShipperService _$ShipperServiceFromJson(Map<String, dynamic> json) =>
     ShipperService(
       id: json['id'] as int,
+      shipperName: json['shipperName'] as String,
       content: json['content'] as String,
       shipperPhoneNumber: json['shipperPhoneNumber'] as String,
       status: json['status'] as String,
@@ -17,17 +18,18 @@ ShipperService _$ShipperServiceFromJson(Map<String, dynamic> json) =>
           const TimestampConverter().fromJson(json['beginDate'] as Timestamp),
       endDate:
           const TimestampConverter().fromJson(json['endDate'] as Timestamp),
-      billImageBase64: json['billImageBase64'] as String?,
+      billImageUrl: json['billImageUrl'] as String?,
     );
 
 Map<String, dynamic> _$ShipperServiceToJson(ShipperService instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'billImageBase64': instance.billImageBase64,
+      'billImageUrl': instance.billImageUrl,
       'content': instance.content,
       'shipperPhoneNumber': instance.shipperPhoneNumber,
       'status': instance.status,
       'type': instance.type,
+      'shipperName': instance.shipperName,
       'beginDate': const TimestampConverter().toJson(instance.beginDate),
       'endDate': const TimestampConverter().toJson(instance.endDate),
     };

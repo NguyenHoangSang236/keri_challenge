@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:either_dart/either.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:keri_challenge/core/extension/datetime_extension.dart';
 import 'package:keri_challenge/data/entities/shipper_service.dart';
 import 'package:keri_challenge/data/enum/shipper_service_enum.dart';
+import 'package:keri_challenge/services/firebase_storage_service.dart';
 
 import '../../core/failure/failure.dart';
 import '../../main.dart';
@@ -12,8 +16,10 @@ import '../enum/firestore_enum.dart';
 class ShipperServiceRepository {
   Future<Either<Failure, String>> registerNewShipperService(
     ShipperService service,
+    File billImage,
   ) async {
     String result = '';
+    bool isSuccess = false;
     int newId = 0;
     ShipperService? latestService;
 
@@ -51,27 +57,79 @@ class ShipperServiceRepository {
           ),
         );
       } else {
-        await FirebaseDatabaseService.addData(
-          data: service.toJson(),
-          collection: FireStoreCollectionEnum.shipperService.name,
-          document: service.getShipperServiceDoc(),
-        ).then(
-          (value) {
-            result =
-                'Đăng ký gói dịch vụ mới thành công, xin hãy đợi quản trị viên duyệt hoá đơn của bạn';
-          },
-        );
+        String billUrl = '';
 
-        // await FirebaseDatabaseService.updateData(
-        //   data: {
-        //     'shipperServiceStartDate': service.beginDate,
-        //     'shipperServiceEndDate': service.endDate,
+        final fileRef =
+            firebaseStorage.ref().child(service.getShipperServiceDoc());
+
+        final UploadTask upLoadTask = fileRef.putFile(billImage);
+        // upLoadTask.snapshotEvents.listen(
+        //   (taskSnapshot) {
+        //     switch (taskSnapshot.state) {
+        //       case TaskState.running:
+        //         final progress = 100.0 *
+        //             (taskSnapshot.bytesTransferred / taskSnapshot.totalBytes);
+        //         debugPrint("Upload is $progress% complete.");
+        //
+        //         break;
+        //       case TaskState.paused:
+        //         debugPrint('Paused uploading file');
+        //         break;
+        //       case TaskState.success:
+        //         debugPrint('Uploaded file successfully');
+        //         break;
+        //       case TaskState.canceled:
+        //         debugPrint('Canceled uploading file');
+        //         break;
+        //       case TaskState.error:
+        //         debugPrint('Caught error uploading file');
+        //         break;
+        //     }
         //   },
-        //   collection: FireStoreCollectionEnum.users.name,
-        //   document: service.shipperPhoneNumber,
         // );
 
-        return Right(result);
+        await upLoadTask.whenComplete(() async {
+          billUrl = await FirebaseStorageService.getFileUrl(
+            service.getShipperServiceDoc(),
+          );
+
+          if (billUrl.isNotEmpty && billUrl != 'failed') {
+            service.billImageUrl = billUrl;
+
+            await FirebaseDatabaseService.addData(
+              data: service.toJson(),
+              collection: FireStoreCollectionEnum.shipperService.name,
+              document: service.getShipperServiceDoc(),
+            ).then((value) {
+              isSuccess = true;
+            });
+          } else {
+            isSuccess = false;
+            result = 'Đăng ký thất bại, không thể tải hình ảnh lên';
+          }
+        });
+
+        print('@@@');
+        print(result);
+        print(isSuccess);
+
+        return isSuccess
+            ? const Right(
+                'Đăng ký gói dịch vụ mới thành công, xin hãy đợi quản trị viên duyệt hoá đơn của bạn',
+              )
+            : Left(ExceptionFailure(result));
+
+        // FirebaseStorageService.uploadFile(
+        //   billImage,
+        //   service.getShipperServiceDoc(),
+        //   onSuccess: (taskSnapshot)
+        //   },
+        //   // onError: (e) {
+        //   //   debugPrint(e.toString());
+        //   //   isSuccess = false;
+        //   //   result = 'Đăng ký thất bại, không thể tải hình ảnh lên';
+        //   // },
+        // );
       }
     } catch (e, stackTrace) {
       debugPrint(
@@ -226,6 +284,37 @@ class ShipperServiceRepository {
     } catch (e, stackTrace) {
       debugPrint(
         'Caught getting current shipper service error: ${e.toString()} \n${stackTrace.toString()}',
+      );
+      return Left(ExceptionFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, String>> actionsOnShipperService(
+    ShipperService shipperService,
+    ShipperServiceEnum serviceEnum,
+  ) async {
+    try {
+      FirebaseDatabaseService.updateData(
+        data: {'status': serviceEnum.name},
+        collection: FireStoreCollectionEnum.shipperService.name,
+        document: shipperService.getShipperServiceDoc(),
+      );
+
+      if (serviceEnum == ShipperServiceEnum.accepted) {
+        await FirebaseDatabaseService.updateData(
+          data: {
+            'shipperServiceStartDate': shipperService.beginDate,
+            'shipperServiceEndDate': shipperService.endDate,
+          },
+          collection: FireStoreCollectionEnum.users.name,
+          document: shipperService.shipperPhoneNumber,
+        );
+      }
+
+      return const Right('Chỉnh sửa trạng thái đơn hàng thành công');
+    } catch (e, stackTrace) {
+      debugPrint(
+        'Caught updating shipper service error: ${e.toString()} \n${stackTrace.toString()}',
       );
       return Left(ExceptionFailure(e.toString()));
     }

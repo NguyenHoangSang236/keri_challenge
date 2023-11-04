@@ -33,4 +33,8 @@ class ValueRender {
       ),
     );
   }
+
+  static String getFileExtension(String fileName) {
+    return ".${fileName.split('.').last}";
+  }
 }

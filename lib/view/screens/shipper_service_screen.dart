@@ -122,6 +122,7 @@ class _ShipperServiceScreenState extends State<ShipperServiceScreen> {
             OnAddNewShipperServiceEvent(
               ShipperService(
                 id: 0,
+                shipperName: context.read<AuthorBloc>().currentUser!.fullName,
                 content:
                     '${context.read<AuthorBloc>().currentUser!.phoneNumber} đăng kí ${_getServiceType(_currentServiceType)}',
                 shipperPhoneNumber:
@@ -130,8 +131,10 @@ class _ShipperServiceScreenState extends State<ShipperServiceScreen> {
                 type: _currentServiceType,
                 beginDate: DateTime.now(),
                 endDate: _getServiceEndDate(),
-                billImageBase64: ValueRender.convertImageToBase64(imageFile!),
+                billImageUrl: '',
+                // billImageBase64: ValueRender.convertImageToBase64(imageFile!),
               ),
+              imageFile!,
             ),
           );
     } else {
@@ -547,11 +550,7 @@ class _ShipperServiceScreenState extends State<ShipperServiceScreen> {
             shipperService.endDate.date,
           ),
           _shipperServiceInfoData('Biên lai', ''),
-          Container(
-            child: UiRender.convertBase64ToImage(
-              shipperService.billImageBase64!,
-            ),
-          ),
+          Image.network(shipperService.billImageUrl ?? ''),
         ],
       ),
     );

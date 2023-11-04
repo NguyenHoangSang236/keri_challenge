@@ -20,6 +20,7 @@ final appTheme = ThemeData(
     background: Color(0xFFE3E3E8),
     brightness: Brightness.light,
     tertiary: Colors.grey,
+    onTertiary: Colors.green,
     surface: Color(0xFFE0E1E5),
     onSurface: Colors.black,
   ),

@@ -60,6 +60,22 @@ class ShipperServiceUnexpiredState extends ShipperServiceState {
   List<Object?> get props => [message];
 }
 
+class ShipperServiceAcceptedState extends ShipperServiceState {
+  final String message;
+
+  const ShipperServiceAcceptedState(this.message);
+  @override
+  List<Object?> get props => [message];
+}
+
+class ShipperServiceRejectedState extends ShipperServiceState {
+  final String message;
+
+  const ShipperServiceRejectedState(this.message);
+  @override
+  List<Object?> get props => [message];
+}
+
 class ShipperServiceErrorState extends ShipperServiceState {
   final String message;
 

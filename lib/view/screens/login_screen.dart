@@ -189,9 +189,15 @@ class _LoginScreenState extends State<LoginScreen> {
             listeners: [
               BlocListener<AuthorBloc, AuthorState>(
                 listener: (context, state) {
-                  if (state is AuthorLoggedInState) {
+                  if (state is AuthorCurrentLocationUpdatedState) {
+                    context.router.replaceAll([const ClientIndexRoute()]);
+                  } else if (state is AuthorLoggedInState) {
                     if (state.user.role == RoleEnum.client.name) {
-                      context.router.replaceAll([const ClientIndexRoute()]);
+                      context.read<GoogleMapBloc>().add(
+                            OnLoadCurrentLocationEvent(
+                              state.user.phoneNumber,
+                            ),
+                          );
                     } else if (state.user.role == RoleEnum.shipper.name) {
                       if (state.user.shipperServiceEndDate != null &&
                           state.user.shipperServiceEndDate!
@@ -260,6 +266,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   } else if (state is OrderErrorState) {
                     context.router
                         .replaceAll([ShipperIndexRoute(initialTabIndex: 1)]);
+                  }
+                },
+              ),
+              BlocListener<GoogleMapBloc, GoogleMapState>(
+                listener: (context, state) {
+                  if (state is GoogleMapCurrentLocationLoadedState) {
+                    context.read<AuthorBloc>().add(
+                          OnUpdateCurrentLocationEvent(
+                            state.currentLatLng,
+                          ),
+                        );
                   }
                 },
               ),

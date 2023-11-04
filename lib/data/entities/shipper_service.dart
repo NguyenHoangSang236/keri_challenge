@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../core/converter/timestamp_converter.dart';
+import '../enum/shipper_service_enum.dart';
 
 part 'shipper_service.g.dart';
 
@@ -9,11 +10,12 @@ part 'shipper_service.g.dart';
 class ShipperService {
   @JsonKey(name: 'id')
   int id;
-  String? billImageBase64;
+  String? billImageUrl;
   String content;
   String shipperPhoneNumber;
   String status;
   String type;
+  String shipperName;
   @TimestampConverter()
   DateTime beginDate;
   @TimestampConverter()
@@ -21,13 +23,14 @@ class ShipperService {
 
   ShipperService({
     required this.id,
+    required this.shipperName,
     required this.content,
     required this.shipperPhoneNumber,
     required this.status,
     required this.type,
     required this.beginDate,
     required this.endDate,
-    this.billImageBase64,
+    this.billImageUrl,
   });
 
   factory ShipperService.fromJson(Map<String, dynamic> json) =>
@@ -39,8 +42,28 @@ class ShipperService {
     return '$shipperPhoneNumber-$id';
   }
 
+  String getServiceType() {
+    return type == ShipperServiceEnum.month.name
+        ? 'Gói tháng'
+        : type == ShipperServiceEnum.day.name
+            ? 'Gói ngày'
+            : 'Không xác định';
+  }
+
+  String getShipperServiceStatus() {
+    return status == ShipperServiceEnum.waiting.name
+        ? 'Đang chờ xác nhận'
+        : status == ShipperServiceEnum.accepted.name
+            ? 'Đã chấp nhận'
+            : status == ShipperServiceEnum.expired.name
+                ? 'Đã hết hạn'
+                : status == ShipperServiceEnum.rejected.name
+                    ? 'Đã từ chối'
+                    : 'Không xác định';
+  }
+
   @override
   String toString() {
-    return '{id: $id, billImageBase64: $billImageBase64, content: $content, shipperPhoneNumber: $shipperPhoneNumber, status: $status, type: $type, beginDate: $beginDate, endDate: $endDate}';
+    return '{id: $id, billImageUrl: $billImageUrl, content: $content, shipperPhoneNumber: $shipperPhoneNumber, status: $status, type: $type, shipperName: $shipperName, beginDate: $beginDate, endDate: $endDate}';
   }
 }

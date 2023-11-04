@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:keri_challenge/core/extension/latLng_extension.dart';
 import 'package:keri_challenge/data/entities/user.dart';
 import 'package:keri_challenge/data/enum/firestore_enum.dart';
 import 'package:keri_challenge/data/repository/account_repository.dart';
@@ -40,6 +42,34 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
       } catch (e, stackTrace) {
         debugPrint(
             'Caught login error: ${e.toString()} \n${stackTrace.toString()}');
+        emit(AuthorErrorState(e.toString()));
+      }
+    });
+
+    on<OnUpdateCurrentLocationEvent>((event, emit) async {
+      emit(AuthorLoadingState());
+
+      try {
+        final response = await _accountRepository.updateUser(
+          {'currentLocation': event.currentLocationLatLng.toGeoPoint},
+          currentUser!.phoneNumber,
+        );
+
+        response.fold(
+          (failure) => emit(AuthorErrorState(failure.message)),
+          (success) {
+            currentUser?.currentLocation =
+                event.currentLocationLatLng.toGeoPoint;
+
+            ValueRender.currentUser?.currentLocation =
+                event.currentLocationLatLng.toGeoPoint;
+
+            emit(AuthorCurrentLocationUpdatedState(success));
+          },
+        );
+      } catch (e, stackTrace) {
+        debugPrint(
+            'Caught logout error: ${e.toString()} \n${stackTrace.toString()}');
         emit(AuthorErrorState(e.toString()));
       }
     });

@@ -26,4 +26,10 @@ class OnRegisterEvent extends AuthorEvent {
   const OnRegisterEvent(this.newUser);
 }
 
+class OnUpdateCurrentLocationEvent extends AuthorEvent {
+  final LatLng currentLocationLatLng;
+
+  OnUpdateCurrentLocationEvent(this.currentLocationLatLng);
+}
+
 class OnLogoutEvent extends AuthorEvent {}
