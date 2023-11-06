@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -41,7 +40,6 @@ final Dio dio = Dio();
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 final FirebaseFirestore fireStore = FirebaseFirestore.instance;
-final FirebaseAppCheck firebaseAppCheck = FirebaseAppCheck.instance;
 final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
 final emulatorHost =
@@ -76,11 +74,6 @@ Future<void> main() async {
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  await firebaseAppCheck.activate(
-    androidProvider: AndroidProvider.playIntegrity,
-    appleProvider: AppleProvider.appAttest,
   );
 
   await SystemChrome.setPreferredOrientations([

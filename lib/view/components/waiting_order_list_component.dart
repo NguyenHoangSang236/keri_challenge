@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:keri_challenge/bloc/order/order_bloc.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
+import 'package:keri_challenge/view/components/order_info.dart';
 
 import '../../data/entities/order.dart';
 import '../../util/ui_render.dart';
@@ -26,11 +27,10 @@ class _WaitingOrderListComponentState extends State<WaitingOrderListComponent> {
   }
 
   void _showOrderInfo(Order order) {
-    UiRender.showDialog(
+    UiRender.showWidgetDialog(
       context,
-      'Thông tin đơn hàng',
-      order.showFullInfo(),
-      textAlign: TextAlign.start,
+      title: 'Thông tin đơn hàng',
+      child: OrderInfo(order: order),
     );
   }
 

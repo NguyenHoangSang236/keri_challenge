@@ -13,15 +13,11 @@ import 'package:keri_challenge/bloc/google_map/google_map_bloc.dart';
 import 'package:keri_challenge/core/extension/latLng_extension.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/core/extension/pointLatLng_extension.dart';
-import 'package:keri_challenge/services/firebase_message_service.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/screens/searching_screen.dart';
 
 import '../../bloc/authorization/author_bloc.dart';
-import '../../data/entities/user.dart';
-import '../../data/enum/local_storage_enum.dart';
 import '../../main.dart';
-import '../../services/local_storage_service.dart';
 import '../../util/ui_render.dart';
 
 @RoutePage()
@@ -58,13 +54,13 @@ class _MapState extends State<MapScreen> {
   Map<PolylineId, Polyline> polylinesMap = {};
   late LatLng currentLatLng;
 
-  void clearAllMarkers() {
+  void _clearAllMarkers() {
     setState(() {
       _markers.clear();
     });
   }
 
-  void clearMarker(bool isFromLocation) {
+  void _clearMarker(bool isFromLocation) {
     Future.delayed(
       const Duration(milliseconds: 300),
       () {
@@ -82,13 +78,13 @@ class _MapState extends State<MapScreen> {
     );
   }
 
-  void onPressTextBox(bool isFromLocation) {
+  void _onPressTextBox(bool isFromLocation) {
     context.router.pushWidget(
       SearchingScreen(isFromLocation: isFromLocation),
     );
   }
 
-  void onPressRemoveLocationButton(bool isFromLocation) {
+  void _onPressRemoveLocationButton(bool isFromLocation) {
     Future.delayed(
       const Duration(milliseconds: 300),
       () {
@@ -99,7 +95,7 @@ class _MapState extends State<MapScreen> {
     );
   }
 
-  Future<void> onPressPinLocationButton(bool isFromLocation) async {
+  Future<void> _onPressPinLocationButton(bool isFromLocation) async {
     Future.delayed(
       const Duration(milliseconds: 300),
       () {
@@ -126,7 +122,7 @@ class _MapState extends State<MapScreen> {
                   .currentSelectedToPointLatLng!
                   .toLatLng;
 
-          addMarkerAndAnimateCameraToPosition(
+          _addMarkerAndAnimateCameraToPosition(
             latLng: latLng,
             isFromLocation: isFromLocation,
           );
@@ -141,7 +137,7 @@ class _MapState extends State<MapScreen> {
     );
   }
 
-  void animateCameraToPosition(LatLng latLng) async {
+  void _animateCameraToPosition(LatLng latLng) async {
     CameraPosition cameraPosition = CameraPosition(
       target: latLng,
       zoom: 14,
@@ -153,7 +149,7 @@ class _MapState extends State<MapScreen> {
     );
   }
 
-  void addMarkerOnMap({
+  void _addMarkerOnMap({
     required LatLng latLng,
     bool isFromLocation = true,
   }) async {
@@ -170,16 +166,16 @@ class _MapState extends State<MapScreen> {
     });
   }
 
-  void addMarkerAndAnimateCameraToPosition({
+  void _addMarkerAndAnimateCameraToPosition({
     required LatLng latLng,
     bool isFromLocation = true,
   }) async {
-    addMarkerOnMap(latLng: latLng, isFromLocation: isFromLocation);
+    _addMarkerOnMap(latLng: latLng, isFromLocation: isFromLocation);
 
-    animateCameraToPosition(latLng);
+    _animateCameraToPosition(latLng);
   }
 
-  void onPressShowDirectionButton() {
+  void _onPressShowDirectionButton() {
     Future.delayed(
       const Duration(milliseconds: 300),
       () {
@@ -197,7 +193,7 @@ class _MapState extends State<MapScreen> {
           Prediction? endPre =
               context.read<GoogleMapBloc>().currentSelectedToPrediction;
 
-          showDirection(
+          _showDirection(
             start: fromPointLatLng,
             end: toPointLatLng,
             startPre: startPre,
@@ -214,7 +210,7 @@ class _MapState extends State<MapScreen> {
     );
   }
 
-  void showDirection({
+  void _showDirection({
     required PointLatLng start,
     required PointLatLng end,
     Prediction? startPre,
@@ -235,14 +231,14 @@ class _MapState extends State<MapScreen> {
     );
 
     setState(() {
-      if (needMessage) {
-        sendMessage(
-          startPre: startPre,
-          endPre: endPre,
-          startLatLng: start,
-          endLatLng: end,
-        );
-      }
+      // if (needMessage) {
+      //   sendMessage(
+      //     startPre: startPre,
+      //     endPre: endPre,
+      //     startLatLng: start,
+      //     endLatLng: end,
+      //   );
+      // }
 
       // Adding the coordinates to the list
       if (result.points.isNotEmpty) {
@@ -273,37 +269,37 @@ class _MapState extends State<MapScreen> {
     });
   }
 
-  void sendMessage({
-    Prediction? startPre,
-    Prediction? endPre,
-    required PointLatLng startLatLng,
-    required PointLatLng endLatLng,
-  }) async {
-    User user = context.read<AuthorBloc>().currentUser!;
+  // void sendMessage({
+  //   Prediction? startPre,
+  //   Prediction? endPre,
+  //   required PointLatLng startLatLng,
+  //   required PointLatLng endLatLng,
+  // }) async {
+  //   User user = context.read<AuthorBloc>().currentUser!;
+  //
+  //   FirebaseMessageService.sendMessage(
+  //     title: 'Notice !!',
+  //     content:
+  //         '${user.fullName} is finding a way from ${startPre?.description!.contains('My Location') == false ? startPre?.description : 'Position of ${user.fullName}'} to ${endPre?.description!.contains('My Location') == false ? endPre?.description : 'Position of ${user.fullName}'}',
+  //     data: {
+  //       'fromPhoneToken': await LocalStorageService.getLocalStorageData(
+  //         LocalStorageEnum.phoneToken.name,
+  //       ) as String,
+  //       'startDes': startPre?.description!.contains('My Location') == false
+  //           ? startPre?.description
+  //           : 'Location of ${user.fullName}',
+  //       'endDes': endPre?.description!.contains('My Location') == false
+  //           ? endPre?.description
+  //           : 'Location of ${user.fullName}',
+  //       'startLat': startLatLng.latitude.toString(),
+  //       'startLng': startLatLng.longitude.toString(),
+  //       'endLat': endLatLng.latitude.toString(),
+  //       'endLng': endLatLng.longitude.toString(),
+  //     },
+  //   );
+  // }
 
-    FirebaseMessageService.sendMessage(
-      title: 'Notice !!',
-      content:
-          '${user.fullName} is finding a way from ${startPre?.description!.contains('My Location') == false ? startPre?.description : 'Position of ${user.fullName}'} to ${endPre?.description!.contains('My Location') == false ? endPre?.description : 'Position of ${user.fullName}'}',
-      data: {
-        'fromPhoneToken': await LocalStorageService.getLocalStorageData(
-          LocalStorageEnum.phoneToken.name,
-        ) as String,
-        'startDes': startPre?.description!.contains('My Location') == false
-            ? startPre?.description
-            : 'Location of ${user.fullName}',
-        'endDes': endPre?.description!.contains('My Location') == false
-            ? endPre?.description
-            : 'Location of ${user.fullName}',
-        'startLat': startLatLng.latitude.toString(),
-        'startLng': startLatLng.longitude.toString(),
-        'endLat': endLatLng.latitude.toString(),
-        'endLng': endLatLng.longitude.toString(),
-      },
-    );
-  }
-
-  Future<Position> getUserCurrentLocation() async {
+  Future<Position> _getUserCurrentLocation() async {
     await Geolocator.requestPermission()
         .then((value) {})
         .onError((error, stackTrace) async {
@@ -327,6 +323,33 @@ class _MapState extends State<MapScreen> {
     }
 
     context.router.pop();
+  }
+
+  void _confirmShippingLocation() {
+    PointLatLng? from =
+        context.read<GoogleMapBloc>().currentSelectedFromPointLatLng;
+
+    PointLatLng? to =
+        context.read<GoogleMapBloc>().currentSelectedToPointLatLng;
+
+    if (from != null && to != null) {
+      context.read<GoogleMapBloc>().add(
+            OnCalculateDistanceEvent(
+              context
+                  .read<GoogleMapBloc>()
+                  .currentSelectedFromPointLatLng!
+                  .toLatLng,
+              context
+                  .read<GoogleMapBloc>()
+                  .currentSelectedToPointLatLng!
+                  .toLatLng,
+            ),
+          );
+
+      context.router.pop();
+    } else {
+      UiRender.showDialog(context, '', 'Vui lòng chọn điểm đi và điểm đến');
+    }
   }
 
   @override
@@ -356,7 +379,7 @@ class _MapState extends State<MapScreen> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(
-              "BSS Map",
+              "Vinaship",
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 color: Theme.of(context).colorScheme.secondary,
@@ -368,7 +391,7 @@ class _MapState extends State<MapScreen> {
         ),
         actions: [
           IconButton(
-            onPressed: onPressShowDirectionButton,
+            onPressed: _onPressShowDirectionButton,
             color: Colors.white,
             icon: Icon(
               Icons.directions,
@@ -394,7 +417,7 @@ class _MapState extends State<MapScreen> {
             ),
           ),
           Positioned(
-            bottom: 10.height,
+            bottom: 0,
             left: 20.width,
             child: GradientElevatedButton(
               text: 'Xác nhận địa chỉ giao hàng',
@@ -403,7 +426,7 @@ class _MapState extends State<MapScreen> {
               buttonMargin: EdgeInsets.symmetric(
                 vertical: 30.height,
               ),
-              onPress: () => context.router.pop(),
+              onPress: _confirmShippingLocation,
             ),
           ),
         ],
@@ -416,7 +439,7 @@ class _MapState extends State<MapScreen> {
       children: [
         Expanded(
           child: GestureDetector(
-            onTap: () => onPressTextBox(isFromLocation),
+            onTap: () => _onPressTextBox(isFromLocation),
             child: Container(
               // width: MediaQuery.of().size.width,
               margin: EdgeInsets.only(top: 10.height),
@@ -431,7 +454,7 @@ class _MapState extends State<MapScreen> {
               child: BlocConsumer<GoogleMapBloc, GoogleMapState>(
                 listener: (context, state) async {
                   if (state is GoogleMapNewLocationLoadedState) {
-                    addMarkerAndAnimateCameraToPosition(
+                    _addMarkerAndAnimateCameraToPosition(
                       latLng: state.latLng,
                       isFromLocation: state.isFromLocation,
                     );
@@ -439,25 +462,25 @@ class _MapState extends State<MapScreen> {
                     setState(() {
                       currentLatLng = state.currentLatLng;
 
-                      animateCameraToPosition(currentLatLng);
+                      _animateCameraToPosition(currentLatLng);
                     });
                   } else if (state is GoogleMapLocationClearedState) {
-                    clearMarker(state.isFromLocation);
+                    _clearMarker(state.isFromLocation);
                   } else if (state is GoogleMapMessageSentBackState) {
                     UiRender.showSnackBar(context, state.message);
                   } else if (state
                       is GoogleMapDirectionFromPublicMessageLoadedState) {
-                    addMarkerOnMap(
+                    _addMarkerOnMap(
                       latLng: state.fromLatLng,
                       isFromLocation: true,
                     );
 
-                    addMarkerAndAnimateCameraToPosition(
+                    _addMarkerAndAnimateCameraToPosition(
                       latLng: state.toLatLng,
                       isFromLocation: false,
                     );
 
-                    showDirection(
+                    _showDirection(
                       start: state.fromLatLng.toPointLatLng,
                       end: state.toLatLng.toPointLatLng,
                       needMessage: false,
@@ -484,21 +507,21 @@ class _MapState extends State<MapScreen> {
                     }
                   } else if (state
                       is GoogleMapLocationFromPrivateMessageLoadedState) {
-                    onPressPinLocationButton(false);
+                    _onPressPinLocationButton(false);
                   } else if (state is GoogleMapErrorState) {
-                    UiRender.showDialog(context, 'Error', state.message);
+                    UiRender.showDialog(context, 'Lỗi', state.message);
                   } else if (state is GoogleMapOrderDirectionLoadedState) {
-                    addMarkerAndAnimateCameraToPosition(
+                    _addMarkerAndAnimateCameraToPosition(
                       latLng: state.fromLatLng,
                       isFromLocation: true,
                     );
 
-                    addMarkerAndAnimateCameraToPosition(
+                    _addMarkerAndAnimateCameraToPosition(
                       latLng: state.toLatLng,
                       isFromLocation: false,
                     );
 
-                    showDirection(
+                    _showDirection(
                       start: state.fromLatLng.toPointLatLng,
                       end: state.toLatLng.toPointLatLng,
                       needMessage: false,
@@ -570,7 +593,7 @@ class _MapState extends State<MapScreen> {
           width: 35.size,
           height: 35.size,
           child: IconButton(
-            onPressed: () => onPressRemoveLocationButton(isFromLocation),
+            onPressed: () => _onPressRemoveLocationButton(isFromLocation),
             icon: Icon(
               Icons.clear,
               color: Theme.of(context).colorScheme.secondary,
@@ -581,7 +604,7 @@ class _MapState extends State<MapScreen> {
           width: 35.size,
           height: 35.size,
           child: IconButton(
-            onPressed: () => onPressPinLocationButton(isFromLocation),
+            onPressed: () => _onPressPinLocationButton(isFromLocation),
             icon: Icon(
               Icons.pin_drop_sharp,
               color: Theme.of(context).colorScheme.secondary,

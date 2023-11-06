@@ -80,6 +80,15 @@ class GoogleMapErrorState extends GoogleMapState {
   List<Object?> get props => [message];
 }
 
+class GoogleMapSearchingErrorState extends GoogleMapState {
+  final String message;
+
+  const GoogleMapSearchingErrorState(this.message);
+
+  @override
+  List<Object?> get props => [message];
+}
+
 class GoogleMapMessageSentBackState extends GoogleMapState {
   final String message;
 

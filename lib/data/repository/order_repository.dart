@@ -195,7 +195,9 @@ class OrderRepository {
       if (shippingOrder != null) {
         return Right(shippingOrder!);
       } else {
-        return const Left(ExceptionFailure('Không có dữ liêụ'));
+        return const Left(
+          ExceptionFailure('Không có đơn hàng nào đang được giao'),
+        );
       }
     } catch (e, stackTrace) {
       debugPrint(
@@ -230,7 +232,7 @@ class OrderRepository {
                 ? (querySnap.docs.first.data()['id'] as int)
                 : 0;
 
-            data['shipperOrderID'] = latestShipperOrderId;
+            data['shipperOrderId'] = latestShipperOrderId;
           }
         },
         onError: (e) => debugPrint("Error getting document list: $e"),

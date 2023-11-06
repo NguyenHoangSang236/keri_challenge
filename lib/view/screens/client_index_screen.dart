@@ -14,6 +14,7 @@ import 'package:keri_challenge/data/enum/shipper_enum.dart';
 import 'package:keri_challenge/util/ui_render.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/components/layout.dart';
+import 'package:keri_challenge/view/components/order_info.dart';
 
 import '../../bloc/appConfig/app_config_bloc.dart';
 import '../../bloc/authorization/author_bloc.dart';
@@ -45,40 +46,38 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
     // context.router.pushNamed(AppRouterPath.onlineShipperList);
 
     if (_clientIndexFormKey.currentState!.validate()) {
-      UiRender.showConfirmDialog(
+      Order newOrder = Order(
+        id: 0,
+        distance: distance,
+        price: context.read<AppConfigBloc>().appConfig!.pricePerKm * distance,
+        fromLocationGeoPoint: context
+            .read<GoogleMapBloc>()
+            .currentSelectedFromPointLatLng!
+            .toGeoPoint,
+        toLocationGeoPoint: context
+            .read<GoogleMapBloc>()
+            .currentSelectedToPointLatLng!
+            .toGeoPoint,
+        packageName: _packageNameController.text,
+        cod: _codController.text,
+        noteForShipper: _noteController.text,
+        fromLocation: _fromLocationController.text,
+        toLocation: _toLocationController.text,
+        senderPhoneNumber: context.read<AuthorBloc>().currentUser!.phoneNumber,
+        receiverPhoneNumber: _phoneNumberController.text,
+        receiverName: _receiverController.text,
+        status: ShipperEnum.shipper_waiting.name,
+        orderDate: DateTime.now(),
+      );
+
+      UiRender.showWidgetConfirmDialog(
         context,
-        'Thông tin đơn hàng của bạn',
-        '${_fromLocationController.text}\n${_toLocationController.text}\n${_receiverController.text}\n${_phoneNumberController.text}\n${_codController.text}\n${_fromLocationController.text}\n${_noteController.text}\n',
+        title: 'Thông tin đơn hàng của bạn',
+        child: OrderInfo(order: newOrder),
       ).then((value) {
         if (value) {
           context.read<OrderBloc>().add(
-                OnAddNewOrderEvent(
-                  Order(
-                    id: 0,
-                    distance: distance,
-                    price: context.read<AppConfigBloc>().appConfig!.pricePerKm *
-                        distance,
-                    fromLocationGeoPoint: context
-                        .read<GoogleMapBloc>()
-                        .currentSelectedFromPointLatLng!
-                        .toGeoPoint,
-                    toLocationGeoPoint: context
-                        .read<GoogleMapBloc>()
-                        .currentSelectedToPointLatLng!
-                        .toGeoPoint,
-                    packageName: _packageNameController.text,
-                    cod: _codController.text,
-                    noteForShipper: _noteController.text,
-                    fromLocation: _fromLocationController.text,
-                    toLocation: _toLocationController.text,
-                    senderPhoneNumber:
-                        context.read<AuthorBloc>().currentUser!.phoneNumber,
-                    receiverPhoneNumber: _phoneNumberController.text,
-                    receiverName: _receiverController.text,
-                    status: ShipperEnum.shipper_waiting.name,
-                    orderDate: DateTime.now(),
-                  ),
-                ),
+                OnAddNewOrderEvent(newOrder),
               );
         }
       });
@@ -100,12 +99,28 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
   }
 
   void _onLongPressDataRow(Order order) {
-    UiRender.showDialog(
-      context,
-      'Thông tin đơn hàng',
-      order.showFullInfo(),
-      textAlign: TextAlign.start,
-    );
+    if (order.status == ShipperEnum.shipper_waiting.name &&
+        (order.shipperPhoneNumber == null ||
+            order.shipperPhoneNumber!.isEmpty)) {
+      UiRender.showConfirmDialog(
+        context,
+        'Thông tin đơn hàng',
+        order.showFullInfo(),
+        confirmText: 'Chuyển đơn',
+        textAlign: TextAlign.start,
+      ).then((value) {
+        if (value) {
+          context.router.pushNamed(AppRouterPath.onlineShipperList);
+        }
+      });
+    } else {
+      UiRender.showDialog(
+        context,
+        'Thông tin đơn hàng',
+        order.showFullInfo(),
+        textAlign: TextAlign.start,
+      );
+    }
   }
 
   String? _textFieldValidator(
@@ -458,7 +473,7 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
                 needValidate: false,
               ),
               Text(
-                'Số tiền tạm tính: ${(context.read<AppConfigBloc>().appConfig!.pricePerKm * distance).formatMoney}VND (${distance.format} km)',
+                'Số tiền tạm tính: ${(context.read<AppConfigBloc>().appConfig!.pricePerKm * distance).formatMoney} VND (${distance.format} KM)',
                 style: TextStyle(
                   color: Theme.of(context).colorScheme.error,
                   fontSize: 15.size,
@@ -467,7 +482,7 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
               ),
               Center(
                 child: GradientElevatedButton(
-                  text: 'Đặt shipper',
+                  text: 'Đặt shipper Vinaship',
                   buttonHeight: 43.height,
                   onPress: _onPressShipperBookingButton,
                 ),

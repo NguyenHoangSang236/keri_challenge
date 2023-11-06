@@ -49,8 +49,8 @@ class UiRender {
     BuildContext context,
     String title,
     String message, {
+    TextAlign textAlign = TextAlign.center,
     String confirmText = 'OK',
-    bool needCenterMessage = true,
   }) async {
     bool? result = await showCupertinoDialog(
       barrierDismissible: true,
@@ -59,10 +59,10 @@ class UiRender {
         return CupertinoAlertDialog(
           title: title.isNotEmpty ? Text(title) : null,
           content: message.isNotEmpty
-              ? Text(message,
-                  textAlign: needCenterMessage == true
-                      ? TextAlign.center
-                      : TextAlign.start)
+              ? Text(
+                  message,
+                  textAlign: textAlign,
+                )
               : null,
           actions: [
             // The "Yes" button
@@ -73,8 +73,8 @@ class UiRender {
               isDefaultAction: true,
               child: Text(
                 confirmText,
-                style: const TextStyle(
-                  color: CupertinoColors.activeBlue,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
@@ -85,7 +85,7 @@ class UiRender {
               },
               isDestructiveAction: true,
               child: const Text('Huỷ'),
-            )
+            ),
           ],
         );
       },
@@ -118,10 +118,10 @@ class UiRender {
                 context.router.pop(true);
               },
               isDefaultAction: true,
-              child: const Text(
+              child: Text(
                 'Xác nhận',
                 style: TextStyle(
-                  color: CupertinoColors.activeBlue,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
@@ -129,6 +129,81 @@ class UiRender {
         );
       },
     );
+  }
+
+  static Future<void> showWidgetDialog(
+    BuildContext context, {
+    String title = '',
+    required Widget child,
+    String confirmText = 'OK',
+  }) async {
+    return showCupertinoDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext ctx) {
+        return CupertinoAlertDialog(
+          title: title.isNotEmpty ? Text(title) : null,
+          content: child,
+          actions: [
+            CupertinoDialogAction(
+              onPressed: () {
+                context.router.pop(true);
+              },
+              isDefaultAction: true,
+              child: Text(
+                'Xác nhận',
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  static Future<bool> showWidgetConfirmDialog(
+    BuildContext context, {
+    String title = '',
+    required Widget child,
+    String confirmText = 'Xác nhận',
+  }) async {
+    bool? result = await showCupertinoDialog(
+      barrierDismissible: true,
+      context: context,
+      builder: (BuildContext ctx) {
+        return CupertinoAlertDialog(
+          title: title.isNotEmpty ? Text(title) : null,
+          content: child,
+          actions: [
+            // The "Yes" button
+            CupertinoDialogAction(
+              onPressed: () {
+                context.router.pop(true);
+              },
+              isDefaultAction: true,
+              child: Text(
+                confirmText,
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+            ),
+            // The "No" button
+            CupertinoDialogAction(
+              onPressed: () {
+                context.router.pop(false);
+              },
+              isDestructiveAction: true,
+              child: const Text('Huỷ'),
+            ),
+          ],
+        );
+      },
+    );
+
+    return result ?? false;
   }
 
   static Future<String> showSingleTextFieldDialog(
@@ -169,10 +244,10 @@ class UiRender {
                 context.router.pop(controller?.text ?? '');
               },
               isDefaultAction: true,
-              child: const Text(
+              child: Text(
                 'Gửi',
                 style: TextStyle(
-                  color: CupertinoColors.activeBlue,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),

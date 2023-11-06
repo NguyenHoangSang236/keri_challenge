@@ -30,7 +30,7 @@ class GoogleMapRepository {
 
       return Right(predictionList);
     } else {
-      return const Left(ApiFailure('Seaching Api Error!'));
+      return const Left(ApiFailure('Lỗi tìm kiếm!'));
     }
   }
 

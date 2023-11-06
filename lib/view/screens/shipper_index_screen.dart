@@ -14,6 +14,7 @@ import 'package:keri_challenge/util/ui_render.dart';
 import 'package:keri_challenge/util/value_render.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/components/layout.dart';
+import 'package:keri_challenge/view/components/order_info.dart';
 import 'package:keri_challenge/view/components/waiting_order_list_component.dart';
 
 import '../../bloc/google_map/google_map_bloc.dart';
@@ -125,11 +126,10 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
   }
 
   void _showOrderInfo(my_order.Order order) {
-    UiRender.showDialog(
+    UiRender.showWidgetDialog(
       context,
-      'Thông tin đơn hàng',
-      order.showFullInfo(),
-      textAlign: TextAlign.start,
+      title: 'Thông tin đơn hàng',
+      child: OrderInfo(order: order),
     );
   }
 
@@ -196,6 +196,14 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
             context.read<AuthorBloc>().currentUser!.phoneNumber,
           ),
         );
+  }
+
+  void _reloadShipperHistoryOrderList() {
+    context.read<OrderBloc>().add(OnLoadShipperHistoryOrderList(
+          context.read<AuthorBloc>().currentUser!.phoneNumber,
+          int.parse(_historyListLimitController.text),
+          1,
+        ));
   }
 
   @override
@@ -422,7 +430,7 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
                     : const SizedBox(),
                 shippingOrder != null
                     ? GradientElevatedButton(
-                        text: 'Xác nhận hoàn tất',
+                        text: 'Giao thành công',
                         buttonMargin: EdgeInsets.only(top: 20.height),
                         onPress: () => _confirmFinishShipping(
                           shippingOrder!,
@@ -555,103 +563,109 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
   }
 
   Widget _historyOrderList() {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          vertical: 10.height,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                15.horizontalSpace,
-                const Text('Xem '),
-                GradientElevatedButton(
-                  text: '-',
-                  buttonHeight: 30.size,
-                  textSize: 18.size,
-                  buttonWidth: 30.size,
-                  buttonMargin: EdgeInsets.zero,
-                  onPress: _decreaseHistoryListLimit,
-                ),
-                Flexible(
-                  child: SizedBox(
-                    width: 60.width,
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      controller: _historyListLimitController,
-                      showCursor: false,
-                      keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.zero,
+    return RefreshIndicator(
+      onRefresh: () async {
+        _reloadShipperHistoryOrderList();
+      },
+      child: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 10.height,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  15.horizontalSpace,
+                  const Text('Xem '),
+                  GradientElevatedButton(
+                    text: '-',
+                    buttonHeight: 30.size,
+                    textSize: 18.size,
+                    buttonWidth: 30.size,
+                    buttonMargin: EdgeInsets.zero,
+                    onPress: _decreaseHistoryListLimit,
+                  ),
+                  Flexible(
+                    child: SizedBox(
+                      width: 60.width,
+                      child: TextField(
+                        textAlign: TextAlign.center,
+                        controller: _historyListLimitController,
+                        showCursor: false,
+                        keyboardType: TextInputType.number,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.zero,
+                        ),
+                        onChanged: _changeHistoryOrderListLimit,
                       ),
-                      onChanged: _changeHistoryOrderListLimit,
                     ),
                   ),
-                ),
-                GradientElevatedButton(
-                  text: '+',
-                  textSize: 18.size,
-                  buttonHeight: 30.size,
-                  buttonWidth: 30.size,
-                  buttonMargin: EdgeInsets.zero,
-                  onPress: _increaseHistoryListLimit,
-                ),
-                5.horizontalSpace,
-                const Text('dòng'),
-              ],
-            ),
-            20.verticalSpace,
-            Center(
-              child: Text(
-                'Nhẫn và giữ để xem thông tin chi tiết đơn hàng của bạn',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13.size,
-                  fontStyle: FontStyle.italic,
-                  color: Theme.of(context).colorScheme.tertiary,
+                  GradientElevatedButton(
+                    text: '+',
+                    textSize: 18.size,
+                    buttonHeight: 30.size,
+                    buttonWidth: 30.size,
+                    buttonMargin: EdgeInsets.zero,
+                    onPress: _increaseHistoryListLimit,
+                  ),
+                  5.horizontalSpace,
+                  const Text('dòng'),
+                ],
+              ),
+              20.verticalSpace,
+              Center(
+                child: Text(
+                  'Nhẫn và giữ để xem thông tin chi tiết đơn hàng của bạn',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 13.size,
+                    fontStyle: FontStyle.italic,
+                    color: Theme.of(context).colorScheme.tertiary,
+                  ),
                 ),
               ),
-            ),
-            20.verticalSpace,
-            BlocBuilder<OrderBloc, OrderState>(
-              builder: (context, state) {
-                List<my_order.Order> orderList =
-                    context.read<OrderBloc>().currentOrderList;
-                int page = context.read<OrderBloc>().currentPage;
+              20.verticalSpace,
+              BlocBuilder<OrderBloc, OrderState>(
+                builder: (context, state) {
+                  List<my_order.Order> orderList =
+                      context.read<OrderBloc>().currentOrderList;
+                  int page = context.read<OrderBloc>().currentPage;
 
-                if (state is ShipperHistoryOrderListLoadedState) {
-                  orderList = state.orderList;
-                  page = state.page;
-                } else if (state is OrderLoadingState) {
-                  return UiRender.loadingCircle(context);
-                }
+                  if (state is ShipperHistoryOrderListLoadedState) {
+                    orderList = state.orderList;
+                    page = state.page;
+                  } else if (state is OrderLoadingState) {
+                    return UiRender.loadingCircle(context);
+                  }
 
-                return DataTable(
-                  columnSpacing: 10.width,
-                  dataRowMinHeight: 30.height,
-                  dataRowMaxHeight: 100.height,
-                  dataTextStyle: TextStyle(
-                    fontSize: 15.size,
-                    fontWeight: FontWeight.w400,
-                    color: Theme.of(context).colorScheme.onError,
-                  ),
-                  columns: [
-                    _dataColumn('ID'),
-                    _dataColumn('Tên người nhận'),
-                    _dataColumn('SĐT người nhận'),
-                    _dataColumn('Ngày giao'),
-                    _dataColumn('Tình trạng'),
-                  ],
-                  rows: List.generate(
-                    orderList.length,
-                    (index) => _dataRow(orderList[index]),
-                  ),
-                );
-              },
-            ),
-          ],
+                  return DataTable(
+                    columnSpacing: 10.width,
+                    dataRowMinHeight: 30.height,
+                    dataRowMaxHeight: 100.height,
+                    dataTextStyle: TextStyle(
+                      fontSize: 15.size,
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context).colorScheme.onError,
+                    ),
+                    columns: [
+                      _dataColumn('ID'),
+                      _dataColumn('Tên người nhận'),
+                      _dataColumn('SĐT người nhận'),
+                      _dataColumn('Ngày giao'),
+                      _dataColumn('Tình trạng'),
+                    ],
+                    rows: List.generate(
+                      orderList.length,
+                      (index) => _dataRow(orderList[index]),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -681,7 +695,7 @@ class _ShipperIndexScreenState extends State<ShipperIndexScreen> {
       cells: [
         DataCell(
           Text(
-            order.shipperOrderId.toString(),
+            order.shipperOrderId?.toString() ?? '',
             softWrap: true,
             textAlign: TextAlign.center,
             maxLines: 5,

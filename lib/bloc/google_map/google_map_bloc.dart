@@ -50,7 +50,7 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
         final response = await _googleMapRepository.getLocationData(event.text);
 
         response.fold(
-          (failure) => emit(GoogleMapErrorState(failure.message)),
+          (failure) => emit(GoogleMapSearchingErrorState(failure.message)),
           (data) {
             predictionList = data;
 
@@ -59,7 +59,7 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
         );
       } catch (e, stackTrace) {
         debugPrint('Catch error: ${e.toString()} \n ${stackTrace.toString()}');
-        emit(GoogleMapErrorState(e.toString()));
+        emit(GoogleMapSearchingErrorState(e.toString()));
       }
     });
 
