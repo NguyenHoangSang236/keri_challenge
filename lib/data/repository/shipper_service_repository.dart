@@ -5,6 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:keri_challenge/core/extension/datetime_extension.dart';
 import 'package:keri_challenge/data/entities/shipper_service.dart';
+import 'package:keri_challenge/data/enum/shipper_enum.dart';
 import 'package:keri_challenge/data/enum/shipper_service_enum.dart';
 import 'package:keri_challenge/services/firebase_storage_service.dart';
 
@@ -108,10 +109,6 @@ class ShipperServiceRepository {
             result = 'Đăng ký thất bại, không thể tải hình ảnh lên';
           }
         });
-
-        print('@@@');
-        print(result);
-        print(isSuccess);
 
         return isSuccess
             ? const Right(
@@ -305,6 +302,7 @@ class ShipperServiceRepository {
           data: {
             'shipperServiceStartDate': shipperService.beginDate,
             'shipperServiceEndDate': shipperService.endDate,
+            'shipperWorkingStatus': ShipperEnum.available.name,
           },
           collection: FireStoreCollectionEnum.users.name,
           document: shipperService.shipperPhoneNumber,

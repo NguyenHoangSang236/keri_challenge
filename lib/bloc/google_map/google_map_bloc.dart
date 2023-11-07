@@ -302,9 +302,6 @@ class GoogleMapBloc extends Bloc<GoogleMapEvent, GoogleMapState> {
             title: 'You have message from ${event.senderUser.fullName}',
             content: event.message,
             data: {
-              'fromPhoneToken': await LocalStorageService.getLocalStorageData(
-                LocalStorageEnum.phoneToken.name,
-              ) as String,
               'senderDes': 'Location of ${event.senderUser.fullName}',
               'senderLat': event.senderLatLng.latitude.toString(),
               'senderLng': event.senderLatLng.longitude.toString(),

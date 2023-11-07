@@ -6,6 +6,7 @@ import 'package:keri_challenge/core/extension/latLng_extension.dart';
 import 'package:keri_challenge/data/entities/user.dart';
 import 'package:keri_challenge/data/enum/firestore_enum.dart';
 import 'package:keri_challenge/data/repository/account_repository.dart';
+import 'package:keri_challenge/services/firebase_message_service.dart';
 import 'package:keri_challenge/services/local_storage_service.dart';
 import 'package:keri_challenge/util/value_render.dart';
 
@@ -31,10 +32,11 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
 
         response.fold(
           (failure) => emit(AuthorErrorState(failure.message)),
-          (user) async {
+          (user) {
             currentUser = user;
-
             ValueRender.currentUser = user;
+
+            FirebaseMessageService.subscribeToTopic(user.phoneNumber);
 
             emit(AuthorLoggedInState(currentUser!));
           },
@@ -86,6 +88,10 @@ class AuthorBloc extends Bloc<AuthorEvent, AuthorState> {
         response.fold(
           (failure) => emit(AuthorErrorState(failure.message)),
           (success) {
+            FirebaseMessageService.unsubscribeFromTopic(
+              currentUser!.phoneNumber,
+            );
+
             currentUser = null;
 
             ValueRender.currentUser = null;

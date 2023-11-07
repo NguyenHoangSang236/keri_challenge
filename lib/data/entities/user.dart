@@ -29,6 +29,7 @@ class User {
   DateTime registerDate;
   String role;
   String? phoneFcmToken;
+  String? shipperWorkingStatus;
 
   User({
     required this.fullName,
@@ -47,6 +48,7 @@ class User {
     this.shipperServiceStartDate,
     this.shipperServiceEndDate,
     this.phoneFcmToken,
+    this.shipperWorkingStatus,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
@@ -73,6 +75,6 @@ class User {
 
   @override
   String toString() {
-    return '{phoneNumber: $phoneNumber, fullName: $fullName, birthYear: $birthYear, sex: $sex, address: $address, idCertificateNumber: $idCertificateNumber, password: $password, distance: $distance, status: $status, currentLocation: $currentLocation, isOnline: $isOnline, shipperServiceStartDate: $shipperServiceStartDate, shipperServiceEndDate: $shipperServiceEndDate, registerDate: $registerDate, role: $role, phoneFcmToken: $phoneFcmToken}';
+    return 'User{phoneNumber: $phoneNumber, fullName: $fullName, birthYear: $birthYear, sex: $sex, address: $address, idCertificateNumber: $idCertificateNumber, password: $password, distance: $distance, status: $status, currentLocation: $currentLocation, isOnline: $isOnline, shipperServiceStartDate: $shipperServiceStartDate, shipperServiceEndDate: $shipperServiceEndDate, registerDate: $registerDate, role: $role, phoneFcmToken: $phoneFcmToken, shipperWorkingStatus: $shipperWorkingStatus}';
   }
 }

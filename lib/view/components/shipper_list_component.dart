@@ -22,7 +22,6 @@ class ShipperListComponent extends StatefulWidget {
 
 class _ShipperListComponentState extends State<ShipperListComponent> {
   bool _isSelected = false;
-
   void _onSelectShipper() {
     setState(() {
       _isSelected = !_isSelected;

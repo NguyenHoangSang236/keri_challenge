@@ -4,4 +4,6 @@ enum ShipperEnum {
   shipped,
   acceptOrder,
   refuseOrder,
+  available,
+  unavailable,
 }

@@ -102,23 +102,22 @@ class _ClientIndexScreenState extends State<ClientIndexScreen> {
     if (order.status == ShipperEnum.shipper_waiting.name &&
         (order.shipperPhoneNumber == null ||
             order.shipperPhoneNumber!.isEmpty)) {
-      UiRender.showConfirmDialog(
+      UiRender.showWidgetConfirmDialog(
         context,
-        'Thông tin đơn hàng',
-        order.showFullInfo(),
+        title: 'Thông tin đơn hàng',
+        child: OrderInfo(order: order),
         confirmText: 'Chuyển đơn',
-        textAlign: TextAlign.start,
       ).then((value) {
         if (value) {
+          context.read<OrderBloc>().add(OnGetCurrentNewOrderEvent(order));
           context.router.pushNamed(AppRouterPath.onlineShipperList);
         }
       });
     } else {
-      UiRender.showDialog(
+      UiRender.showWidgetDialog(
         context,
-        'Thông tin đơn hàng',
-        order.showFullInfo(),
-        textAlign: TextAlign.start,
+        title: 'Thông tin đơn hàng',
+        child: OrderInfo(order: order),
       );
     }
   }

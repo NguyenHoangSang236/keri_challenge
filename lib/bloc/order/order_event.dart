@@ -74,6 +74,12 @@ class OnRefuseOrderEvent extends OrderEvent {
   OnRefuseOrderEvent(this.doc, this.shipperPhoneNumber);
 }
 
+class OnGetCurrentNewOrderEvent extends OrderEvent {
+  final Order order;
+
+  OnGetCurrentNewOrderEvent(this.order);
+}
+
 class OnFinishShippingOrderEvent extends OrderEvent {
   final String doc;
 

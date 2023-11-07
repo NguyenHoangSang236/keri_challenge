@@ -27,6 +27,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       shipperServiceEndDate: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['shipperServiceEndDate'], const TimestampConverter().fromJson),
       phoneFcmToken: json['phoneFcmToken'] as String?,
+      shipperWorkingStatus: json['shipperWorkingStatus'] as String?,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -49,6 +50,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'registerDate': const TimestampConverter().toJson(instance.registerDate),
       'role': instance.role,
       'phoneFcmToken': instance.phoneFcmToken,
+      'shipperWorkingStatus': instance.shipperWorkingStatus,
     };
 
 Value? _$JsonConverterFromJson<Json, Value>(

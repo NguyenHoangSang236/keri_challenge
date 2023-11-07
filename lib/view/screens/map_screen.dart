@@ -17,7 +17,11 @@ import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/screens/searching_screen.dart';
 
 import '../../bloc/authorization/author_bloc.dart';
+import '../../data/entities/user.dart';
+import '../../data/enum/local_storage_enum.dart';
 import '../../main.dart';
+import '../../services/firebase_message_service.dart';
+import '../../services/local_storage_service.dart';
 import '../../util/ui_render.dart';
 
 @RoutePage()
@@ -231,14 +235,14 @@ class _MapState extends State<MapScreen> {
     );
 
     setState(() {
-      // if (needMessage) {
-      //   sendMessage(
-      //     startPre: startPre,
-      //     endPre: endPre,
-      //     startLatLng: start,
-      //     endLatLng: end,
-      //   );
-      // }
+      if (needMessage) {
+        sendMessage(
+          startPre: startPre,
+          endPre: endPre,
+          startLatLng: start,
+          endLatLng: end,
+        );
+      }
 
       // Adding the coordinates to the list
       if (result.points.isNotEmpty) {
@@ -269,35 +273,36 @@ class _MapState extends State<MapScreen> {
     });
   }
 
-  // void sendMessage({
-  //   Prediction? startPre,
-  //   Prediction? endPre,
-  //   required PointLatLng startLatLng,
-  //   required PointLatLng endLatLng,
-  // }) async {
-  //   User user = context.read<AuthorBloc>().currentUser!;
-  //
-  //   FirebaseMessageService.sendMessage(
-  //     title: 'Notice !!',
-  //     content:
-  //         '${user.fullName} is finding a way from ${startPre?.description!.contains('My Location') == false ? startPre?.description : 'Position of ${user.fullName}'} to ${endPre?.description!.contains('My Location') == false ? endPre?.description : 'Position of ${user.fullName}'}',
-  //     data: {
-  //       'fromPhoneToken': await LocalStorageService.getLocalStorageData(
-  //         LocalStorageEnum.phoneToken.name,
-  //       ) as String,
-  //       'startDes': startPre?.description!.contains('My Location') == false
-  //           ? startPre?.description
-  //           : 'Location of ${user.fullName}',
-  //       'endDes': endPre?.description!.contains('My Location') == false
-  //           ? endPre?.description
-  //           : 'Location of ${user.fullName}',
-  //       'startLat': startLatLng.latitude.toString(),
-  //       'startLng': startLatLng.longitude.toString(),
-  //       'endLat': endLatLng.latitude.toString(),
-  //       'endLng': endLatLng.longitude.toString(),
-  //     },
-  //   );
-  // }
+  void sendMessage({
+    Prediction? startPre,
+    Prediction? endPre,
+    required PointLatLng startLatLng,
+    required PointLatLng endLatLng,
+  }) async {
+    User user = context.read<AuthorBloc>().currentUser!;
+
+    FirebaseMessageService.sendMessage(
+      title: 'Notice !!',
+      topic: '/topics/all',
+      content:
+          '${user.fullName} is finding a way from ${startPre?.description!.contains('My Location') == false ? startPre?.description : 'Position of ${user.fullName}'} to ${endPre?.description!.contains('My Location') == false ? endPre?.description : 'Position of ${user.fullName}'}',
+      data: {
+        'fromPhoneToken': await LocalStorageService.getLocalStorageData(
+          LocalStorageEnum.phoneToken.name,
+        ) as String,
+        'startDes': startPre?.description!.contains('My Location') == false
+            ? startPre?.description
+            : 'Location of ${user.fullName}',
+        'endDes': endPre?.description!.contains('My Location') == false
+            ? endPre?.description
+            : 'Location of ${user.fullName}',
+        'startLat': startLatLng.latitude.toString(),
+        'startLng': startLatLng.longitude.toString(),
+        'endLat': endLatLng.latitude.toString(),
+        'endLng': endLatLng.longitude.toString(),
+      },
+    );
+  }
 
   Future<Position> _getUserCurrentLocation() async {
     await Geolocator.requestPermission()

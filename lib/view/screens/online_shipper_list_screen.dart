@@ -5,14 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:keri_challenge/core/extension/number_extension.dart';
 import 'package:keri_challenge/data/enum/firestore_enum.dart';
+import 'package:keri_challenge/data/enum/shipper_enum.dart';
 import 'package:keri_challenge/main.dart';
 import 'package:keri_challenge/util/ui_render.dart';
 import 'package:keri_challenge/view/components/gradient_button.dart';
 import 'package:keri_challenge/view/components/layout.dart';
-import 'package:keri_challenge/view/components/shipper_list_component.dart';
 
 import '../../bloc/order/order_bloc.dart';
 import '../../data/entities/user.dart';
+import '../components/shipper_list_component.dart';
 
 @RoutePage()
 class OnlineShipperScreen extends StatefulWidget {
@@ -28,11 +29,11 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
   Stream<QuerySnapshot> _usersStream = fireStore
       .collection(FireStoreCollectionEnum.users.name)
       .where('role', isEqualTo: 'shipper')
-      .where('isOnline', isEqualTo: true)
+      .where('shipperWorkingStatus', isEqualTo: ShipperEnum.available.name)
       .where(
         'shipperServiceEndDate',
         isNull: false,
-        isGreaterThan: Timestamp.fromDate(DateTime.now()),
+        isGreaterThanOrEqualTo: Timestamp.fromDate(DateTime.now()),
       )
       .limit(10)
       .snapshots();
@@ -46,11 +47,11 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
       _usersStream = fireStore
           .collection(FireStoreCollectionEnum.users.name)
           .where('role', isEqualTo: 'shipper')
-          .where('isOnline', isEqualTo: true)
+          .where('shipperWorkingStatus', isEqualTo: ShipperEnum.available.name)
           .where(
             'shipperServiceEndDate',
             isNull: false,
-            isGreaterThan: Timestamp.fromDate(DateTime.now()),
+            isGreaterThanOrEqualTo: Timestamp.fromDate(DateTime.now()),
           )
           .limit(limit)
           .snapshots();
@@ -68,11 +69,14 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
         _usersStream = fireStore
             .collection(FireStoreCollectionEnum.users.name)
             .where('role', isEqualTo: 'shipper')
-            .where('isOnline', isEqualTo: true)
+            .where(
+              'shipperWorkingStatus',
+              isEqualTo: ShipperEnum.available.name,
+            )
             .where(
               'shipperServiceEndDate',
               isNull: false,
-              isGreaterThan: Timestamp.fromDate(DateTime.now()),
+              isGreaterThanOrEqualTo: Timestamp.fromDate(DateTime.now()),
             )
             .limit(limit)
             .snapshots();
@@ -91,11 +95,14 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
           _usersStream = fireStore
               .collection(FireStoreCollectionEnum.users.name)
               .where('role', isEqualTo: 'shipper')
-              .where('isOnline', isEqualTo: true)
+              .where(
+                'shipperWorkingStatus',
+                isEqualTo: ShipperEnum.available.name,
+              )
               .where(
                 'shipperServiceEndDate',
                 isNull: false,
-                isGreaterThan: Timestamp.fromDate(DateTime.now()),
+                isGreaterThanOrEqualTo: Timestamp.fromDate(DateTime.now()),
               )
               .limit(limit)
               .snapshots();
@@ -190,28 +197,28 @@ class _OnlineShipperScreenState extends State<OnlineShipperScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
                     return const Text('Xảy ra lỗi');
-                  }
-
-                  if (snapshot.connectionState == ConnectionState.waiting) {
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
                     return const Text("Đang tải");
-                  }
+                  } else {
+                    return SizedBox(
+                      height: 500.height,
+                      child: ListView(
+                        shrinkWrap: true,
+                        children: snapshot.data!.docs
+                            .map((DocumentSnapshot document) {
+                              Map<String, dynamic> data =
+                                  document.data()! as Map<String, dynamic>;
 
-                  return SizedBox(
-                    height: 500.height,
-                    child: ListView(
-                      shrinkWrap: true,
-                      children: snapshot.data!.docs
-                          .map((DocumentSnapshot document) {
-                            Map<String, dynamic> data =
-                                document.data()! as Map<String, dynamic>;
-                            return ShipperListComponent(
-                              shipper: User.fromJson(data),
-                            );
-                          })
-                          .toList()
-                          .cast(),
-                    ),
-                  );
+                              return ShipperListComponent(
+                                shipper: User.fromJson(data),
+                              );
+                            })
+                            .toList()
+                            .cast(),
+                      ),
+                    );
+                  }
                 },
               ),
             ],

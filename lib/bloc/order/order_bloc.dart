@@ -5,6 +5,7 @@ import 'package:keri_challenge/data/enum/shipper_enum.dart';
 
 import '../../data/entities/order.dart';
 import '../../data/repository/order_repository.dart';
+import '../../services/firebase_message_service.dart';
 
 part 'order_event.dart';
 part 'order_state.dart';
@@ -114,6 +115,12 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         response.fold(
           (failure) => emit(OrderErrorState(failure.message)),
           (success) {
+            FirebaseMessageService.sendMessage(
+              title: 'Thông báo đơn hàng',
+              content: 'Bạn có một đơn hàng mới',
+              topic: event.shipperPhoneNumber,
+            );
+
             currentNewOrder = null;
 
             emit(
@@ -165,6 +172,10 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       }
     });
 
+    on<OnGetCurrentNewOrderEvent>((event, emit) {
+      currentNewOrder = event.order;
+    });
+
     on<OnAcceptOrderEvent>((event, emit) async {
       emit(OrderLoadingState());
 
@@ -179,6 +190,12 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
           response.fold(
             (failure) => emit(OrderErrorState(failure.message)),
             (success) {
+              FirebaseMessageService.sendMessage(
+                title: 'Thông báo đơn hàng',
+                content: 'Shipper đã nhận đơn hàng',
+                topic: currentShippingOrder!.senderPhoneNumber,
+              );
+
               emit(const OrderAcceptedState('Đã nhận đơn hàng'));
             },
           );
@@ -204,7 +221,15 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
 
         response.fold(
           (failure) => emit(OrderErrorState(failure.message)),
-          (success) => emit(const OrderRefusedState('Đã từ chối đơn hàng')),
+          (success) async {
+            FirebaseMessageService.sendMessage(
+              title: 'Thông báo đơn hàng',
+              content: 'Shipper đã từ chối đơn hàng',
+              topic: currentShippingOrder!.senderPhoneNumber,
+            );
+
+            emit(const OrderRefusedState('Đã từ chối đơn hàng'));
+          },
         );
       } catch (e, stackTrace) {
         debugPrint('Caught error: ${e.toString()} \n${stackTrace.toString()}');
@@ -216,7 +241,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       emit(OrderLoadingState());
 
       try {
-        final response = await _orderRepository.updateOrder(
+        final response = await _orderRepository.finishShipping(
           {
             'shipDate': DateTime.now(),
             'status': ShipperEnum.shipped.name,
@@ -227,6 +252,13 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
         response.fold(
           (failure) => emit(OrderErrorState(failure.message)),
           (success) {
+            FirebaseMessageService.sendMessage(
+              title: 'Thông báo đơn hàng',
+              content: 'Shipper đã hoàn thành đơn hàng',
+              data: currentShippingOrder!.toJson(),
+              topic: currentShippingOrder!.senderPhoneNumber,
+            );
+
             currentShippingOrder = null;
 
             emit(const OrderFinishedShippingState('Đã hoàn thành đơn hàng'));

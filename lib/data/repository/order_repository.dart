@@ -1,6 +1,7 @@
 import 'package:either_dart/either.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:keri_challenge/data/enum/shipper_enum.dart';
+import 'package:keri_challenge/util/value_render.dart';
 
 import '../../core/failure/failure.dart';
 import '../../main.dart';
@@ -237,6 +238,12 @@ class OrderRepository {
         },
         onError: (e) => debugPrint("Error getting document list: $e"),
       );
+
+      await FirebaseDatabaseService.updateData(
+        data: {'shipperWorkingStatus': ShipperEnum.unavailable.name},
+        collection: FireStoreCollectionEnum.users.name,
+        document: ValueRender.currentUser!.phoneNumber,
+      );
     } else if (action == ShipperEnum.refuseOrder) {
       data = {
         'shipperPhoneNumber': null,
@@ -285,6 +292,38 @@ class OrderRepository {
         (value) {
           result = 'Chỉnh sửa đơn hàng thành công';
         },
+      );
+
+      return Right(result);
+    } catch (e, stackTrace) {
+      debugPrint(
+        'Caught updating order error: ${e.toString()} \n${stackTrace.toString()}',
+      );
+      return Left(ExceptionFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, String>> finishShipping(
+    Map<String, dynamic> data,
+    String orderId,
+  ) async {
+    String result = '';
+
+    try {
+      await FirebaseDatabaseService.updateData(
+        data: data,
+        collection: FireStoreCollectionEnum.orders.name,
+        document: orderId,
+      ).then(
+        (value) {
+          result = 'Chỉnh sửa đơn hàng thành công';
+        },
+      );
+
+      await FirebaseDatabaseService.updateData(
+        data: {'shipperWorkingStatus': ShipperEnum.available.name},
+        collection: FireStoreCollectionEnum.users.name,
+        document: ValueRender.currentUser!.phoneNumber,
       );
 
       return Right(result);

@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:keri_challenge/core/extension/datetime_extension.dart';
-import 'package:keri_challenge/core/extension/number_extension.dart';
 
 import '../../core/converter/geopoint_converter.dart';
 import '../../core/converter/timestamp_converter.dart';
@@ -60,9 +58,9 @@ class Order {
 
   Map<String, dynamic> toJson() => _$OrderToJson(this);
 
-  String showFullInfo() {
-    return 'ID: $id \nKhoảng cách: ${distance.format}km \nGiá tiền: ${price.format} đồng \nĐiểm đi: $fromLocation \n Số điện thoại shipper: ${shipperPhoneNumber == null || shipperPhoneNumber!.isEmpty ? 'Chưa xác định' : shipperPhoneNumber} \nĐiểm đến: $toLocation \nSố điện thoại người gửi: $senderPhoneNumber \nSố điện thoại người nhận: $receiverPhoneNumber \nTên người nhận: $receiverName \nTrạng thái: ${status == ShipperEnum.shipping.name ? 'Đang giao' : status == ShipperEnum.shipped.name ? 'Đã giao' : status == ShipperEnum.shipper_waiting.name ? 'Đợi shipper' : 'Không xác định'} \nNgày đặt hàng: ${orderDate.date} \nNgày giao hàng: ${shipDate ?? 'Chưa xác định'} \nGhi chú cho shipper: $noteForShipper \nTên kiện hàng: $packageName \nCod: $cod';
-  }
+  // String showFullInfo() {
+  //   return 'ID: $id \nKhoảng cách: ${distance.format}km \nGiá tiền: ${price.format} đồng \nĐiểm đi: $fromLocation \n Số điện thoại shipper: ${shipperPhoneNumber == null || shipperPhoneNumber!.isEmpty ? 'Chưa xác định' : shipperPhoneNumber} \nĐiểm đến: $toLocation \nSố điện thoại người gửi: $senderPhoneNumber \nSố điện thoại người nhận: $receiverPhoneNumber \nTên người nhận: $receiverName \nTrạng thái: ${status == ShipperEnum.shipping.name ? 'Đang giao' : status == ShipperEnum.shipped.name ? 'Đã giao' : status == ShipperEnum.shipper_waiting.name ? 'Đợi shipper' : 'Không xác định'} \nNgày đặt hàng: ${orderDate.date} \nNgày giao hàng: ${shipDate ?? 'Chưa xác định'} \nGhi chú cho shipper: $noteForShipper \nTên kiện hàng: $packageName \nCod: $cod';
+  // }
 
   String getOrderDoc() {
     return '$senderPhoneNumber-$id';
