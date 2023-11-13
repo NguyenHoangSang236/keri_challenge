@@ -193,7 +193,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
               FirebaseMessageService.sendMessage(
                 title: 'Thông báo đơn hàng',
                 content: 'Shipper đã nhận đơn hàng',
-                topic: currentShippingOrder!.senderPhoneNumber,
+                topic: event.doc.substring(0, event.doc.indexOf('-')),
               );
 
               emit(const OrderAcceptedState('Đã nhận đơn hàng'));
@@ -225,7 +225,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             FirebaseMessageService.sendMessage(
               title: 'Thông báo đơn hàng',
               content: 'Shipper đã từ chối đơn hàng',
-              topic: currentShippingOrder!.senderPhoneNumber,
+              topic: event.doc.substring(0, event.doc.indexOf('-')),
             );
 
             emit(const OrderRefusedState('Đã từ chối đơn hàng'));
@@ -255,7 +255,6 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
             FirebaseMessageService.sendMessage(
               title: 'Thông báo đơn hàng',
               content: 'Shipper đã hoàn thành đơn hàng',
-              data: currentShippingOrder!.toJson(),
               topic: currentShippingOrder!.senderPhoneNumber,
             );
 
